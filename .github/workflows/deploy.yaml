@@ -6,6 +6,9 @@ on:
       - 'main'
 jobs:
   deploy:
+    permissions:
+      pages: write
+      id-token: write
     environment:
       name: github-pages
       url: ${{ steps.build-publish.outputs.page_url }}
@@ -16,3 +19,4 @@ jobs:
         with:
           path: storybook-static
           build_command: npm run storybook:build
+          token: ${{ secrets.GITHUB_TOKEN }}
