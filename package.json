@@ -1,0 +1,112 @@
+{
+  "name": "rea11y-easy-form",
+  "version": "0.1.0",
+  "main": "build/cjs/index.js",
+  "module": "build/esm/index.js",
+  "files": [
+    "build"
+  ],
+  "types": "build/index.d.ts",
+  "description": "Final form use",
+  "scripts": {
+    "build": "rollup -c",
+    "test": "jest",
+    "test:coverage": "jest --coverage",
+    "lint": "eslint src --ext .ts,.js",
+    "test:watch": "jest --watch",
+    "storybook": "storybook dev -p 6006",
+    "storybook:build": "storybook build",
+    "generate": "node ./scripts/create-component"
+  },
+  "repository": {
+    "type": "git"
+  },
+  "keywords": [
+    "React",
+    "Component",
+    "Library",
+    "Rollup",
+    "Typescript",
+    "Sass",
+    "Storybook"
+  ],
+  "author": "Leon Slater",
+  "license": "MIT",
+  "peerDependencies": {
+    "dompurify": ">=3.0.0",
+    "final-form": ">=4.0.0",
+    "react": ">=17.0.0",
+    "react-beautiful-dnd": ">=13.0.0",
+    "react-dom": ">=17.0.0",
+    "react-final-form": ">=6.0.0"
+  },
+  "peerDependenciesMeta": {
+    "dompurify": {
+      "optional": true
+    },
+    "react-beautiful-dnd": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@babel/core": "^7.23.5",
+    "@babel/preset-env": "^7.23.5",
+    "@babel/preset-typescript": "^7.23.3",
+    "@rollup/plugin-commonjs": "^25.0.7",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-terser": "^0.4.4",
+    "@rollup/plugin-typescript": "^11.1.5",
+    "@storybook/addon-actions": "^7.6.3",
+    "@storybook/addon-essentials": "^7.6.3",
+    "@storybook/addon-interactions": "^7.6.3",
+    "@storybook/addon-links": "^7.6.3",
+    "@storybook/addon-mdx-gfm": "^7.6.3",
+    "@storybook/react": "^7.6.3",
+    "@storybook/react-webpack5": "^7.6.3",
+    "@storybook/testing-library": "^0.2.2",
+    "@testing-library/jest-dom": "^6.1.5",
+    "@testing-library/react": "^14.1.2",
+    "@types/dompurify": "^3.0.5",
+    "@types/jest": "^29.5.11",
+    "@types/react": "^18.2.42",
+    "@types/react-beautiful-dnd": "^13.1.7",
+    "@types/react-dom": "^18.2.17",
+    "@types/react-is": "^18.2.4",
+    "babel-loader": "^9.1.3",
+    "babel-preset-react-app": "^10.0.1",
+    "dompurify": "^3.0.6",
+    "eslint": "^8.55.0",
+    "eslint-config-react-app": "^7.0.1",
+    "eslint-plugin-storybook": "^0.6.15",
+    "final-form": "^4.20.10",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
+    "less": "^4.2.0",
+    "less-loader": "^11.1.3",
+    "react": "^18.2.0",
+    "react-beautiful-dnd": "^13.1.1",
+    "react-dom": "^18.2.0",
+    "react-final-form": "^6.5.9",
+    "rollup": "^3.29.2",
+    "rollup-plugin-copy": "^3.5.0",
+    "rollup-plugin-peer-deps-external": "^2.2.4",
+    "rollup-plugin-postcss": "^4.0.2",
+    "rollup-plugin-typescript2": "^0.35.0",
+    "sass-loader": "^13.3.2",
+    "storybook": "^7.6.3",
+    "ts-jest": "^29.1.1",
+    "typescript": "^5.3.2"
+  },
+  "dependencies": {
+    "@react-hookz/deep-equal": "^1.0.4",
+    "@react-hookz/web": "^23.1.0",
+    "clsx": "^2.0.0",
+    "final-form-arrays": "^3.1.0",
+    "final-form-set-field-data": "^1.0.2",
+    "react-final-form-arrays": "^3.1.4",
+    "react-is": "^18.2.0",
+    "tabbable": "^6.2.0",
+    "use-constant": "^1.1.1"
+  }
+}

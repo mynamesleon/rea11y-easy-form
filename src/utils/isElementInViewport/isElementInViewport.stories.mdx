@@ -1,0 +1,16 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Utils and Hooks/isElementInViewport" />
+
+# `isElementInViewport()`
+
+Checks if an element (or a DOMRect from `getBoundingClientRect()`) is entirely within the viewport.
+
+## Usage
+
+```js
+import { isElementInViewport } from 'rea11y-easy-form';
+
+const element = document.querySelector('.element');
+const isInViewport = isElementInViewport(element);
+```

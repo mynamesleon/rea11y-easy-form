@@ -1,0 +1,21 @@
+@import '../../less/mixins.less';
+@import '../../less/variables.less';
+
+.field-styles('fieldset', {
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: @spacing-6;
+    margin-bottom: @spacing-6;
+    border: 0;
+    
+    &__legend {
+        display: block;
+        font-size: @font-size-h3;
+        width: 100%;
+        padding-left: 0;
+        padding-right: 0;
+        padding-bottom: @spacing-2;
+    }
+});

@@ -1,0 +1,52 @@
+@import '../../less/mixins.less';
+@import '../../less/variables.less';
+
+.field-styles('color-input', {
+    .input-styles();
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: space-between;
+    cursor: text;
+
+    input {
+        padding: 0;
+        background: transparent;
+        border: none;
+        margin: 0;
+        box-sizing: border-box;
+    }
+
+    &__text[type='text'] {
+        &:focus {
+            .focus-highlight(transparent);
+        }
+    }
+
+    &__color[type='color'] {
+        height: calc(@input-height - (@spacing-2 * 2));
+        width: calc(@input-height - (@spacing-2 * 2));
+
+        &:focus {
+            .focus-highlight();
+        }
+
+        &::-moz-color-swatch {
+            border: 1px solid @color-grey-4;
+            border-radius: calc(@input-border-radius * 1.25);
+        }
+    
+        &::-webkit-color-swatch {
+            border: 1px solid @color-grey-4;
+            border-radius: calc(@input-border-radius * 1.25);
+        }
+    
+        &::-moz-color-swatch-wrapper {
+            padding: 0;
+        }
+    
+        &::-webkit-color-swatch-wrapper {
+            padding: 0;
+        }
+    }
+});

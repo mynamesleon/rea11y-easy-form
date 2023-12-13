@@ -1,0 +1,24 @@
+@import '../../less/mixins.less';
+@import '../../less/variables.less';
+
+.field-styles('select', {
+    .input-styles();
+    .icon-chevron-down();
+    background-position: right 10px top 50% !important;
+    background-repeat: no-repeat !important;
+
+    // all appearance properties needed
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    appearance: none;
+
+    // IE11
+    &::-ms-expand {
+        display: none;
+    }
+
+    // option {
+    //     color: @kds-charcoal !important;
+    // }
+});

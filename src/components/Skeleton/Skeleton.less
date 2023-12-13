@@ -1,0 +1,36 @@
+@import '../../less/mixins.less';
+@import '../../less/variables.less';
+
+@keyframes shine {
+    to {
+        background-position: 80px 0, 0 0;
+    }
+}
+
+.field-styles('skeleton', {
+    color: transparent !important;
+    overflow: hidden;
+    user-select: none;
+    background-image: linear-gradient(270deg, transparent, @color-white 40px, transparent 80px), linear-gradient(@color-grey-2 100%, transparent 0);
+    background-size: 700px 100%;
+    background-repeat: repeat-y;
+    background-position: -700px 0, 0 0;
+    border-radius: @border-radius-default;
+    max-width: 320px;
+    min-width: 60px;
+
+    @media screen and (prefers-reduced-motion: no-preference) {
+        animation: shine 2s; 
+        // limit this animation due to CPU hit of background position animation
+        animation-iteration-count: 15;
+    }
+
+    &--text {
+        display: inline-block;
+        width: 200px;
+    }
+
+    &--input {
+        .input-styles();
+    }
+});

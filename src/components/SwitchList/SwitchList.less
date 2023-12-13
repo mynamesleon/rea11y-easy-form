@@ -1,0 +1,34 @@
+@import '../../less/mixins.less';
+@import '../../less/variables.less';
+
+.field-styles('switch-list', {
+    fieldset& {
+        margin: 0;
+        padding: 0;
+        border: 0;
+    }
+
+    &__list {
+        display: block;
+        padding-left: 0;
+        margin-left: 0;
+        margin-bottom: @spacing-2;
+        margin-top: @spacing-2;
+        list-style: none;
+    }
+
+    &__list-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: @spacing-2;
+        margin-top: @spacing-2;
+
+        &:first-child {
+            margin-top: 0;
+        }
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+});

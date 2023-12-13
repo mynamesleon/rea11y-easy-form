@@ -1,0 +1,51 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Utils and Hooks/useMutatedField" />
+
+# `useMutatedField()`
+
+The `useMutatedField()` hook is a wrapper around `react-final-form`'s own `useField()` hook,
+that attempts to normalise some of the `FieldState` (returned in the `meta` object)
+for asynchronous validation cases.
+
+## The problem this hook attempts to solve
+
+When using field-level asynchronous validation, the normal
+`react-final-form` `<Field>`/`useField()` resets a lot of its state.
+
+For example, if an `error` already exists on the `FieldState`, and new validation is triggered,
+that `error` is cleared (set to `undefined`) while the field is `validating`,
+which can be quite visually jarring.
+
+This applies to the `valid` and `invalid` `FieldState` properties as well.
+
+Further to that, if asynchronous validation is repeatedly triggered on a field,
+the `validating` state gets reset to `false` when the first
+asynchronous function completes, even if others are still ongoing.
+This means that you cannot even reliably display a loading indicator
+based on the `validating` property.
+
+## How it works
+
+The hook uses React refs to keep track of previous states for certain `FieldState` properties,
+and mutates the `meta` object as needed based on the `validating` state.
+
+Because the `validating` property on the `FieldState` is not completely reliable,
+the hook also subscribes to the `validating` state of the `FormState`.
+This means that, if a field also triggers validation for another field,
+then the first field's mutated `validating` state will remain `true`
+until the other field finishes validating as well.
+
+**Please note**: you (unsurprisingly) need to subscribe to the `error` and `validating`
+properties on the `FieldState` for this hook to have any meaningful effect.
+
+## Usage
+
+```js
+import { useMutatedField } from 'rea11y-easy-form';
+
+const YourComponent = () => {
+  const { input, meta } = useMutatedField('field-name', config);
+  // your component code here
+};
+```

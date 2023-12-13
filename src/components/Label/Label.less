@@ -1,0 +1,13 @@
+@import '../../less/mixins.less';
+
+.field-styles('label', {
+    display: inline-block;
+
+    &--required &__asterisk {
+        padding-right: 2px;
+        // remove default abbr underline
+        border-bottom: none;
+        text-decoration: none;
+        cursor: inherit;
+    }
+});

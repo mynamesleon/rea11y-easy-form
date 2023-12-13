@@ -1,0 +1,18 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Utils and Hooks/focusAndSmoothlyScrollIntoView" />
+
+# `focusAndSmoothlyScrollIntoView()`
+
+Focus a provided element (using the `focusElement` util), then trigger the `smoothlyScrollIntoView` util.
+
+The provided argument can be an HTMLElement, or a React Ref (or at least, an object with a `.current` property).
+
+## Usage
+
+```js
+import { focusAndSmoothlyScrollIntoView } from 'rea11y-easy-form';
+
+const element = document.querySelector('.element');
+focusAndSmoothlyScrollIntoView(element);
+```

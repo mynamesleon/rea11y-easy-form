@@ -1,0 +1,167 @@
+import { Meta, Canvas, Title, Primary, Controls } from '@storybook/blocks';
+import { Form } from 'react-final-form';
+import EasyField from './EasyField';
+import Input from '../Input';
+import EasyForm from '../EasyForm';
+import {
+  OrdinaryFormExample,
+  SubscriptionsExample,
+  ValidationExample,
+} from './EasyField.stories';
+
+<Meta isTemplate />
+
+<Title />
+
+The `<EasyField>` component is intended to make field, label, and validation handling
+as easy as possible.
+
+## Table of Contents
+
+- [Basic usage](#basic-usage)
+  - [Accessibility](#accessibility)
+  - [Ordinary `<Form>` usage](#ordinary-form-usage)
+- [Advanced Usage](#advanced-usage)
+  - [Overrides to default `<Field>` behaviour](#overrides-to-default-field-behaviour)
+    - [Subscription](#subscription)
+    - [`validateFields`](#validatefields)
+    - [`parse`](#parse)
+  - [Validation](#validation)
+
+## Basic usage
+
+At its core, the `<EasyField>` is an extension to the `react-final-form` `<Field>`,
+which means it takes takes all of the same base props, plus a few more.
+
+It sets some opinionated defaults for various `<Field>` props
+for the sake of performance and consistency.
+It also takes `label` and `description` props,
+and has a number of built-in validation rules that can be made use of,
+while still allowing for custom validation as well.
+
+<Primary />
+
+<Controls />
+
+### Accessibility
+
+Best of all, the `<EasyField>` component will also handle
+the label-description-field relationships for you,
+including all of the the needed ARIA attributes. For example:
+
+1. The rendered field is provided with a generated unique `id`,
+   which will match the generated `<label>`'s `for` attribute.
+2. If a `description` is provided, then the element this is rendered in
+   will also have a generated unique `id`, and the rendered field
+   will receive an `aria-describedby` prop linking to it. This will respect any
+   existing `aria-describedby` prop as well, and will even update for rendered error messages.
+3. If you set the `required` prop
+   (or a `required` rule in the `validation` object prop)
+   then the rendered field will receive an `aria-required` attribute automatically.
+4. If the field is in an error state,
+   then an `aria-invalid` attribute will be provided as well.
+
+Feel free to inspect the rendered HTML in the examples to see this in action.
+
+### Ordinary `<Form>` usage
+
+The `<EasyField>` can be used used within the `<EasyForm>` component -
+such as in the example above - but can also be used directly within
+`react-final-form`'s normal `<Form>` component. E.g.
+
+<Canvas of={OrdinaryFormExample} />
+
+## Advanced Usage
+
+### Overrides to default `<Field>` behaviour
+
+As mentioned above, `<EasyField>` sets some opinionated defaults,
+particularly for the `subscription`, `validateFields`, and `parse` props.
+
+#### Subscription
+
+By default `react-final-form`'s `<Field>` subscribes to all of the `FieldState`.
+But in 99% of cases, that's overkill, and causes a lot of unnecessary re-renders.
+Instead, by default, `<EasyField>` will subscribe only to the parts of `FieldState`
+that it needs to (though you can override this of course).
+
+`<EasyField>` also doesn't pass any of the underlying `FieldState`'s `meta` object
+to the rendered Field. But you can override that with the `meta` boolean prop.
+
+So let's set up some examples, and use the `meta` prop
+to show which parts of the `FieldState` are exposed.
+
+<Canvas of={SubscriptionsExample} />
+
+#### `validateFields`
+
+This is a simpler one. By default, `react-final-form`'s `<Field>` triggers validation
+on all fields within the form whenever **any** field value changes.
+Once again, in 99% of cases, that's overkill and causes a lot of unnecessary re-renders.
+
+Instead, by default, when an `<EasyField>` value changes,
+only that field is validated - not every field.
+You can return this to the default `react-final-form` `<Field>` behaviour
+by explicitly setting the `validateFields` prop to `undefined`.
+More on that in a bit.
+
+#### `parse`
+
+Another simple one. By default, `react-final-form` `<Field>`s
+convert empty strings to `undefined`. Instead, `<EasyField>` sets the `parse` prop
+to an identity function (`(v) => v`), retaining empty string values.
+
+You can override this by setting your own `parse` function, and, just as with the
+`subscription` and `validateFields` props, you can reset this to the original
+`react-final-form` `<Field>` behaviour by explicitly setting it to `undefined`.
+
+### Validation
+
+You can use the normal `validate` function prop
+as you would with `react-final-form`'s `<Field>` component,
+as well as a small number of built-in validation rules via the `validation` object prop,
+namely:
+
+- alpha
+- alphanumeric
+- date
+- email
+- empty
+- hexcolor
+- integer
+- lowercase
+- number
+- uppercase
+- url
+- required
+
+These can be set to a string (for the validation message),
+boolean `true` (in which case, the key will be used as the validation message),
+or you can set a custom function. When used in an `<EasyForm>`,
+you can also define additional global rules or override existing ones
+(see the EasyForm story for more detail on that).
+
+You can also set the `required` prop directly on the `<EasyForm>` for simplicity.
+
+Additionally, when using asynchronous validation, the normal `react-final-form` `<Field>`
+resets the `error` `FieldState`. This can cause quick flashes
+where an error message renders, then disappears while the field is validating, then renders again.
+As this is visually jarring, the `<EasyField>` retains any existing error `FieldState`
+while the field is validating using our `useMutatedField()` hook.
+
+You can also specify which bits of `FieldState` should be used to determine
+if the error should render using the `errorLogic` object prop.
+This accepts a `FieldSubscription`-like object, and is set to `{ touched: true }` by default.
+`<EasyField>` will automatically take this into account and subscribe to those parts
+of the `FieldState` (if they haven't been specified already).
+You can also specify that part of the `FieldState` should be `false`
+and the `<EasyField>` will check that too.
+
+So let's set up some examples to show all this:
+
+<Canvas of={ValidationExample} />
+
+Please note, all validation functions other than the `required` rule will only run
+if the field value is **not** `null`, `undefined`, or an empty string.
+This logic is intentional so that custom validation rules do not need to check
+for the existence of a current value before doing their checks.

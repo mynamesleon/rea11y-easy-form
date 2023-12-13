@@ -1,0 +1,27 @@
+@import '../../less/mixins.less';
+@import '../../less/variables.less';
+
+@icon-size: @spacing-5;
+
+.field-styles('error-message', {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin-top: @spacing-1;
+    margin-bottom: @spacing-1;
+    font-weight: 700;
+    color: @color-red-4;
+    padding-left: calc(@icon-size + @spacing-2);
+    min-height: @icon-size;
+
+    &__icon {
+        position: absolute;
+        top: 48%;
+        left: 0;
+        width: @icon-size;
+        height: @icon-size;
+        color: @color-red-4;
+        transform: translateY(-50%);
+    }
+});

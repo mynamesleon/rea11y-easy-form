@@ -1,0 +1,68 @@
+@import './variables.less';
+
+// reminder: disabled styles do not have to meet WCAG contrast requirements
+.input-disabled() {
+    border-color: @border-color-disabled;
+    background-color: @color-grey-2;
+    color: @color-grey-5;
+    cursor: not-allowed;
+    opacity: 1;
+}
+
+.focus-highlight(@color: @color-azure-3) {
+    box-shadow: 0 0 0 1px @color, 0 0 8px lighten(@color, 7.5%);
+    border-color: @color; 
+    // use transparent outline instead of `none`,
+    // so that an outline will still show in high contrast modes,
+    // where styles like `box-shadow` will be removed
+    outline: 2px solid transparent;
+}
+
+.error-border() {
+    border-color: @color-red-4;
+}
+
+.input-styles() {
+    display: block;
+    height: @input-height;
+    margin-top: @input-margin-top;
+    background-color: @color-white;
+    padding-block: @input-padding-vertical;
+    padding-inline: @input-padding-horizontal;
+    border-radius: @border-radius-default;
+    width: @input-width;
+    border: 1px solid @border-color-default;
+    color: @color-grey-5;
+    box-sizing: border-box;
+
+    &:focus {
+        .focus-highlight();
+    }
+
+    // in case the mixin is used on a containing element
+    // to look like an input
+    &:focus-within {
+        .focus-highlight();
+    }
+
+    &[disabled],
+    &[aria-disabled='true'] {
+        .input-disabled();
+    }
+
+    &[aria-invalid='true'] {
+        .error-border();
+    }
+}
+
+.field-styles(@suffix, @rules) {
+    @selector: ~'.easy-form-@{suffix}';
+    @{selector} {
+        @rules();
+    }
+}
+
+.icon-chevron-down(@width: 14, @height: 10, @color: @color-grey-5) {
+    @colourToUse: replace(@color, "#", "%23");
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg width='@{width}' height='@{height}' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 17 10'%3E%3Cpath d='M1 1.023L8.488 8 16 1' stroke-width='2' stroke='@{colourToUse}' fill='none' fill-rule='evenodd'/%3E%3C/svg%3E") !important;
+}

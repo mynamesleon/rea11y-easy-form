@@ -1,0 +1,280 @@
+import { Meta, Canvas, Title, Primary, Controls } from '@storybook/blocks';
+import EasyForm from '../EasyForm';
+import {
+  FormWithCustomComponent,
+  LoginFormWithSubmitError,
+  LoginFormWithHeaderAndFooter,
+  LoginFormWithUniqueFieldSetup,
+  LoginFormWithStructureAndChildren,
+  LoginFormWithUniqueFormAndFieldSetup,
+  LoginFormWithStaticLabelsValidationSummary,
+} from './EasyForm.stories';
+
+<Meta isTemplate />
+
+<Title />
+
+Built on top of `react-final-form`, the `<EasyForm>` component aims to make setting up
+forms in React as easy as possible. It includes simple and extensible handling
+of common form aspects, such as defining shared validation rules, generating a validation summary
+after submit attempts, global `disabled` handling throughout the form, etc.
+
+The fundamental feature of the `<EasyForm>` however is its `structure` prop -
+an array of objects that can be used to generate the entire form.
+This is particularly useful for any applications that include form building
+and store/return that structural data from API endpoints.
+
+## Table of Contents
+
+- [Basic usage](#basic-usage)
+  - [`header` and `footer`](#header-and-footer)
+  - [Understanding `structure`](#understanding-structure)
+- [Advanced Usage](#advanced-usage)
+  - [Using your own components with `structure`](#using-your-own-components-with-structure)
+  - [Defining default field behaviour](#defining-default-field-behaviour)
+  - [Validation summary](#validation-summary)
+    - [`validationSummary` prop](#validationsummary-prop)
+    - [Shorthand `validationSummary` prop values](#shorthand-validationsummary-prop-values)
+    - [Validation summary `submitError`](#validation-summary-submiterror)
+    - [Validation summary accessibility](#validation-summary-accessibility)
+
+## Basic usage
+
+The `<EasyForm>` takes the same base props as `react-final-form`'s `<Form>`,
+plus some additional props mainly for global/default field behaviour,
+and configuring the validation summary.
+
+So let's set up a quick login form example,
+using built-in validation rules (`required`, and `email`),
+with default validation summary behaviour
+(which will render after a submission attempt fails).
+
+<Primary />
+
+<Controls />
+
+As with `react-final-form`'s normal `<Form>`, you can also use
+`children`, `render`, or `component` props to render your content.
+You can even combine those with the `structure` prop.
+**Please note** however, that the content rendered based
+on the `structure` prop will always render first. E.g.
+
+<Canvas of={LoginFormWithStructureAndChildren} />
+
+### `header` and `footer`
+
+You can optionally provide `header` and/or `footer` props to be rendered as part of the form.
+These can be a simple string (or any other `ReactNode`), or you can pass a function
+which will receive all of the normal `FormRenderProps` (minus the `handleSubmit` prop)
+and should return a `ReactNode`.
+
+**Please note**, when passing a function, the props it receives are dependent on the
+`subscription` prop (just as with a normal `react-final-form` `<Form>`).
+
+The `footer` is expected to be used for rendering your own submit/reset buttons as needed.
+A default submit button is rendered if a `footer` prop does not exist (and as long as
+`submitText` and `onSubmit` props exist), but if a `footer` is provided,
+you will need to handle this yourself.
+
+<Canvas of={LoginFormWithHeaderAndFooter} />
+
+### Understanding `structure`
+
+Thankfully the `structure` prop is fairly simple. Each object in the array
+is expected to have a `type`. This `type` is then checked against the default (and supplied)
+`containers` and `components` to determine what component should render.
+
+When rendering a component for a form field, every other property on the object
+gets passed to the `<EasyField>` to be handled from there.
+So core functional properties on the object such as `label`, `description`,
+`validation`, and `validate` are handled by `<EasyField>` for all of its accessibility benefits.
+
+That also means that you can define things like the field `subscription` and `errorLogic`
+within the form `structure` too, as well as being able to define global defaults
+on the `<EasyForm>`. A quick example might help:
+
+<Canvas of={LoginFormWithUniqueFieldSetup} />
+
+## Advanced usage
+
+### Using your own components with `structure`
+
+As mentioned in the [understanding structure](#understanding-structure) section,
+the objects in the `structure` array are expected to have a `type` that matches up
+to one of the available components internally.
+You can also define your own components for a specific `type`,
+override any of the default `type`s, or define a `component`, `render`, or `children`
+property on the object in your `structure` array.
+
+Having multiple ways to do this makes it sound complex,
+so let's see this in action to show how easy it is!
+
+This will be our custom component.
+
+```jsx
+const customComponent = ({ meta, ...props }) => (
+  <div className="custom-component">
+    <Input {...props} type="text" />
+    <p>{JSON.stringify({ ...props, meta })}</p>
+  </div>
+);
+```
+
+We're printing out all the props so that it's clear what's passed to it by the
+`<EasyField>` that's used internally. The `<EasyField>` will handle a selection of
+core properties (`label`, `validation`, etc.) and will then pass the `aria-` attributes,
+`value`, etc. on to our custom component.
+
+We can then use our custom component by defining it in the `components` object prop
+(where the keys in the object determine the `type` to be used within the `structure` array),
+or by using it directly in the objects in the `structure` array.
+You can see the various ways this can be done in the code for this example -
+and we're throw in a `type` that doesn't match a component too, to show how that's handled:
+
+<Canvas of={FormWithCustomComponent} />
+
+You can safely use lazy components as well.
+Because all of the properties get passed to the `<EasyField>` first, which then renders
+your custom component, the field will be registered by the form straight away
+(including its validation rules).
+
+### Defining default field behaviour
+
+The `<EasyForm>` can take `defaultFieldValidationFunctions`,
+`defaultFieldErrorLogic`, and `defaultFieldConfig` props to define behaviour for every field.
+These can then be overridden by the props for each field as needed.
+
+This will work for fields defined within the `structure` prop, as well as any other usage of
+`<EasyField>`, as long as its within the `<EasyForm>`. For example:
+
+<Canvas of={LoginFormWithUniqueFormAndFieldSetup} />
+
+### Validation
+
+Form level validation is done in exactly the same way as the `react-final-form`
+`<Form>` component - via the `validate` function prop. That will be passed directly to
+the `<Form>` used internally. So that is exactly as you would expect.
+
+You can also specify `defaultFieldValidationFunctions` on the `<EasyForm>` component though.
+This is an object of validation functions that can be used by each field
+in its `validation` object, simply by using the same key.
+You can find further details about all of the included defaults on the
+[`<EasyField>` documentation page](?path=/docs/easyfield--docs#validation).
+
+### Validation summary
+
+The validation summary is another fundamental built-in feature of the `<EasyForm>` component.
+It will render after a submission has failed, and its content
+can be controlled via the `validationSummary` prop.
+
+#### `validationSummary` prop
+
+There are some short-hand values you can use (more on that in a moment),
+but in its most expanded form, the `validationSummary` prop's value matches this type:
+
+```ts
+type EasyFormValidationSummaryInfo = {
+  position?: 'afterbegin' | 'afterend' | 'beforebegin' | 'beforeend';
+  content?: 'errors' | 'labels';
+  mode?: 'dynamic' | 'static' | 'none';
+  renderLogic?: FormSubscription;
+  header?: ReactNode;
+  footer?: ReactNode;
+  render?: ((ref: ForwardedRef<HTMLElement>) => ReactNode) | null;
+};
+```
+
+So let's explain these one at a time:
+
+1. **`position`**: when setting this, think of 'begin' as the `header` prop,
+   and 'end' as the `footer` prop. How the positioning works is intuitive from there.
+   The default is `'afterbegin'`.
+2. **`content`**:
+   1. When set to `'errors'` (the default), the `errors` and `submitErrors`
+      from the `FormState` will be listed in the validation summary.
+   2. When set to `'labels'`, the `label` prop/property
+      from each field with an `error` or `submitError` will be used instead.
+3. **`mode`**:
+   1. If this is set to `'dynamic'` (the default), then the validation summary
+      will update its content as the `FormState` does. So if the `FormState`'s `errors`
+      and/or `submitErrors` change, then the validation summary's content will update too
+      (this scenario uses a `<FormSpy>` internally so that there is no need to subscribe
+      to the `errors` or `submitErrors` on the `<EasyForm>` itself).
+   2. If the `mode` is set to `'static'`, then a snapshot of the `errors`
+      and `submitErrors` is taken whenever a submit fails, and that snapshot is used instead.
+      So the validation summary's content will quite literally remain static
+      and will not update until another form submission is attempted.
+   3. You can also set the `mode` to `'none'` to disable the validation summary.
+4. **`renderLogic`**: this is a `react-final-form` `FormSubscription`-like object
+   which works in exactly the same way as the `errorLogic` prop for the `<EasyField>`.
+   It defaults to only rendering the validation summary when `submitFailed` is `true`,
+   but you can even check for parts of the `FormState` being `false`.
+5. **`header`**: this is content to be rendered within the validation summary container,
+   _before_ the errors/labels list.
+6. **`footer`**: this is content to be rendered within the validation summary container,
+   _after_ the errors/labels list.
+7. **`render`**: if a `render` function is provided, then the expectation is
+   that you will handle all of the content yourself, including the container component,
+   and having to use a `<FormSpy>` or `useFormState()` to get the error data.
+   So, in this scenario, the only other properties from this list that have any effect
+   are the `position` string and `renderLogic` object; all others will be ignored.
+
+The default validation summary logic (which you can see in all of the examples so far)
+equates to setting the `validationSummary` prop to:
+
+```ts
+{
+  renderLogic: { submitFailed: true },
+  position: 'afterbegin',
+  content: 'errors',
+  mode: 'dynamic',
+}
+```
+
+After all that, it's time for an example!
+
+Here we're setting the `validationSummary` to have a `header`,
+with a `position` of `'beforeend'`, `content` set to `'labels'`,
+and the `mode` set to `'static'`:
+
+<Canvas of={LoginFormWithStaticLabelsValidationSummary} />
+
+#### Shorthand `validationSummary` prop values
+
+1. Leaving the prop `undefined`, setting it to boolean `true`,
+   or setting it to the string `'dynamic'`,
+   are all shorthand alternatives for the default object.
+2. Setting the prop to the string `'static'` uses the default object,
+   but with the `mode` set to `'static'`
+3. Setting `validationSummary` to a boolean `false` or the string `'none'`
+   will disable the validation summary
+
+#### Validation summary `submitError`
+
+The `<EasyForm>` validation summary considers the `submitError` to take priority
+over all other errors. This means that, if a `submitError` exists in the `FormState`,
+and your `renderLogic` conditions are met, then that error will be dislayed in the
+validation summary area on its own (without rendering the `header` or `footer`).
+
+To coincide with this, if the `<EasyForm>` `onSubmit` function throws an error,
+then this will be caught internally and used for the `submitError`. E.g.
+
+<Canvas of={LoginFormWithSubmitError} />
+
+#### Validation summary accessibility
+
+After a submission attempt fails, it's important that users are properly notified
+of errors in the form. This is why the validation summary is enabled by default,
+and defaults to rendering when the `FormState` `submitFailed` property is `true`.
+
+But the appearance of the element alone isn't enough, as screen-reader users
+may not be notified of it.
+
+So, the `<EasyForm>` will automatically attempt to move focus and scroll the page
+to the validation summary element after a submission attempt has failed.
+And, when the `mode` is set to `'static'`, or when the `submitError` is displayed,
+the summary will also have `role='alert'` set on it. **Please note**, the `role` attribute
+is set automatically only in those cases, because if `role='alert'` was set on the
+`'dynamic'` validation summary, then the the assertive
+screen-reader announcements would be too intrusive due to the summary content
+updating when the `FormState` does.

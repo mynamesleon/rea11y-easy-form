@@ -1,0 +1,19 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Utils and Hooks/smoothlyScrollIntoView" />
+
+# `smoothlyScrollIntoView()`
+
+Smoothly (if supported) scroll an element (that is not already in the viewport) into view (using native methods).
+
+This will also vertically scroll the window so that the element is at the top or bottom of the window, based on its original position relative to the viewport.
+If the element is too large to fit in the viewport, it will scroll to the top of that element.
+
+## Usage
+
+```js
+import { smoothlyScrollIntoView } from 'rea11y-easy-form';
+
+const element = document.querySelector('.element');
+smoothlyScrollIntoView(element);
+```

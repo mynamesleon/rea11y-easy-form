@@ -1,0 +1,25 @@
+import { Meta, Controls } from '@storybook/addon-docs/blocks';
+import focusElement from './focusElement';
+
+<Meta title="Utils and Hooks/focusElement" />
+
+# `focusElement()`
+
+Utility function to focus (via the native `focus` method)
+an HTMLElement that does not already have focus.
+
+If the element is not natively focusable/tabbable (determined by the `'tabbable'` library),
+then a `tabindex` of `'-1'` will be set on it so that it can receive focus.
+
+The provided argument can be an HTMLElement,
+or a React Ref (or at least, an object with a `.current` property).
+
+## Usage
+
+```js
+import { focusElement } from 'rea11y-easy-form';
+
+const element = document.querySelector('.element');
+const options = { preventScroll: true };
+focusElement(element, options);
+```
