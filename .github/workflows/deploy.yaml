@@ -20,3 +20,4 @@ jobs:
         with:
           path: storybook-static
           build_command: npm run storybook:build
+          compression-level: 0
