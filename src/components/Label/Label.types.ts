@@ -1,6 +1,6 @@
 import type { ComponentPropsWithRef, ElementType, ReactNode } from 'react';
 
-export type LabelProps<C extends ElementType = 'label'> = {
+export type LabelProps<C extends ElementType = ElementType> = {
   text?: ReactNode;
   /**
    * Used to indicate that an asterisk should be rendered

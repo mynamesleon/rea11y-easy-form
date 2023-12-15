@@ -17,7 +17,7 @@ export interface NoticeIconProps extends SVGAttributes<SVGElement> {
   type?: NOTICE_TYPE;
 }
 
-export type NoticeProps<C extends ElementType = 'div'> = {
+export type NoticeProps<C extends ElementType = ElementType> = {
   component?: C;
   type?: NOTICE_TYPE;
   /**

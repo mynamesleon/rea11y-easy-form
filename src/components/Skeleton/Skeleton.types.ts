@@ -5,7 +5,7 @@ export enum SKELETON_TYPE {
   TEXT = 'text',
 }
 
-export type SkeletonProps<C extends ElementType = 'span'> = {
+export type SkeletonProps<C extends ElementType = ElementType> = {
   /**
    * The outer element to render for the component
    * @default 'span'

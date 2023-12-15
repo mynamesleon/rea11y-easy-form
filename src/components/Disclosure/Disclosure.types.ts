@@ -1,6 +1,6 @@
 import type { ComponentPropsWithRef, ElementType, ReactNode } from 'react';
 
-export type DisclosureProps<C extends ElementType = 'div'> = {
+export type DisclosureProps<C extends ElementType = ElementType> = {
   /**
    * The element to use for the outer element
    * @default 'div'

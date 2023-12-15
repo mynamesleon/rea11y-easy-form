@@ -6,7 +6,7 @@ import type { ComponentPropsWithRef, ElementType, ReactNode } from 'react';
  * Can use `children` for the content, or the `text` prop,
  * which will better leverage memoisation.
  */
-export type VisuallyHiddenProps<C extends ElementType = 'span'> = {
+export type VisuallyHiddenProps<C extends ElementType = ElementType> = {
   /**
    * The outer element to render for the component
    * @default 'span'
