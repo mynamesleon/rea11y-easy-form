@@ -1,3 +1,3 @@
-import { InputHTMLAttributes } from 'react';
+import { ComponentPropsWithRef } from 'react';
 
-export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {}
+export interface InputProps extends ComponentPropsWithRef<'input'> {}

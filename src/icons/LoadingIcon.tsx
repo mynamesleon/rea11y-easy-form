@@ -1,7 +1,6 @@
-import React from 'react';
-import type { Dictionary } from '../utils/constants';
+import React, { type SVGProps } from 'react';
 
-const LoadingIcon = (props: Dictionary) => (
+const LoadingIcon = (props: SVGProps<SVGSVGElement>) => (
   <svg viewBox="0 0 24 24" {...props}>
     <style>{'@keyframes spinner_KYSC{to{transform:rotate(360deg)}}'}</style>
     <path

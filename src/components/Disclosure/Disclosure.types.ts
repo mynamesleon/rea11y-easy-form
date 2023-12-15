@@ -1,12 +1,11 @@
-import type { ElementType, ReactNode } from 'react';
-import type { Dictionary } from '../../utils/constants';
+import type { ComponentPropsWithRef, ElementType, ReactNode } from 'react';
 
-export interface DisclosureProps extends Dictionary {
+export type DisclosureProps<C extends ElementType = 'div'> = {
   /**
    * The element to use for the outer element
    * @default 'div'
    */
-  component?: ElementType;
+  component?: C;
   /**
    * If using in uncontrolled mode, sets the starting open state
    */
@@ -41,5 +40,8 @@ export interface DisclosureProps extends Dictionary {
    * Disable the button interactions
    */
   disabled?: boolean;
+  /**
+   * Controlled state prop
+   */
   open?: boolean;
-}
+} & Omit<ComponentPropsWithRef<C>, 'onChange' | 'label' | 'title'>;

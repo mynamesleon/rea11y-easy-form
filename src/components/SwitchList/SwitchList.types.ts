@@ -1,4 +1,4 @@
-import type { FieldsetPropsBase } from '../Fieldset/Fieldset.types';
+import type { FieldsetProps } from '../Fieldset/Fieldset.types';
 
 export enum SWITCH_LIST_TYPE {
   CHECKBOX = 'checkbox',
@@ -16,7 +16,7 @@ export type DetailedSwitchListOption = {
 
 export type SwitchListOptions = (string | DetailedSwitchListOption)[];
 
-export interface BaseSwitchListProps extends FieldsetPropsBase {
+export interface BaseSwitchListProps extends FieldsetProps {
   options?: SwitchListOptions;
   className?: string;
   disabled?: boolean;

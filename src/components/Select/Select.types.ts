@@ -1,4 +1,4 @@
-import type { ReactNode, SelectHTMLAttributes } from 'react';
+import type { ComponentPropsWithRef } from 'react';
 
 export type DetailedSelectOption = {
   key?: string;
@@ -21,8 +21,7 @@ export interface SelectOptionsProps {
   options?: SelectOptions;
 }
 
-export interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
+export interface SelectProps extends ComponentPropsWithRef<'select'> {
   options?: SelectOptions;
-  children?: ReactNode;
   className?: string;
 }

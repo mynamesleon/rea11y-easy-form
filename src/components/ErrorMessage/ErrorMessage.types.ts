@@ -1,8 +1,7 @@
-import type { HTMLAttributes, ReactNode } from 'react';
+import type { ComponentPropsWithRef, ReactNode } from 'react';
 
-export interface ErrorMessageProps extends HTMLAttributes<HTMLDivElement> {
+export interface ErrorMessageProps extends ComponentPropsWithRef<'div'> {
   loading?: boolean;
-  children?: ReactNode;
   text?: ReactNode;
   className?: string;
 }

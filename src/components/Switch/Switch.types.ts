@@ -1,8 +1,4 @@
-import type {
-  ChangeEventHandler,
-  FocusEventHandler,
-  InputHTMLAttributes,
-} from 'react';
+import type { ComponentPropsWithRef } from 'react';
 
 export enum SWITCH_TYPE {
   CHECKBOX = 'checkbox',
@@ -10,7 +6,7 @@ export enum SWITCH_TYPE {
   RADIO = 'radio',
 }
 
-export interface BaseSwitchProps extends InputHTMLAttributes<HTMLInputElement> {
+export interface BaseSwitchProps extends ComponentPropsWithRef<'input'> {
   tabIndex?: number;
   disabled?: boolean;
   className?: string;
@@ -24,9 +20,6 @@ export interface BaseSwitchProps extends InputHTMLAttributes<HTMLInputElement> {
    * Alias for defaultChecked
    */
   initialChecked?: boolean;
-  onChange?: ChangeEventHandler<HTMLInputElement>;
-  onFocus?: FocusEventHandler<HTMLInputElement>;
-  onBlur?: FocusEventHandler<HTMLInputElement>;
 }
 
 export type SwitchStrings = {

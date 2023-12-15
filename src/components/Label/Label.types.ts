@@ -1,19 +1,21 @@
-import type { ElementType, ReactNode } from 'react';
-import type { Dictionary } from '../../utils/constants';
+import type { ComponentPropsWithRef, ElementType, ReactNode } from 'react';
 
-export interface LabelProps extends Dictionary {
+export type LabelProps<C extends ElementType = 'label'> = {
   text?: ReactNode;
   /**
    * Used to indicate that an asterisk should be rendered
    * @default false
    */
   required?: boolean;
-  children?: ReactNode;
-  className?: string;
   /**
    * Text used for `title` and `aria-label` attributes on the asterisk element
    */
   srRequiredText?: string;
-  component?: ElementType;
-  htmlFor?: string;
-}
+  /**
+   * The element to use,
+   * e.g. can be passed a `'div'` if `htmlFor` will be empty
+   * to prevent orphaned labels
+   * @default 'label'
+   */
+  component?: C;
+} & ComponentPropsWithRef<C>;

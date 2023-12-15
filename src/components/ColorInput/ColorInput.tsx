@@ -51,7 +51,7 @@ const ColorInput = forwardRef<HTMLInputElement, ColorInputProps>(
     ref
   ) => {
     // allow controlled and uncontrolled variant
-    const [valueState, setValueState] = useState(
+    const [valueState, setValueState] = useState(() =>
       convertToColorHex(defaultValue || initialValue)
     );
     // in controlled mode,

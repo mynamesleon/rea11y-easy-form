@@ -1,7 +1,6 @@
-import React from 'react';
-import type { Dictionary } from '../utils/constants';
+import React, { type SVGProps } from 'react';
 
-const TickIcon = (props: Dictionary) => (
+const TickIcon = (props: SVGProps<SVGSVGElement>) => (
   <svg viewBox="0 0 24 24" {...props}>
     <path
       fill="currentColor"

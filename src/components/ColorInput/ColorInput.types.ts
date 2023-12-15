@@ -1,9 +1,8 @@
-import type { ChangeEvent, FocusEvent, AriaAttributes } from 'react';
-import type { Dictionary } from '../../utils/constants';
+import type { FocusEvent, ChangeEvent, ComponentPropsWithRef } from 'react';
 
 // extending Dictionary, instead of InputHTMLAttributes,
 // due to incompatible `onChange` approach
-export interface ColorInputProps extends AriaAttributes, Dictionary<any> {
+export type ColorInputProps = {
   colorPickerLabel?: string;
   /**
    * Class name to add to the container element
@@ -29,4 +28,4 @@ export interface ColorInputProps extends AriaAttributes, Dictionary<any> {
   id?: string;
   name?: string;
   disabled?: boolean;
-}
+} & Omit<ComponentPropsWithRef<'input'>, 'onChange'>;

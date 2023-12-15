@@ -42,11 +42,8 @@ const EasyFormRow = ({ field = {}, fieldNamePrefix = '' }: any) => {
       <Suspense fallback={<Skeleton type={SKELETON_TYPE.INPUT} />}>
         <Container {...otherFieldProps} name={name}>
           {type === 'repeater' ? (
-            ({ name: fieldNamePrefix }) => (
-              <EasyFormBuilder
-                fieldNamePrefix={fieldNamePrefix}
-                structure={children}
-              />
+            ({ name }) => (
+              <EasyFormBuilder fieldNamePrefix={name} structure={children} />
             )
           ) : (
             <EasyFormBuilder fieldNamePrefix={name} structure={children} />

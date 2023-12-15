@@ -51,7 +51,7 @@ const ValidationSummary = forwardRef<HTMLElement, ValidationSummaryProps>(
         {...other}
         ref={ref}
         type={NOTICE_TYPE.ERROR}
-        tabIndex="-1"
+        tabIndex={-1}
         component="div"
         className={clsx(className, classPrefix)}
       >

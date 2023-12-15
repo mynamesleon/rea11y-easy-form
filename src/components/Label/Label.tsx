@@ -29,7 +29,7 @@ const Label = forwardRef<any, LabelProps>(
         data-testid="Label"
         {...other}
         ref={ref}
-        htmlFor={Component === 'label' ? htmlFor : null}
+        htmlFor={Component === 'label' ? htmlFor : undefined}
         className={clsx(className, classPrefix, {
           [`${classPrefix}--required`]: required,
         })}

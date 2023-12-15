@@ -1,5 +1,9 @@
-import type { ElementType, ReactNode, SVGAttributes } from 'react';
-import { Dictionary } from '../../utils/constants';
+import type {
+  ComponentPropsWithRef,
+  SVGAttributes,
+  ElementType,
+  ReactNode,
+} from 'react';
 
 export enum NOTICE_TYPE {
   LOADING = 'loading',
@@ -13,14 +17,12 @@ export interface NoticeIconProps extends SVGAttributes<SVGElement> {
   type?: NOTICE_TYPE;
 }
 
-export interface NoticeProps extends Dictionary {
-  component?: ElementType;
-  children?: ReactNode;
+export type NoticeProps<C extends ElementType = 'div'> = {
+  component?: C;
   type?: NOTICE_TYPE;
   /**
    * Alias for `type`
    */
   variant?: NOTICE_TYPE;
-  className?: string;
   text?: ReactNode;
-}
+} & ComponentPropsWithRef<C>;

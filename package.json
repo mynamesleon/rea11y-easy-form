@@ -1,6 +1,6 @@
 {
   "name": "rea11y-easy-form",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "main": "build/cjs/index.js",
   "module": "build/esm/index.js",
   "files": [
@@ -19,16 +19,19 @@
     "generate": "node ./scripts/create-component"
   },
   "repository": {
-    "type": "git"
+    "type": "git",
+    "url": "git+https://github.com/mynamesleon/rea11y-easy-form.git"
   },
+  "bugs": {
+    "url": "https://github.com/mynamesleon/rea11y-easy-form/issues"
+},
+  "homepage": "https://mynamesleon.github.io/rea11y-easy-form",
   "keywords": [
+    "React Form",
+    "final-form",
+    "react-final-form",
     "React",
-    "Component",
-    "Library",
-    "Rollup",
-    "Typescript",
-    "Sass",
-    "Storybook"
+    "Typescript"
   ],
   "author": "Leon Slater",
   "license": "MIT",

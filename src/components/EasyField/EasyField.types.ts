@@ -1,3 +1,4 @@
+import type { ComponentProps, ReactNode } from 'react';
 import type {
   UseFieldConfig,
   RenderableProps,
@@ -6,7 +7,7 @@ import type {
 } from 'react-final-form';
 import type { FieldSubscription, FieldValidator } from 'final-form';
 import type { Dictionary } from '../../utils/constants';
-import { ElementType, ReactNode } from 'react';
+import Label from '../Label';
 
 export interface EasyFieldRenderProps
   extends FieldInputProps<any, any>,
@@ -34,7 +35,11 @@ export interface EasyFieldRenderProps
   'aria-required'?: boolean;
 }
 
-type EasyFieldValidationRule = boolean | string | FieldValidator<any> | any;
+export type EasyFieldValidationRule =
+  | boolean
+  | string
+  | FieldValidator<any>
+  | any;
 
 export interface EasyFieldProps
   extends UseFieldConfig<any, any>,
@@ -87,5 +92,5 @@ export interface EasyFieldProps
    * Component to pass to the `<Label>`
    * (e.g. to render a `<div>` instead of a `<label>` for a text-content field)
    */
-  labelComponent?: ElementType;
+  labelComponent?: ComponentProps<typeof Label>['component'];
 }

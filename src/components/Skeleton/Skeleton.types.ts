@@ -1,22 +1,16 @@
-import type { ElementType, ReactNode } from 'react';
-import type { Dictionary } from '../../utils/constants';
+import type { ComponentPropsWithRef, ElementType, ReactNode } from 'react';
 
 export enum SKELETON_TYPE {
   INPUT = 'input',
   TEXT = 'text',
 }
 
-export interface SkeletonProps extends Dictionary {
+export type SkeletonProps<C extends ElementType = 'span'> = {
   /**
-   * The outer element to render for the component;
-   * defaults to 'div' in input mode, and 'span' in text mode
+   * The outer element to render for the component
+   * @default 'span'
    */
-  component?: ElementType;
-  className?: string;
-  /**
-   * Content to render inside the skeleton area
-   */
-  children?: ReactNode;
+  component?: C;
   /**
    * Text visible to screen-reader users within the skeleton element;
    * can use this prop with a primitive value (such as a string)
@@ -27,5 +21,5 @@ export interface SkeletonProps extends Dictionary {
   /**
    * @default 'input'
    */
-  type?: SKELETON_TYPE;
-}
+  type?: SKELETON_TYPE | String;
+} & ComponentPropsWithRef<C>;

@@ -5,10 +5,11 @@ import { capitaliseFirstLetter, isNullOrUndefined } from '../../utils';
 
 import type { FieldValidator } from 'final-form';
 import type { Dictionary } from '../../utils/constants';
+import type { EasyFieldValidationRule } from './EasyField.types';
 
 const useEasyFieldValidator = (
   requiredArg?: any,
-  validation?: Dictionary<FieldValidator<any>>,
+  validation?: Dictionary<EasyFieldValidationRule>,
   validate?: FieldValidator<any>
 ) => {
   const { defaultFieldValidationFunctions } = useEasyFormContext();

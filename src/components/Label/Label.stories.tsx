@@ -11,6 +11,13 @@ StandardUsage.args = {
   text: 'Label text',
 };
 
+/**
+ * A simple component to render a `<label>` element,
+ * with handling for a required asterisk with optional screen-reader text.
+ *
+ * Can use `children` for the content, or the `text` prop,
+ * which will better leverage memoisation.
+ */
 export default {
   title: 'Components/Label',
   component: StandardUsage,

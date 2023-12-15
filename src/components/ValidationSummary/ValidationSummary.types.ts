@@ -1,4 +1,4 @@
-import { HTMLAttributes, ReactNode } from 'react';
+import { ComponentPropsWithRef, ReactNode } from 'react';
 import { Dictionary } from '../../utils/constants';
 
 export type ValidationSummaryError =
@@ -10,10 +10,9 @@ export type ValidationSummaryErrors =
   | ValidationSummaryError[]
   | Dictionary<any>;
 
-export interface ValidationSummaryProps extends HTMLAttributes<HTMLDivElement> {
+export interface ValidationSummaryProps extends ComponentPropsWithRef<'div'> {
   header?: ReactNode;
   footer?: ReactNode;
-  className?: string;
   error?: ValidationSummaryError;
   errors?: ValidationSummaryErrors;
 }

@@ -1,14 +1,6 @@
-import type { FieldsetHTMLAttributes, ReactNode } from 'react';
+import type { ComponentPropsWithRef, ReactNode } from 'react';
 
-export interface FieldsetProps extends FieldsetPropsBase {
-  children?: ReactNode;
-}
-
-export interface FieldsetPropsBase
-  extends FieldsetPropsStandAlone,
-    FieldsetHTMLAttributes<HTMLFieldSetElement> {}
-
-export interface FieldsetPropsStandAlone {
+export interface FieldsetProps extends ComponentPropsWithRef<'fieldset'> {
   /**
    * Alias for `legend`
    */
@@ -17,7 +9,6 @@ export interface FieldsetPropsStandAlone {
    * The legend contents
    */
   legend?: ReactNode;
-  className?: string;
   /**
    * Alias for `visuallyHiddenLegend`
    */
