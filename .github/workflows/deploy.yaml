@@ -7,6 +7,7 @@ on:
 jobs:
   deploy:
     permissions:
+      contents: read
       pages: write
       id-token: write
     environment:
@@ -19,4 +20,3 @@ jobs:
         with:
           path: storybook-static
           build_command: npm run storybook:build
-          token: ${{ secrets.GITHUB_TOKEN }}
