@@ -5,6 +5,22 @@ on:
     branches:
       - 'main'
 jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18.x'
+      - name: Build
+        run: |
+          npm ci
+          npm run storybook:build
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v2.0.0
+        with:
+          path: storybook-static
+
   deploy:
     permissions:
       contents: read
@@ -15,9 +31,8 @@ jobs:
       url: ${{ steps.build-publish.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - id: build-publish
-        uses: bitovi/github-actions-storybook-to-github-pages@v1.0.0
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v3
         with:
-          path: storybook-static
-          build_command: npm run storybook:build
-          compression-level: 0
+          token: ${{ github.token }}
