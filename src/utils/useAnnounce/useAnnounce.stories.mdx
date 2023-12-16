@@ -1,0 +1,33 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Utils and Hooks/useAnnounce" />
+
+# `useAnnounce()` hook
+
+The `useAnnounce()` hook is intended for components that
+need to make custom screen-reader announcements after specific interactions.
+E.g. a button click that moves an element to another position in the DOM.
+
+The hook also optionally takes a string to be used for the `aria-live`
+attribute on the result, which defaults to `'assertive'`.
+
+It returns an `announce()` function that takes a `ReactNode` (element, string, etc.),
+and an `announcer` element to be rendered.
+
+## Usage
+
+```jsx
+import { useAnnounce } from 'rea11y-easy-form';
+
+const YourComponent = () => {
+  const { announcer, announce } = useAnnounce();
+  return (
+    <div>
+      {announcer}
+      <button type="button" onClick={() => announce('You did a thing')}>
+        Do a thing
+      </button>
+    </div>
+  );
+};
+```

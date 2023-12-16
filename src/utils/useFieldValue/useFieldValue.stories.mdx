@@ -1,0 +1,23 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Utils and Hooks/useFieldValue" />
+
+# `useFieldValue()` hook
+
+## Usage
+
+```jsx
+import { useFieldValue } from 'rea11y-easy-form';
+
+const customParse = (value) => doSomethingWithTheValue(value);
+
+const YourComponent = () => {
+  const value = useFieldValue('field-name');
+  const [firstValue, secondValue] = useFieldValue(['first', 'second']);
+  const deepComparedParsedValues = useFieldValue(['first', 'second'], {
+    parse: customParse,
+    deep: true,
+  });
+  // your component code here
+};
+```

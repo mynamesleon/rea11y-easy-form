@@ -6,6 +6,8 @@ export {
   isElementInViewport,
   isNullOrUndefined,
   smoothlyScrollIntoView,
+  useAnnounce,
+  useFieldValue,
   useMutatedField,
 } from './utils';
 export * from './utils/validation';
