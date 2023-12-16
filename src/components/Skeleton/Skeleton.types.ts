@@ -5,12 +5,12 @@ export enum SKELETON_TYPE {
   TEXT = 'text',
 }
 
-export type SkeletonProps<C extends ElementType = ElementType> = {
+export type SkeletonProps = {
   /**
    * The outer element to render for the component
    * @default 'span'
    */
-  component?: C;
+  component?: ElementType;
   /**
    * Text visible to screen-reader users within the skeleton element;
    * can use this prop with a primitive value (such as a string)
@@ -22,4 +22,4 @@ export type SkeletonProps<C extends ElementType = ElementType> = {
    * @default 'input'
    */
   type?: SKELETON_TYPE | String;
-} & ComponentPropsWithRef<C>;
+} & ComponentPropsWithRef<'span'>;

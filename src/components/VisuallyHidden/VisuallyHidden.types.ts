@@ -6,12 +6,12 @@ import type { ComponentPropsWithRef, ElementType, ReactNode } from 'react';
  * Can use `children` for the content, or the `text` prop,
  * which will better leverage memoisation.
  */
-export type VisuallyHiddenProps<C extends ElementType = ElementType> = {
+export type VisuallyHiddenProps = {
   /**
    * The outer element to render for the component
    * @default 'span'
    */
-  component?: C;
+  component?: ElementType;
   /**
    * Indicates that the VisuallyHidden `component` is a focusable element,
    * and should be made visible when it receives focus / is active
@@ -19,4 +19,4 @@ export type VisuallyHiddenProps<C extends ElementType = ElementType> = {
    */
   focusable?: boolean;
   text?: ReactNode;
-} & ComponentPropsWithRef<C>;
+} & ComponentPropsWithRef<'span'>;

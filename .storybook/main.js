@@ -1,6 +1,6 @@
 module.exports = {
   stories: [
-    '../src/components/EasyForm/EasyForm.stories.tsx',
+    '../src/Introduction.stories.mdx',
     '../src/**/*.stories.@(js|jsx|ts|tsx)',
     '../src/**/*.stories.mdx',
   ],

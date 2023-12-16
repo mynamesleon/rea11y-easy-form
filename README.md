@@ -1,7 +1,9 @@
 # rea11y-easy-form (IN PROGRESS!)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
-[![npm version](https://img.shields.io/npm/v/rea11y-easy-form.svg)](http://npm.im/rea11y-easy-form)
+[![NPM version](https://img.shields.io/npm/v/rea11y-easy-form.svg)](http://npm.im/rea11y-easy-form)
+[![Types](https://flat.badgen.net/npm/types/rea11y-easy-form)](https://www.npmjs.com/package/rea11y-easy-form)
+[![Tree Shaking](https://flat.badgen.net/bundlephobia/tree-shaking/rea11y-easy-form)](https://bundlephobia.com/result?p=rea11y-easy-form)
 
 The (hopefully!) easiest way to build highly performant and accessible forms in React.
 

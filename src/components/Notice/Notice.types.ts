@@ -17,12 +17,12 @@ export interface NoticeIconProps extends SVGAttributes<SVGElement> {
   type?: NOTICE_TYPE;
 }
 
-export type NoticeProps<C extends ElementType = ElementType> = {
-  component?: C;
+export type NoticeProps = {
+  component?: ElementType;
   type?: NOTICE_TYPE;
   /**
    * Alias for `type`
    */
   variant?: NOTICE_TYPE;
   text?: ReactNode;
-} & ComponentPropsWithRef<C>;
+} & ComponentPropsWithRef<'div'>;

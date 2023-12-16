@@ -1,11 +1,11 @@
 import type { ComponentPropsWithRef, ElementType, ReactNode } from 'react';
 
-export type DisclosureProps<C extends ElementType = ElementType> = {
+export type DisclosureProps = {
   /**
    * The element to use for the outer element
    * @default 'div'
    */
-  component?: C;
+  component?: ElementType;
   /**
    * If using in uncontrolled mode, sets the starting open state
    */
@@ -44,4 +44,4 @@ export type DisclosureProps<C extends ElementType = ElementType> = {
    * Controlled state prop
    */
   open?: boolean;
-} & Omit<ComponentPropsWithRef<C>, 'onChange' | 'label' | 'title'>;
+} & Omit<ComponentPropsWithRef<'div'>, 'onChange' | 'label' | 'title'>;
