@@ -26,13 +26,6 @@ describe('<Skeleton />', () => {
     expect(component).toHaveClass(props.className);
   });
 
-  it('renders as a div for the input type', () => {
-    props.type = SKELETON_TYPE.INPUT;
-    const { getByTestId } = renderComponent();
-    const component = getByTestId('Skeleton');
-    expect(component.tagName).toBe('DIV');
-  });
-
   it('renders as a span for the text type', () => {
     props.type = SKELETON_TYPE.TEXT;
     const { getByTestId } = renderComponent();

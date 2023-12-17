@@ -4,7 +4,21 @@ import { Meta } from '@storybook/addon-docs/blocks';
 
 # `useFieldValue()` hook
 
+A hook to get a value - or multiple values - from the `FormState`.
+
+This subscribes to the `FormState` values, and relies on a number of comparisons internally,
+to only return a new value if that field's value has actually changed.
+If your field's value is likely to be a reference value type (e.g. `object` or `array`),
+then you can set the `deep` option to `true` to do a deep value comparison.
+
+**Please note**: if you pass in an array of field names to the hook,
+then a deep value comparison will always be done.
+
 ## Usage
+
+```js
+useFieldValue(nameOrArrayOfNames, options);
+```
 
 ```jsx
 import { useFieldValue } from 'rea11y-easy-form';

@@ -1,8 +1,8 @@
-import { getIn } from 'final-form';
-import { useCallback, useMemo, useRef } from 'react';
-import { useFormState } from 'react-final-form';
-import { isEqual } from '@react-hookz/deep-equal';
+import { useCallback, useMemo, useRef, useEffect } from 'react';
 import { useDeepCompareMemo } from '@react-hookz/web';
+import { isEqual } from '@react-hookz/deep-equal';
+import { useFormState } from 'react-final-form';
+import { getIn } from 'final-form';
 
 type UseFieldValueNameOrNames = string | string[] | null;
 type UseFieldValueOptions = {
@@ -41,20 +41,23 @@ const useFieldValue = (
   if (!previousValues.current) {
     setPreviousValuesRef(fieldValues);
   }
-
-  return useMemo(() => {
+  const valuesChanged = useMemo(() => {
     const doDeepComparison = deep || nameIsArray;
-    const valuesChanged = doDeepComparison
+    return doDeepComparison
       ? !isEqual(fieldValues, previousValues.current)
       : fieldValues !== previousValues.current;
+  }, [deep, nameIsArray, fieldValues]);
+
+  useEffect(() => {
     if (valuesChanged) {
       setPreviousValuesRef(fieldValues);
     }
-    if (nameIsArray) {
-      return previousValues.current;
-    }
-    return previousValues.current?.[0];
-  }, [fieldValues, deep, nameIsArray, setPreviousValuesRef]);
+  }, [valuesChanged, fieldValues, setPreviousValuesRef]);
+
+  if (nameIsArray) {
+    return previousValues.current;
+  }
+  return previousValues.current?.[0];
 };
 
 export default useFieldValue;
