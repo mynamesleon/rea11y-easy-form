@@ -4,16 +4,13 @@ module.exports = {
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
   testPathIgnorePatterns: ['node_modules/'],
   testEnvironment: 'jest-environment-jsdom',
-  coverageReporters: ['text'],
+  coverageReporters: ['text', 'cobertura'],
+  coverageDirectory: 'coverage',
   transform: {
     '^.+\\.tsx?$': 'ts-jest',
   },
-  transformIgnorePatterns: [
-    '/node_modules/(?!(react-markdown).*/)',
-  ],
   testMatch: ['**/*.(test|spec).(ts|tsx|js|jsx)'],
   moduleNameMapper: {
-    // Mocks out all these file formats when tests are run.
     '\\.(jpg|ico|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$':
       'identity-obj-proxy',
     '\\.(css|less|scss|sass)$': 'identity-obj-proxy',
