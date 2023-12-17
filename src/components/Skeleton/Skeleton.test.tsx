@@ -19,6 +19,12 @@ describe('<Skeleton />', () => {
     expect(getByText(props.text as string)).not.toBeNull();
   });
 
+  it('renders default loading text if no text prop is provided', () => {
+    props.text = undefined;
+    const { getByText } = renderComponent();
+    expect(getByText('Loading...')).not.toBeNull();
+  });
+
   it('takes a `className` prop', () => {
     props.className = 'test-class';
     const { getByTestId } = renderComponent();
