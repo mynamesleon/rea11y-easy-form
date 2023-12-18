@@ -1,7 +1,7 @@
 import React, { forwardRef, memo } from 'react';
 import clsx from 'clsx';
 import { VisuallyHiddenProps } from './VisuallyHidden.types';
-import { useFieldClassName } from '../../utils';
+import useFieldClassName from '../../utils/useFieldClassName';
 import './VisuallyHidden.less';
 
 const VisuallyHidden = forwardRef<any, VisuallyHiddenProps>(
