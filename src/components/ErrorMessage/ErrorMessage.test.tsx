@@ -1,7 +1,14 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import ErrorMessage from './ErrorMessage';
-import { ErrorMessageProps } from './ErrorMessage.types';
+import type { ErrorMessageProps } from './ErrorMessage.types';
+import { NoticeIcon, NOTICE_TYPE } from '../Notice';
+
+jest.mock('../Notice', () => ({
+  __esModule: true,
+  ...jest.requireActual('../Notice'),
+  NoticeIcon: jest.fn(() => null),
+}));
 
 describe('<ErrorMessage />', () => {
   let props: ErrorMessageProps;
@@ -32,6 +39,25 @@ describe('<ErrorMessage />', () => {
     const { queryByTestId } = renderComponent();
     const component = queryByTestId('ErrorMessage');
     expect(component).toBeNull();
+  });
+
+  it('renders an error type NoticeIcon by default', () => {
+    props.text = 'text';
+    renderComponent();
+    expect(NoticeIcon).toHaveBeenCalledWith(
+      expect.objectContaining({ type: NOTICE_TYPE.ERROR }),
+      expect.any(Object) // context
+    );
+  });
+
+  it('renders a loading type NoticeIcon if `loading` is true', () => {
+    props.text = 'text';
+    props.loading = true;
+    renderComponent();
+    expect(NoticeIcon).toHaveBeenCalledWith(
+      expect.objectContaining({ type: NOTICE_TYPE.LOADING }),
+      expect.any(Object) // context
+    );
   });
 
   it('passes other props onto the element', () => {

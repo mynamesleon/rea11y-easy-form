@@ -23,7 +23,7 @@ export type DisclosureProps = {
     open: boolean,
     event: React.MouseEvent<HTMLButtonElement>
   ) => void;
-  children?: ReactNode | ((isOpen: boolean) => ReactNode);
+  children?: ReactNode | ((isOpen: boolean) => ReactNode | null);
   /**
    * The contents to render inside the button toggle element
    */
@@ -44,4 +44,7 @@ export type DisclosureProps = {
    * Controlled state prop
    */
   open?: boolean;
-} & Omit<ComponentPropsWithRef<'div'>, 'onChange' | 'label' | 'title'>;
+} & Omit<
+  ComponentPropsWithRef<'div'>,
+  'onChange' | 'label' | 'title' | 'children' | 'summary'
+>;

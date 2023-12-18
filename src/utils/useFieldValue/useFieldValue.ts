@@ -7,12 +7,21 @@ import { getIn } from 'final-form';
 type UseFieldValueNameOrNames = string | string[] | null;
 type UseFieldValueOptions = {
   parse?: (value: any) => any;
-  deep: boolean;
+  deep?: boolean;
 };
 
 const DEFAULT_OPTIONS: UseFieldValueOptions = {
   parse: (value: any) => value,
   deep: false,
+};
+
+const parseValues = (
+  values: any,
+  returnArray: boolean,
+  parse?: (values: any) => any
+) => {
+  const valuesToParse = returnArray ? values : values?.[0];
+  return typeof parse === 'function' ? parse(valuesToParse) : valuesToParse;
 };
 
 const useFieldValue = (
@@ -33,31 +42,35 @@ const useFieldValue = (
     [namesArr, values]
   );
 
-  const previousValues = useRef<any[]>();
-  const setPreviousValuesRef = useCallback(
-    (values: any[]) => (previousValues.current = parse?.(values) ?? values),
-    [parse]
-  );
-  if (!previousValues.current) {
-    setPreviousValuesRef(fieldValues);
+  const previousValues = useRef<any[]>(fieldValues);
+  const parsedValues = useRef<any>();
+  if (!parsedValues.current) {
+    parsedValues.current = parseValues(fieldValues, nameIsArray, parse);
   }
+
   const valuesChanged = useMemo(() => {
     const doDeepComparison = deep || nameIsArray;
-    return doDeepComparison
+    const hasChanged = doDeepComparison
       ? !isEqual(fieldValues, previousValues.current)
       : fieldValues !== previousValues.current;
+
+    if (hasChanged) {
+      previousValues.current = fieldValues;
+    }
+    return hasChanged;
   }, [deep, nameIsArray, fieldValues]);
 
-  useEffect(() => {
+  // doing the parsing in a separate useMemo in case the
+  // `parse` option is passed in as an inline function,
+  // which would cause extra re-renders
+  // and potentially additional deep object comparisons
+  // if this was done in the `useMemo` above
+  return useMemo(() => {
     if (valuesChanged) {
-      setPreviousValuesRef(fieldValues);
+      parsedValues.current = parseValues(fieldValues, nameIsArray, parse);
     }
-  }, [valuesChanged, fieldValues, setPreviousValuesRef]);
-
-  if (nameIsArray) {
-    return previousValues.current;
-  }
-  return previousValues.current?.[0];
+    return parsedValues.current;
+  }, [parse, nameIsArray, fieldValues, valuesChanged]);
 };
 
 export default useFieldValue;

@@ -28,6 +28,13 @@ describe('<Disclosure />', () => {
     expect(component).toHaveAttribute('hidden');
   });
 
+  it('takes a children function, assing it the current `open` state', () => {
+    props.open = false;
+    props.children = jest.fn(() => null);
+    renderComponent();
+    expect(props.children).toHaveBeenCalledWith(props.open);
+  });
+
   it('renders the outer element with the chosen component', () => {
     props.component = 'section';
     const { getByTestId } = renderComponent();
@@ -145,6 +152,13 @@ describe('<Disclosure />', () => {
     const component = getByTestId('Disclosure');
     const button = component.querySelector('button');
     expect(getByText(props.summary as string)).toStrictEqual(button);
+  });
+
+  it('takes a function prop for the summary, passing it the current open state', () => {
+    props.open = false;
+    props.summary = jest.fn(() => null);
+    renderComponent();
+    expect(props.summary).toHaveBeenCalledWith(props.open);
   });
 
   it('takes a disabled prop to disable the trigger', () => {
