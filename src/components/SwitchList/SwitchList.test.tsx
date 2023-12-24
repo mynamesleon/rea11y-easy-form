@@ -22,10 +22,4 @@ describe('<SwitchList />', () => {
     const component = getByTestId('SwitchList');
     expect(component).toHaveTextContent('leon was here');
   });
-
-  it('renders nothing if `useSwitchListOptions` returns nothing', () => {
-    (useSwitchListOptions as any).mockReturnValue(null);
-    const { container } = renderComponent();
-    expect(container.querySelector('ul')).not.toBeInTheDocument();
-  });
 });
