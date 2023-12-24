@@ -45,19 +45,33 @@ export const DEFAULT_COMPONENTS = {
     acc[type] = Input;
     return acc;
   }, {}),
-  [CONTROL_TYPE.TEXTAREA]: lazy(() => import('../Textarea')),
-  // custom controls
-  [CONTROL_TYPE.COLOR]: lazy(() => import('../ColorInput')),
-  [CONTROL_TYPE.CHECKBOX]: lazy(() => import('../Checkbox')),
-  [CONTROL_TYPE.CHECKBOXES]: lazy(() => import('../CheckboxList')),
-  [CONTROL_TYPE.CHECKBOX_LIST]: lazy(() => import('../CheckboxList')),
+  // other standard form controls
   [CONTROL_TYPE.RADIO]: lazy(() => import('../Radio')),
-  [CONTROL_TYPE.RADIOS]: lazy(() => import('../RadioList')),
-  [CONTROL_TYPE.RADIO_LIST]: lazy(() => import('../RadioList')),
   [CONTROL_TYPE.SELECT]: lazy(() => import('../Select')),
+  [CONTROL_TYPE.TEXTAREA]: lazy(() => import('../Textarea')),
+  [CONTROL_TYPE.CHECKBOX]: lazy(() => import('../Checkbox')),
+  // custom controls
   [CONTROL_TYPE.SWITCH]: Switch,
+  [CONTROL_TYPE.COLOR]: lazy(() => import('../ColorInput')),
+  // checkbox list
+  [CONTROL_TYPE.CHECKBOXES]: lazy(() => import('../CheckboxList')),
+  [CONTROL_TYPE.CHECKBOXLIST]: lazy(() => import('../CheckboxList')),
+  [CONTROL_TYPE.CHECKBOX_LIST]: lazy(() => import('../CheckboxList')),
+  // radio list
+  [CONTROL_TYPE.RADIOS]: lazy(() => import('../RadioList')),
+  [CONTROL_TYPE.RADIOLIST]: lazy(() => import('../RadioList')),
+  [CONTROL_TYPE.RADIO_LIST]: lazy(() => import('../RadioList')),
+  // switch list
   [CONTROL_TYPE.SWITCHES]: lazy(() => import('../SwitchList')),
+  [CONTROL_TYPE.SWITCHLIST]: lazy(() => import('../SwitchList')),
   [CONTROL_TYPE.SWITCH_LIST]: lazy(() => import('../SwitchList')),
+  // autocomplete
+  [CONTROL_TYPE.AUTOCOMPLETE]: lazy(() => import('../AutoComplete')),
+  [CONTROL_TYPE.AUTO_COMPLETE]: lazy(() => import('../AutoComplete')),
+  [CONTROL_TYPE.TYPEAHEAD]: lazy(() => import('../AutoComplete')),
+  [CONTROL_TYPE.TYPE_AHEAD]: lazy(() => import('../AutoComplete')),
+  [CONTROL_TYPE.COMBOBOX]: lazy(() => import('../AutoComplete')),
+  [CONTROL_TYPE.COMBO_BOX]: lazy(() => import('../AutoComplete')),
 };
 
 const invertForValidation =

@@ -1,0 +1,103 @@
+@import 'aria-autocomplete/dist/aria-autocomplete.css';
+@import '../../less/variables.less';
+@import '../../less/mixins.less';
+
+.field-styles('autocomplete', {
+    .aria-autocomplete {
+        &__input {
+            font-size: initial;
+            min-height: 0;
+        }
+
+        &__list {
+            .box();
+            max-width: 100%;
+        }
+
+        &__selected {
+            .box();
+            line-height: 1;
+            font-size: initial;
+            color: @color-white;
+            display: inline-block;
+            padding-block: calc(@spacing-1 / 2);
+            padding-inline: @spacing-1;
+            background-color: @color-grey-4;
+
+            &--disabled {
+                cursor: not-allowed;
+            }
+
+            &:after {
+                position: static;
+                background: none;
+                font-size: 1.3em;
+            }
+
+            &:not(.aria-autocomplete__selected--disabled) {
+                &:after {
+                    content: "\00d7";
+                    padding-right: @spacing-1;
+                    padding-left: @spacing-2;
+                }
+    
+                &:focus {
+                    .focus-highlight();
+                }
+            }
+        }
+
+        &__wrapper {
+            max-width: @input-width;
+            box-sizing: border-box;
+
+            &:not(.aria-autocomplete__wrapper--autogrow) .aria-autocomplete__input {
+                .input-styles();
+                min-height: 0;
+            }
+
+            &--autogrow.aria-autocomplete__wrapper--multiple {
+                .input-styles();
+                padding-block: @spacing-1;
+                min-height: @input-height;
+                display: flex;
+                height: auto;
+
+                &.aria-autocomplete__wrapper--disabled {
+                    .input-disabled();
+                }
+            }
+
+            &--show-all {
+                .aria-autocomplete__input {
+                    border-top-right-radius: 0;
+                    border-bottom-right-radius: 0;
+                }
+
+                .aria-autocomplete__show-all {
+                    .box();
+                    border-top-left-radius: 0;
+                    border-bottom-left-radius: 0;
+
+                    &:focus {
+                        .focus-highlight();
+                    }
+                }
+
+                &.aria-autocomplete__wrapper--autogrow {
+                    .aria-autocomplete__show-all {
+                        border-top: 0;
+                        border-right: 0;
+                        border-bottom: 0;
+                    }
+                }
+                
+                &:not(.aria-autocomplete__wrapper--autogrow) {
+                    .aria-autocomplete__show-all {
+                        height: @input-height;
+                    }
+                }
+            }
+        }
+    }
+});
