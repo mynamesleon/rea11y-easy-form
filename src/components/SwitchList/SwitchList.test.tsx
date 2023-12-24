@@ -67,4 +67,10 @@ describe('<SwitchList />', () => {
     expect(ul).toBeInTheDocument();
     expect(ul).toHaveClass(`${classPrefix}__list`);
   });
+
+  it('renders nothing if `useSwitchListOptions` returns nothing', () => {
+    (useSwitchListOptions as any).mockReturnValue(null);
+    const { container } = renderComponent();
+    expect(container.querySelector('ul')).not.toBeInTheDocument();
+  });
 });
