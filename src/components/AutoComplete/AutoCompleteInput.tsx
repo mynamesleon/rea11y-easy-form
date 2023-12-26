@@ -49,6 +49,7 @@ const AutoCompleteInput = ({
       ref={inputRef}
       disabled={disabled}
       defaultValue={defaultValue}
+      data-testid="AutoCompleteInput"
     />
   );
 };
