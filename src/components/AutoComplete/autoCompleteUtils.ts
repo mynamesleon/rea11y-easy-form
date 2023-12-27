@@ -6,7 +6,7 @@ import type {
 } from 'aria-autocomplete';
 import { ARIA_ATTRIBUTES, isNullOrUndefined } from '../../utils';
 
-type AutoCompleteApiRef = MutableRefObject<IAriaAutocompleteApi | null>;
+type AutoCompleteApiRef = MutableRefObject<IAriaAutocompleteApi | any | null>;
 
 export const destroyAutoComplete = (autoCompleteRef: AutoCompleteApiRef) =>
   autoCompleteRef.current?.destroy?.();
@@ -21,8 +21,8 @@ export const enableAutoComplete = (autoCompleteRef: AutoCompleteApiRef) =>
 
 export const setAutoCompleteOption = <K extends keyof IAriaAutocompleteOptions>(
   autoCompleteRef: AutoCompleteApiRef,
-  option: K,
-  value: IAriaAutocompleteOptions[K]
+  option?: K,
+  value?: IAriaAutocompleteOptions[K]
 ) => autoCompleteRef.current?.setOption?.(option, value);
 
 export const setAutoCompleteOptions = (

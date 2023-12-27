@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 import AutoCompleteInput from './AutoCompleteInput';
 import type { AutoCompleteInputProps } from './AutoComplete.types';
 import { ARIA_ATTRIBUTES } from '../../utils';
@@ -26,12 +26,6 @@ describe('<AutoCompleteInput />', () => {
     expect(input).not.toBeVisible();
   });
 
-  // how to test this without mocking!
-  it.skip('destroys AriaAutocomplete on unmount', () => {
-    const { unmount } = renderComponent();
-    unmount();
-  });
-
   it.each(ARIA_ATTRIBUTES)(
     'passes (and removes) aria attribute %s from the generated input',
     (attr) => {
@@ -50,24 +44,38 @@ describe('<AutoCompleteInput />', () => {
     }
   );
 
-  // it("triggers the autocomplete API's `disable` method based on the `disabled` prop", () => {
-  //   props.disabled = true;
-  //   renderComponent();
-  //   // passes in `true` to disable deletions
-  //   expect(mockDisable).toHaveBeenCalledWith(true);
-  // });
+  it('disables the autocomplete based on the `disabled` prop', () => {
+    props.disabled = true;
+    props.multiple = true;
+    props.defaultValue = 'apple';
+    props.source = ['apple', 'orange'];
+    const { container } = renderComponent();
+    expect(container.querySelector('.aria-autocomplete__input')).toBeDisabled();
+    // confirm the selected item is disabled too
+    const selected = container.querySelector('.aria-autocomplete__selected');
+    expect(selected).toHaveClass('aria-autocomplete__selected--disabled');
+    // we will also confirm that the selected element
+    // is still in the DOM after being clicked
+    fireEvent.click(selected as HTMLElement);
+    expect(selected).toBeInTheDocument();
+  });
 
-  // it("triggers the autocomplete API's `enable` method based on the `disabled` prop", () => {
-  //   props.disabled = false;
-  //   renderComponent();
-  //   expect(mockEnable).toHaveBeenCalled();
-  // });
-
-  // it("triggers the autocomplete API's `disable` method on load based on selected item count and `maxItems` option", async () => {
-  //   props.disabled = true;
-  //   props.multiple = true;
-  //   props.maxItems = 1;
-  //   renderComponent();
-  //   expect(mockDisable).toHaveBeenCalledWith(undefined);
-  // });
+  it('soft disables the autocomplete on load based on selected item count and `maxItems` option', () => {
+    props.maxItems = 1;
+    props.multiple = true;
+    props.defaultValue = 'apple';
+    props.source = ['apple', 'orange'];
+    const { container } = renderComponent();
+    const generatedInput = container.querySelector('.aria-autocomplete__input');
+    expect(generatedInput).toBeDisabled();
+    // confirm the selected item is NOT disabled
+    const selected = container.querySelector('.aria-autocomplete__selected');
+    expect(selected).not.toHaveClass('aria-autocomplete__selected--disabled');
+    // confirm that clicking the selected item deletes it, and re-enables the input
+    fireEvent.click(selected as HTMLElement);
+    expect(
+      container.querySelector('.aria-autocomplete__selected')
+    ).not.toBeInTheDocument();
+    expect(generatedInput).toBeEnabled();
+  });
 });

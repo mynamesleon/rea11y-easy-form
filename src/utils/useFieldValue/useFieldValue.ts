@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useRef, useEffect } from 'react';
+import { useMemo, useRef } from 'react';
 import { useDeepCompareMemo } from '@react-hookz/web';
 import { isEqual } from '@react-hookz/deep-equal';
 import { useFormState } from 'react-final-form';
