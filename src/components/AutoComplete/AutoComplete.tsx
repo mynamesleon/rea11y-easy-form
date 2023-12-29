@@ -1,11 +1,22 @@
 import clsx from 'clsx';
 import { isEqual } from '@react-hookz/deep-equal';
 import { useDeepCompareMemo, usePrevious } from '@react-hookz/web';
-import React, { forwardRef, memo, useRef, useCallback } from 'react';
+import React, { forwardRef, memo, useRef, useCallback, useState } from 'react';
 import type { AutoCompleteProps } from './AutoComplete.types';
 import AutoCompleteInput from './AutoCompleteInput';
 import { useFieldClassName } from '../../utils';
 import './AutoComplete.less';
+
+const useParsedAutoCompleteValue = (
+  value?: AutoCompleteProps['value'],
+  multipleSeparator?: AutoCompleteProps['multipleSeparator']
+) =>
+  useDeepCompareMemo(() => {
+    if (Array.isArray(value)) {
+      return value.join(multipleSeparator);
+    }
+    return value || '';
+  }, [value, multipleSeparator]);
 
 const AutoComplete = forwardRef<HTMLDivElement, AutoCompleteProps>(
   (
@@ -14,7 +25,6 @@ const AutoComplete = forwardRef<HTMLDivElement, AutoCompleteProps>(
       value,
       onChange,
       className,
-      defaultValue,
       multipleSeparator = ',',
       // core options that need to trigger re-init
       options: optionsProp,
@@ -36,21 +46,19 @@ const AutoComplete = forwardRef<HTMLDivElement, AutoCompleteProps>(
     ref
   ) => {
     const classPrefix = useFieldClassName('autocomplete');
+    const [localValue, setLocalValue] = useState(value);
 
-    const initialValue = useDeepCompareMemo(() => {
-      const val = value ?? defaultValue;
-      if (Array.isArray(val)) {
-        return val.join(multipleSeparator);
-      }
-      return val || '';
-    }, [value, defaultValue, multipleSeparator]);
+    const parsedValue = useParsedAutoCompleteValue(value, multipleSeparator);
+    const parsedLocalValue = useParsedAutoCompleteValue(
+      localValue,
+      multipleSeparator
+    );
 
     const handleChange = useCallback(
       (selected: any[]) => {
-        if (typeof onChange === 'function') {
-          const values = (selected || []).map(({ value }) => value);
-          onChange?.(values);
-        }
+        const values = (selected || []).map(({ value }) => value);
+        setLocalValue(values);
+        onChange?.(values);
       },
       [onChange]
     );
@@ -71,11 +79,14 @@ const AutoComplete = forwardRef<HTMLDivElement, AutoCompleteProps>(
       id,
     };
     const keyRef = useRef<number>(0);
-    const initialValueRef = useRef<string>();
+    const defaultValueRef = useRef<string>();
     const coreOptionsRef = useRef(coreOptions);
     const previousCoreOptions = usePrevious(coreOptions);
-    if (!isEqual(coreOptions, previousCoreOptions)) {
-      initialValueRef.current = initialValue;
+    if (
+      parsedValue !== parsedLocalValue ||
+      !isEqual(coreOptions, previousCoreOptions)
+    ) {
+      defaultValueRef.current = parsedValue;
       coreOptionsRef.current = coreOptions;
       keyRef.current += 1;
     }
@@ -101,7 +112,7 @@ const AutoComplete = forwardRef<HTMLDivElement, AutoCompleteProps>(
       >
         <AutoCompleteInput
           key={`${classPrefix}-key-${keyRef.current}`}
-          defaultValue={initialValueRef.current}
+          defaultValue={defaultValueRef.current}
           multipleSeparator={multipleSeparator}
           ariaAttributes={memoisedAriaProps}
           onChange={handleChange}

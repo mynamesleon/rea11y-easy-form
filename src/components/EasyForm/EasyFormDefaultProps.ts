@@ -38,6 +38,10 @@ export const DEFAULT_CONTAINERS = {
 };
 
 const Input = lazy(() => import('../Input'));
+const RadioList = lazy(() => import('../RadioList'));
+const SwitchList = lazy(() => import('../SwitchList'));
+const CheckboxList = lazy(() => import('../CheckboxList'));
+const AutoComplete = lazy(() => import('../AutoComplete'));
 export const DEFAULT_COMPONENTS = {
   // use generic Input component for any standard input types
   // that do not have custom handling
@@ -54,24 +58,24 @@ export const DEFAULT_COMPONENTS = {
   [CONTROL_TYPE.SWITCH]: Switch,
   [CONTROL_TYPE.COLOR]: lazy(() => import('../ColorInput')),
   // checkbox list
-  [CONTROL_TYPE.CHECKBOXES]: lazy(() => import('../CheckboxList')),
-  [CONTROL_TYPE.CHECKBOXLIST]: lazy(() => import('../CheckboxList')),
-  [CONTROL_TYPE.CHECKBOX_LIST]: lazy(() => import('../CheckboxList')),
+  [CONTROL_TYPE.CHECKBOXES]: CheckboxList,
+  [CONTROL_TYPE.CHECKBOXLIST]: CheckboxList,
+  [CONTROL_TYPE.CHECKBOX_LIST]: CheckboxList,
   // radio list
-  [CONTROL_TYPE.RADIOS]: lazy(() => import('../RadioList')),
-  [CONTROL_TYPE.RADIOLIST]: lazy(() => import('../RadioList')),
-  [CONTROL_TYPE.RADIO_LIST]: lazy(() => import('../RadioList')),
+  [CONTROL_TYPE.RADIOS]: RadioList,
+  [CONTROL_TYPE.RADIOLIST]: RadioList,
+  [CONTROL_TYPE.RADIO_LIST]: RadioList,
   // switch list
-  [CONTROL_TYPE.SWITCHES]: lazy(() => import('../SwitchList')),
-  [CONTROL_TYPE.SWITCHLIST]: lazy(() => import('../SwitchList')),
-  [CONTROL_TYPE.SWITCH_LIST]: lazy(() => import('../SwitchList')),
+  [CONTROL_TYPE.SWITCHES]: SwitchList,
+  [CONTROL_TYPE.SWITCHLIST]: SwitchList,
+  [CONTROL_TYPE.SWITCH_LIST]: SwitchList,
   // autocomplete
-  [CONTROL_TYPE.AUTOCOMPLETE]: lazy(() => import('../AutoComplete')),
-  [CONTROL_TYPE.AUTO_COMPLETE]: lazy(() => import('../AutoComplete')),
-  [CONTROL_TYPE.TYPEAHEAD]: lazy(() => import('../AutoComplete')),
-  [CONTROL_TYPE.TYPE_AHEAD]: lazy(() => import('../AutoComplete')),
-  [CONTROL_TYPE.COMBOBOX]: lazy(() => import('../AutoComplete')),
-  [CONTROL_TYPE.COMBO_BOX]: lazy(() => import('../AutoComplete')),
+  [CONTROL_TYPE.AUTOCOMPLETE]: AutoComplete,
+  [CONTROL_TYPE.AUTO_COMPLETE]: AutoComplete,
+  [CONTROL_TYPE.TYPEAHEAD]: AutoComplete,
+  [CONTROL_TYPE.TYPE_AHEAD]: AutoComplete,
+  [CONTROL_TYPE.COMBOBOX]: AutoComplete,
+  [CONTROL_TYPE.COMBO_BOX]: AutoComplete,
 };
 
 const invertForValidation =

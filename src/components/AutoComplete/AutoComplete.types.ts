@@ -48,7 +48,6 @@ export type AutoCompleteInputProps = {
 } & AutoCompleteOptionsCopy;
 
 export type AutoCompleteProps = {
-  defaultValue?: string | string[];
   className?: string;
   disabled?: boolean;
   value?: string | string[];

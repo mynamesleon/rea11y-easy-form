@@ -275,12 +275,14 @@ StandardUsage.args = {
  * both single and multiple selection modes,
  * for consistency, the `onChange` prop will therefore
  * always return an array of strings containing the `value` of each selected item.
- * The `defaultValue` option will however handle a string being provided
+ * The `value` prop will however handle a string being provided
  * (as well as an array of strings).
  * So if you wish to always handle the value as a string,
  * you will need to account for that in your `onChange` function.
  *
- * **Please note**: if you use a function for your `source`/`options` prop,
+ * **Please note**: this component expects to be **controlled**.
+ *
+ * **Please note (again)**: if you use a function for your `source`/`options` prop,
  * it is especially important that it is memoised. This is due to how the React wrapper
  * interacts with the underlying `aria-autocomplete` library, where it needs to
  * re-initialise the library when the `source` function changes.
@@ -293,28 +295,18 @@ export default {
 export const EasyFormExample = (props: EasyFieldProps & AutoCompleteProps) => (
   <EasyForm
     onSubmit={(values) => alert(JSON.stringify(values))}
-    structure={[
-      {
-        type: 'email',
-        name: 'email',
-        label: 'Email',
-        description: 'Another field for context',
-        validation: { email: 'Please enter a valid email address' },
-      },
-      { type: 'autocomplete', name: 'autocomplete', ...props },
-      {
-        type: 'password',
-        name: 'password',
-        label: 'Password',
-        description: 'Yet another field for context',
-      },
-    ]}
+    structure={[{ type: 'autocomplete', name: 'autocomplete', ...props }]}
   />
 );
 
 EasyFormExample.args = {
   label: 'AutoComplete',
-  description: 'Example in an <EasyForm>',
+  description: (
+    <>
+      Example in an <code>&lt;EasyForm&gt;</code> (and{' '}
+      <code>&lt;EasyField&gt;</code>)
+    </>
+  ),
   options: countries,
   required: 'Please pick a value',
 };
