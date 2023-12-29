@@ -1,9 +1,12 @@
-# rea11y-easy-form (IN PROGRESS!)
+# rea11y-easy-form
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
-[![NPM version](https://img.shields.io/npm/v/rea11y-easy-form.svg)](http://npm.im/rea11y-easy-form)
-[![Types](https://flat.badgen.net/npm/types/rea11y-easy-form)](https://www.npmjs.com/package/rea11y-easy-form)
-[![Tree Shaking](https://flat.badgen.net/bundlephobia/tree-shaking/rea11y-easy-form)](https://bundlephobia.com/result?p=rea11y-easy-form)
+![License: MIT](https://img.shields.io/npm/l/rea11y-easy-form)
+![NPM version](https://img.shields.io/npm/v/rea11y-easy-form.svg)
+![Types](https://img.shields.io/npm/types/rea11y-easy-form)
+![Tree Shaking](https://flat.badgen.net/bundlephobia/tree-shaking/rea11y-easy-form)
+
+![React](https://img.shields.io/badge/React-%2320232a.svg?logo=React&logoColor=%2361DAFB)
+![React Final Form](https://img.shields.io/badge/React%20Final%20Form-%23333639.svg?logo=react&logoColor=white)
 
 The (hopefully!) easiest way to build highly performant and accessible forms in React.
 
@@ -19,6 +22,18 @@ In that order too!
 With a number of built-in components developed for accessibility, and the ability to easily use your own, `rea11y-easy-form` should have you covered.
 
 [View the components and docs in Storybook](https://mynamesleon.github.io/rea11y-easy-form/).
+
+## Install
+
+`react-final-form` and `final-form` are required peer dependencies for all of the core functionality.
+
+```shell
+npm install rea11y-easy-form react-final-form final-form
+# or
+yarn add rea11y-easy-form react-final-form final-form
+```
+
+Certain components require additional peer dependencies as well. They are only needed if you plan to use those components though.
 
 ## Development
 

@@ -22,15 +22,24 @@ enum CONTROL_TYPE {
   // further common non <input /> defaults
   SELECT = 'select',
   TEXTAREA = 'textarea',
-  RADIO_LIST = 'radiolist',
+  RADIO_LIST = 'radio_list',
+  RADIOLIST = 'radiolist', // alias for radio_list
   RADIOS = 'radios', // alias for radiolist
-  SWITCH_LIST = 'switchlist',
+  SWITCH_LIST = 'switch_list',
+  SWITCHLIST = 'switchlist', // alias for switch_list
   SWITCHES = 'switches', // alias for switchlist
-  CHECKBOX_LIST = 'checkboxlist',
+  CHECKBOX_LIST = 'checkbox_list',
+  CHECKBOXLIST = 'checkboxlist', // alias for checkbox_list
   CHECKBOXES = 'checkboxes', // alias for checkboxlist
 
   // enhancements on common fields
   SWITCH = 'switch',
+  AUTO_COMPLETE = 'auto_complete',
+  AUTOCOMPLETE = 'autocomplete', // alias for auto_complete
+  COMBO_BOX = 'combo_box', // alias for autocomplete
+  COMBOBOX = 'combobox', // alias for autocomplete
+  TYPE_AHEAD = 'type_ahead', // alias for autocomplete
+  TYPEAHEAD = 'typeahead', // alias for autocomplete
 
   // containers
   HTML = 'html',

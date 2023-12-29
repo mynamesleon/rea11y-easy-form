@@ -38,6 +38,10 @@ export const DEFAULT_CONTAINERS = {
 };
 
 const Input = lazy(() => import('../Input'));
+const RadioList = lazy(() => import('../RadioList'));
+const SwitchList = lazy(() => import('../SwitchList'));
+const CheckboxList = lazy(() => import('../CheckboxList'));
+const AutoComplete = lazy(() => import('../AutoComplete'));
 export const DEFAULT_COMPONENTS = {
   // use generic Input component for any standard input types
   // that do not have custom handling
@@ -45,19 +49,33 @@ export const DEFAULT_COMPONENTS = {
     acc[type] = Input;
     return acc;
   }, {}),
-  [CONTROL_TYPE.TEXTAREA]: lazy(() => import('../Textarea')),
-  // custom controls
-  [CONTROL_TYPE.COLOR]: lazy(() => import('../ColorInput')),
-  [CONTROL_TYPE.CHECKBOX]: lazy(() => import('../Checkbox')),
-  [CONTROL_TYPE.CHECKBOXES]: lazy(() => import('../CheckboxList')),
-  [CONTROL_TYPE.CHECKBOX_LIST]: lazy(() => import('../CheckboxList')),
+  // other standard form controls
   [CONTROL_TYPE.RADIO]: lazy(() => import('../Radio')),
-  [CONTROL_TYPE.RADIOS]: lazy(() => import('../RadioList')),
-  [CONTROL_TYPE.RADIO_LIST]: lazy(() => import('../RadioList')),
   [CONTROL_TYPE.SELECT]: lazy(() => import('../Select')),
+  [CONTROL_TYPE.TEXTAREA]: lazy(() => import('../Textarea')),
+  [CONTROL_TYPE.CHECKBOX]: lazy(() => import('../Checkbox')),
+  // custom controls
   [CONTROL_TYPE.SWITCH]: Switch,
-  [CONTROL_TYPE.SWITCHES]: lazy(() => import('../SwitchList')),
-  [CONTROL_TYPE.SWITCH_LIST]: lazy(() => import('../SwitchList')),
+  [CONTROL_TYPE.COLOR]: lazy(() => import('../ColorInput')),
+  // checkbox list
+  [CONTROL_TYPE.CHECKBOXES]: CheckboxList,
+  [CONTROL_TYPE.CHECKBOXLIST]: CheckboxList,
+  [CONTROL_TYPE.CHECKBOX_LIST]: CheckboxList,
+  // radio list
+  [CONTROL_TYPE.RADIOS]: RadioList,
+  [CONTROL_TYPE.RADIOLIST]: RadioList,
+  [CONTROL_TYPE.RADIO_LIST]: RadioList,
+  // switch list
+  [CONTROL_TYPE.SWITCHES]: SwitchList,
+  [CONTROL_TYPE.SWITCHLIST]: SwitchList,
+  [CONTROL_TYPE.SWITCH_LIST]: SwitchList,
+  // autocomplete
+  [CONTROL_TYPE.AUTOCOMPLETE]: AutoComplete,
+  [CONTROL_TYPE.AUTO_COMPLETE]: AutoComplete,
+  [CONTROL_TYPE.TYPEAHEAD]: AutoComplete,
+  [CONTROL_TYPE.TYPE_AHEAD]: AutoComplete,
+  [CONTROL_TYPE.COMBOBOX]: AutoComplete,
+  [CONTROL_TYPE.COMBO_BOX]: AutoComplete,
 };
 
 const invertForValidation =

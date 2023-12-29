@@ -22,18 +22,23 @@
     border-color: @color-red-4;
 }
 
-.input-styles() {
+.box() {
     display: block;
-    height: @input-height;
-    margin-top: @input-margin-top;
     background-color: @color-white;
-    padding-block: @input-padding-vertical;
-    padding-inline: @input-padding-horizontal;
+    padding-block: @spacing-2;
+    padding-inline: @spacing-3;
     border-radius: @border-radius-default;
-    width: @input-width;
     border: 1px solid @border-color-default;
     color: @color-grey-5;
     box-sizing: border-box;
+}
+
+.input-styles() {
+    .box();
+    height: @input-height;
+    margin-top: @input-margin-top;
+    width: @input-width;
+    max-width: 100%;
 
     &:focus {
         .focus-highlight();
