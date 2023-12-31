@@ -22,7 +22,8 @@ module.exports = {
     'react-hooks/exhaustive-deps': 'error',
     'testing-library/no-container': 'off',
     'testing-library/no-node-access': 'off',
-    'testing-library/prefer-screen-queries': 'off'
+    'testing-library/prefer-screen-queries': 'off',
+    'testing-library/prefer-presence-queries': 'off'
   },
   overrides: [{
     files: ['*.stories.tsx'],

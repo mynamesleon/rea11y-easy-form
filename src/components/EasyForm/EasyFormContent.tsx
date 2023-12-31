@@ -9,6 +9,7 @@ import EasyFormValidationSummary from './EasyFormValidationSummary';
 import { useEasyFormContext } from './EasyFormContext';
 import EasyFormBuilder from './EasyFormBuilder';
 import { renderComponent } from '../../utils';
+import Button from '../Button';
 
 const EasyFormContent = forwardRef<HTMLDivElement, EasyFormContentProps>(
   (
@@ -81,9 +82,11 @@ const EasyFormContent = forwardRef<HTMLDivElement, EasyFormContentProps>(
         {!footer && hasOnSubmit && submitText && (
           <FormSpy subscription={{ submitting: true }}>
             {({ submitting }) => (
-              <button disabled={formDisabled || submitting} type="submit">
-                {submitText}
-              </button>
+              <Button
+                disabled={formDisabled || submitting}
+                text={submitText}
+                type="submit"
+              />
             )}
           </FormSpy>
         )}

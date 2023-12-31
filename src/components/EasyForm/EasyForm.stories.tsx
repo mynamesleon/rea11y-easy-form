@@ -7,6 +7,7 @@ import { EasyFormProps } from './EasyForm.types';
 import { DEFAULT_FIELD_VALIDATION_FUNCTIONS } from './EasyFormDefaultProps';
 import EasyFormDocsTemplate from './EasyFormDocsTemplate.mdx';
 import EasyField from '../EasyField';
+import Button from '../Button';
 import Input from '../Input';
 
 const listOptions = [{ value: 'Apple' }, 'Orange', { label: 'Strawb3rry' }];
@@ -77,9 +78,7 @@ LoginFormWithHeaderAndFooter.args = {
   footer: (props) => (
     <footer>
       <p>The footer props were {JSON.stringify(props)}</p>
-      <button type="submit" disabled={props.submitting}>
-        Submit
-      </button>
+      <Button type="submit" disabled={props.submitting} text="submit" />
     </footer>
   ),
 } as EasyFormProps;

@@ -2,6 +2,7 @@ import React from 'react';
 import { Form } from 'react-final-form';
 import SwitchList from './SwitchList';
 import { SwitchListProps, SWITCH_LIST_TYPE } from './SwitchList.types';
+import Button from '../Button';
 
 const alertData = (data: any) => window.alert(JSON.stringify(data, null, 3));
 
@@ -33,10 +34,13 @@ export const StandardUsage = (props: SwitchListProps) => (
     {({ handleSubmit, form: { reset } }) => (
       <form onSubmit={handleSubmit}>
         <SwitchList {...props} />
-        <button type="submit">Submit</button>
-        <button type="reset" onClick={reset}>
-          Reset
-        </button>
+        <Button type="submit" text="Submit" />
+        <Button
+          type="reset"
+          onClick={reset}
+          text="reset"
+          variant="destructive"
+        />
         <p />
       </form>
     )}

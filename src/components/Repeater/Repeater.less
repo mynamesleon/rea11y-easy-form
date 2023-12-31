@@ -1,0 +1,70 @@
+@import '../../less/mixins.less';
+@import '../../less/variables.less';
+
+.field-styles('repeater', {
+  &__droppable {
+    position: relative;
+  }
+
+  &__droppable--dragging {
+    background-color: rgba(0, 0, 0, 0.025);
+  }
+
+  &__droppable--dragging &__item {
+    opacity: 0.7;
+  }
+
+  &__item {
+    padding-left: @spacing-2;
+    border: 1px solid transparent;
+    border-left: 4px solid @color-grey-4;
+    border-top-left-radius: @border-radius-default;
+    border-bottom-left-radius: @border-radius-default;
+    padding-top: @spacing-1;
+    padding-bottom: @spacing-1;
+    margin-top: @spacing-4;
+    margin-bottom: @spacing-4;
+
+    &--dragging {
+      background-color: @color-white;
+      opacity: 1 !important;
+      top: auto !important;
+      left: auto !important;
+      margin: 0 !important;
+    }
+
+    > :first-child {
+      margin-top: 0;
+    }
+
+    &:focus {
+      outline: 2px solid transparent;
+    }
+
+    &:focus-visible {
+      .focus-highlight();
+    }
+  }
+
+  &__item-actions {
+    display: flex;
+    row-gap: @spacing-1;
+    flex-wrap: wrap;
+  }
+
+  &__button {
+    align-items: center;
+
+    &--drag {
+      svg {
+        width: 9px;
+        height: 21px;
+        margin-left: @spacing-1;
+      }
+    }
+  }
+
+  &__add {
+    margin-top: @spacing-4;
+  }
+});

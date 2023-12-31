@@ -6,6 +6,7 @@ import React, {
   useRef,
 } from 'react';
 import VisuallyHidden from '../../components/VisuallyHidden';
+import useFieldClassName from '../useFieldClassName';
 
 const MAX_ANNOUNCEMENTS = 5;
 const DEFAULT_ANNOUNCEMENTS = new Array(MAX_ANNOUNCEMENTS).fill(null);
@@ -15,22 +16,29 @@ const useAnnounce = (mode: 'off' | 'assertive' | 'polite' = 'assertive') => {
   const [announcements, setAnnouncements] = useState<(ReactNode | undefined)[]>(
     () => [...DEFAULT_ANNOUNCEMENTS]
   );
+  const classPrefix = useFieldClassName('announcer');
 
   // NOTE: cannot use the announcement value for the `key`, even if it is a string,
   // as we may get multiple consecutive announcements with the same content;
   // index is fine here though, as the array has a fixed length
   const announcer = useMemo(
     () => (
-      <>
+      <VisuallyHidden className={classPrefix} component="span">
         {announcements.map((announcement, index) => (
-          // eslint-disable-next-line react/no-array-index-key
-          <VisuallyHidden aria-live={mode} aria-atomic key={index}>
+          <VisuallyHidden
+            className={`${classPrefix}__item`}
+            component="span"
+            aria-live={mode}
+            aria-atomic
+            // eslint-disable-next-line react/no-array-index-key
+            key={index}
+          >
             {announcement || ''}
           </VisuallyHidden>
         ))}
-      </>
+      </VisuallyHidden>
     ),
-    [announcements, mode]
+    [announcements, classPrefix, mode]
   );
 
   const announce = useCallback((content?: ReactNode) => {

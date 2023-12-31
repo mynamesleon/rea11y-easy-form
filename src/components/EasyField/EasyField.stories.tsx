@@ -1,6 +1,7 @@
 import React from 'react';
 import { Form } from 'react-final-form';
 import Input from '../Input';
+import Button from '../Button';
 import EasyForm from '../EasyForm';
 import EasyField from './EasyField';
 import type { EasyFieldProps } from './EasyField.types';
@@ -41,7 +42,7 @@ export const OrdinaryFormExample = (props: EasyFieldProps) => (
     {({ handleSubmit }) => (
       <form onSubmit={handleSubmit} noValidate>
         <EasyField {...props} />
-        <button type="submit">Submit</button>
+        <Button type="submit" text="Submit" />
       </form>
     )}
   </Form>

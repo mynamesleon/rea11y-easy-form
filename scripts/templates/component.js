@@ -1,6 +1,6 @@
 module.exports = (componentName) => ({
-  content: `import React, { ElementType, forwardRef, memo } from 'react';
-import { ${componentName}Props } from './${componentName}.types';
+  content: `import React, { forwardRef, memo } from 'react';
+import type { ${componentName}Props } from './${componentName}.types';
 
 const ${componentName} = forwardRef<any, ${componentName}Props>(
   (
