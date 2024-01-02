@@ -44,6 +44,7 @@ enum CONTROL_TYPE {
   // containers
   HTML = 'html',
   FIELDSET = 'fieldset',
+  REPEATER = 'repeater',
   DISCLOSURE = 'disclosure',
 
   // generic wrapper, where the container has no semantic relevance;

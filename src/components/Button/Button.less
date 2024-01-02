@@ -30,12 +30,17 @@
         z-index: 2;
     }
 
-    &:active &__shade {
+    &:not(&--disabled):active &__shade {
         background-color: @color-white;
     }
 
-    &:hover &__shade {
+    &:not(&--disabled):hover &__shade {
         opacity: 0.1;
+    }
+
+    &--disabled {
+        cursor: not-allowed;
+        opacity: 0.6;
     }
 
     &:focus-visible {

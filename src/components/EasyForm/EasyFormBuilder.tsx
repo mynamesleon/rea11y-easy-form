@@ -4,8 +4,9 @@ import { reactKeyFrom, isNullOrUndefined } from '../../utils';
 import type { EasyFormBuilderProps } from './EasyForm.types';
 import useEasyFormBuilderSideEffect from './useEasyFormBuilderSideEffect';
 import Skeleton, { SKELETON_TYPE } from '../Skeleton';
-import Notice, { NOTICE_TYPE } from '../Notice';
 import { useEasyFormContext } from './EasyFormContext';
+import Notice, { NOTICE_TYPE } from '../Notice';
+import CONTROL_TYPE from '../../controlTypes';
 import EasyField from '../EasyField';
 
 /**
@@ -41,7 +42,7 @@ const EasyFormRow = ({ field = {}, fieldNamePrefix = '' }: any) => {
     return (
       <Suspense fallback={<Skeleton type={SKELETON_TYPE.INPUT} />}>
         <Container {...otherFieldProps} name={name}>
-          {type === 'repeater' ? (
+          {type === CONTROL_TYPE.REPEATER ? (
             ({ name }) => (
               <EasyFormBuilder fieldNamePrefix={name} structure={children} />
             )

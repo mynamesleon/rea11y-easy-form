@@ -8,8 +8,8 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (
     {
       component: Component = 'button',
-      type = 'button',
       className,
+      disabled,
       children,
       variant,
       text,
@@ -18,17 +18,23 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     ref
   ) => {
     const classPrefix = useFieldClassName('button');
+    const type =
+      'type' in other && other.type === undefined
+        ? undefined
+        : other.type || 'button';
     return (
       <Component
         className={clsx(
           className,
           classPrefix,
+          Boolean(disabled) && `${classPrefix}--disabled`,
           typeof variant === 'string' &&
             `${classPrefix}--${variant.toLowerCase()}`
         )}
         data-testid="Button"
-        type={type}
+        disabled={disabled}
         {...other}
+        type={type}
         ref={ref}
       >
         <span className={`${classPrefix}__shade`} />

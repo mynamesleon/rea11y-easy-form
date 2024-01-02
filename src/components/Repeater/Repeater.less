@@ -2,6 +2,9 @@
 @import '../../less/variables.less';
 
 .field-styles('repeater', {
+  margin-top: @spacing-6;
+  margin-bottom: @spacing-6;
+
   &__droppable {
     position: relative;
   }
@@ -18,8 +21,8 @@
     padding-left: @spacing-2;
     border: 1px solid transparent;
     border-left: 4px solid @color-grey-4;
-    border-top-left-radius: @border-radius-default;
-    border-bottom-left-radius: @border-radius-default;
+    border-top-left-radius: @border-radius-default * 1.5;
+    border-bottom-left-radius: @border-radius-default * 1.5;
     padding-top: @spacing-1;
     padding-bottom: @spacing-1;
     margin-top: @spacing-4;
@@ -65,6 +68,6 @@
   }
 
   &__add {
-    margin-top: @spacing-4;
+    margin-top: 0;
   }
 });

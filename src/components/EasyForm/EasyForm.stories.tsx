@@ -296,7 +296,7 @@ FormWithAllNativeEditableInputs.args = {
 export const ListTypes = Template.bind({});
 ListTypes.args = {
   noValidate: true,
-  onSubmit: alert,
+  onSubmit: alertOnSubmit,
   header: (
     <>
       <h2>List types example</h2>
@@ -308,39 +308,38 @@ ListTypes.args = {
   ),
   structure: [
     {
-      type: CONTROL_TYPE.FIELDSET,
-      label: 'List types',
-      name: 'list-types',
-      children: [
-        {
-          type: 'checkboxlist',
-          name: 'checkboxlist',
-          label: 'Checkbox list',
-          options: listOptions,
-        },
-        {
-          type: 'radiolist',
-          name: 'radiolist',
-          label: 'Radio list',
-          options: listOptions,
-        },
-        {
-          type: 'switchlist',
-          name: 'switchlist',
-          label: 'Switch list',
-          options: listOptions,
-        },
-        {
-          type: 'select',
-          name: 'select',
-          label: 'Select',
-          options: [{ label: 'Please select', value: '' }, ...listOptions],
-          required: 'Pick a value',
-          validation: {
-            alpha: 'Alpha value only please',
-          },
-        },
-      ],
+      type: 'checkboxlist',
+      name: 'checkboxlist',
+      label: 'Checkbox list',
+      options: listOptions,
+    },
+    {
+      type: 'radiolist',
+      name: 'radiolist',
+      label: 'Radio list',
+      options: listOptions,
+    },
+    {
+      type: 'switchlist',
+      name: 'switchlist',
+      label: 'Switch list',
+      options: listOptions,
+    },
+    {
+      type: 'select',
+      name: 'select',
+      label: 'Select',
+      options: [{ label: 'Please select', value: '' }, ...listOptions],
+      required: 'Pick a value',
+      validation: {
+        alpha: 'Alpha value only please',
+      },
+    },
+    {
+      type: 'repeater',
+      name: 'repeater',
+      label: 'repeater',
+      children: [exampleEmail],
     },
   ],
 };

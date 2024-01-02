@@ -53,10 +53,11 @@ const RepeaterItem = forwardRef<HTMLDivElement, RepeaterItemProps>(
       >
         {children}
         <div className={`${classPrefix}__item-actions`}>
-          {typeof remove === 'function' && (!min || fields.length > min) && (
+          {typeof remove === 'function' && (
             <Button
               className={`${buttonClass} ${buttonClass}--delete`}
               {...sharedButtonProps}
+              disabled={Boolean(disabled || (min && fields.length <= min))}
               variant="destructive"
               text={deleteText()}
               onClick={remove}
@@ -92,6 +93,7 @@ const RepeaterItem = forwardRef<HTMLDivElement, RepeaterItemProps>(
                 {...dragHandleProps}
                 text={reorderText()}
                 component="span"
+                type={undefined}
               />
             )}
         </div>
