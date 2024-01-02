@@ -1,4 +1,6 @@
 export { default as AsHtml } from './AsHtml';
+export { default as AutoComplete } from './AutoComplete';
+export { default as Button } from './Button';
 export { default as Checkbox } from './Checkbox';
 export { default as CheckboxList } from './CheckboxList';
 export { default as ColorInput } from './ColorInput';

@@ -23,9 +23,12 @@ import {
 
 /**
  * container types can have children that register other Fields,
- * so we must import them normally, and not dynamically,
+ * so we **should** import them normally, and not dynamically,
  * so that they (and their validation) are properly registered
- * before any other actions (such as submissions) are attempted
+ * before any other actions (such as submissions) are attempted.
+ *
+ * @note: treating the Repeater as an exception to this
+ * due to its complexity and depending on react-beautiful-dnd
  *
  * @note: we will not include aliases for built-in container types,
  * as these cannot be overridden
@@ -35,6 +38,7 @@ export const DEFAULT_CONTAINERS = {
   [CONTROL_TYPE.DISCLOSURE]: Disclosure,
   [CONTROL_TYPE.FIELDSET]: Fieldset,
   [CONTROL_TYPE.CONTAINER]: ({ children }) => children,
+  [CONTROL_TYPE.REPEATER]: lazy(() => import('../Repeater')),
 };
 
 const Input = lazy(() => import('../Input'));
