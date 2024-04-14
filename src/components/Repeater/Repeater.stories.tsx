@@ -54,10 +54,10 @@ StandardUsage.args = {
  * The `name` provided will be based on the `name` prop used for the `Repeater`.
  *
  * e.g. the first entry in this example `Repeater` would have a `name` of
- * `'repeater[0].name'`
+ * `'users[0].name'`
  *
  * ```
- * <Repeater {...props} name='repeater'>
+ * <Repeater {...props} name='users'>
  *   {({ name }) => (
  *     <EasyField
  *       label="Name"

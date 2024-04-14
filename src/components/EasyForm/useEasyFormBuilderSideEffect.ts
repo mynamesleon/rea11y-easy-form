@@ -12,14 +12,14 @@ const useEasyFormBuilderSideEffect = () => {
   if (!tempRef.current) {
     // passing in false, so that subscribers are still notified;
     // @note: having to typecast to `any`, because the FormApi types
-    // in our final-form devDependency version are wrong;
+    // in some final-form versions are wrong
     (pauseValidation as any)(false);
     tempRef.current = true;
   }
 
   // use useEffect to resume validation after child components mount
-  // @note: any internal conditional rendering should run through this component
-  // to re-run this validation logic
+  // @note: any internal conditional rendering should run through
+  // the EasyFormBuilder component to re-run this validation logic
   useEffect(() => {
     if (isValidationPaused()) {
       resumeValidation();

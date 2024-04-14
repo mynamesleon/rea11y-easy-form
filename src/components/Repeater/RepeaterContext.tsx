@@ -52,13 +52,16 @@ const RepeaterContext = ({
   ...strings
 }: RepeaterContextProps) => {
   const { batch } = useForm();
+  // @todo: allow repeater subscription to be controlled too?
+  // we aren't currently passing any of the data to the `children` function,
+  // but it might be useful if consuming apps need more re-renders (for some reason)
   const { fields } = useFieldArray(name, {
     subscription: { value: true, error: true, touched: true },
   });
   const { announcer, announce } = useAnnounce();
 
+  // populate to minimum number of repeater entries
   useEffect(() => {
-    // populate to minimum number of repeater entries
     const fieldsLength = fields.length || 0;
     if (typeof min === 'number' && fieldsLength < min) {
       batch(() => {
@@ -67,15 +70,21 @@ const RepeaterContext = ({
         });
       });
     }
-  }, [fields, min, defaultValues, batch]);
+  }, [fields, fields.length, min, defaultValues, batch]);
 
   // if useEasyFormContext is used within Repeater directly,
   // it causes an infinite rendering loop (sometimes...)
+  // so we will use it within this context provider instead
   const { disabled: formDisabled } = useEasyFormContext() || {};
+
+  // @todo: improve this for inline/anonymous functions being provided?
+  // this component relies on a lot of re-renders anyway, so could do
+  // with a general performance overhaul with less stored in context
   const stringFns = useDeepCompareMemo(
     () => generateContextStringsFns(strings),
     [strings]
   );
+
   const contextValue = useMemo(
     () => ({
       min: typeof min === 'number' && min > -1 ? min : 0,
