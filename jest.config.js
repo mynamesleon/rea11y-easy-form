@@ -1,3 +1,5 @@
+const esModules = ['@react-hookz/web', '@react-hookz/deep-equal'].join('|');
+
 module.exports = {
   roots: ['src'],
   setupFilesAfterEnv: ['./jest.setup.ts'],
@@ -7,6 +9,7 @@ module.exports = {
   coverageReporters: ['text', 'cobertura'],
   coverageDirectory: 'coverage',
   transform: {
+    [`(${esModules}).+\\.js$`]: 'babel-jest',
     '^.+\\.tsx?$': 'ts-jest',
   },
   testMatch: ['**/*.(test|spec).(ts|tsx|js|jsx)'],
@@ -15,4 +18,7 @@ module.exports = {
       'identity-obj-proxy',
     '\\.(css|less|scss|sass)$': 'identity-obj-proxy',
   },
+  transformIgnorePatterns: [
+    `/node_modules/(?!${esModules})`
+  ],
 };
