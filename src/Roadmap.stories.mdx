@@ -2,14 +2,16 @@ import { Meta } from '@storybook/addon-docs/blocks';
 
 <Meta title="Roadmap" />
 
-# Roadmap for v1.0
+# Roadmap
 
-## Core component exports
+## For 1.0
+
+### Core component exports
 
 - `EasyForm` ✓
 - `EasyField` ✓
 
-## Form field components
+### Form field components
 
 - `Input` ✓
 - `Textarea` ✓
@@ -21,14 +23,9 @@ import { Meta } from '@storybook/addon-docs/blocks';
 - `Select` ✓
 - `Switch` ✓
 - `SwitchList` ✓
-- `StarRating` (how granular? E.g. can it display 3.5 out of 5, but only allow selecting full values?)
 - `AutoComplete` ✓ (supports multi-select)
-- `RichTextEditor` (do we want this? Will be big!)
-- `Datepicker` (do we want this? Can use native, and custom can be added)
-- `Timepicker` (do we want this? Can use native, and custom can be added)
-- `Telephone` (do we want this? Is complex. Can use native, and custom can be added)
 
-## Util components (used by form components, and exported)
+### Util components (used by form components, and exported)
 
 - `Fieldset` ✓ (also a container)
 - `ErrorMessage` ✓
@@ -38,7 +35,7 @@ import { Meta } from '@storybook/addon-docs/blocks';
 - `ValidationSummary` ✓
 - `VisuallyHidden` ✓
 
-## Container/unique components
+### Container/unique components
 
 - `AsHtml` ✓
 - `Disclosure` ✓
@@ -46,13 +43,13 @@ import { Meta } from '@storybook/addon-docs/blocks';
 - `Repeater`
 - `Conditional`
 
-## Utility/Form functionality hooks
+### Utility/Form functionality hooks
 
 - `useAnnounce` ✓ (for easy screen-reader announcements)
 - `useFieldValue` ✓ (for easy form field value fetching)
 - `useMutatedField` ✓ (for correcting common field issues)
 
-## Built-in validation functions
+### Built-in validation functions
 
 Only the most basic built-in rules to be included. We do not want to bloat the package.
 
@@ -67,3 +64,13 @@ Only the most basic built-in rules to be included. We do not want to bloat the p
 - `isNumber` ✓
 - `isUpperCase` ✓
 - `isUrl` ✓
+
+## Beyond 1.0 ideas
+
+### Form field components
+
+- `StarRating` (how granular? E.g. can it display 3.5 out of 5, but only allow selecting full values?)
+- `RichTextEditor` (do we want this? Will be big!)
+- `Datepicker` (do we want this? Can use native, and custom can be added)
+- `Timepicker` (do we want this? Can use native, and custom can be added)
+- `Telephone` (do we want this? Is complex. Can use native, and custom can be added)
