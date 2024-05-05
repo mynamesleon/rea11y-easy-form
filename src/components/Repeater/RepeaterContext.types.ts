@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
+import type { FieldSubscription } from 'final-form';
 
 type RepeaterRenderedTextProp = string | (() => string);
-type RepeaterRenderedTextNodeProp = ReactNode | (() => ReactNode);
 type RepeaterRenderedTextWithPositionProp =
   | string
   | ((position: number | string) => string);
@@ -24,12 +24,15 @@ export const REPEATER_STRINGS_KEYS = [
   'srReturnedToStart',
 ];
 
-export interface RepeaterContextStrings {
-  moveDownText?: RepeaterRenderedTextNodeProp;
-  reorderText?: RepeaterRenderedTextNodeProp;
-  deleteText?: RepeaterRenderedTextNodeProp;
-  moveUpText?: RepeaterRenderedTextNodeProp;
-  addText?: RepeaterRenderedTextNodeProp;
+interface RepeaterContextVisibleStrings {
+  moveDownText?: ReactNode;
+  reorderText?: ReactNode;
+  deleteText?: ReactNode;
+  moveUpText?: ReactNode;
+  addText?: ReactNode;
+}
+
+export interface RepeaterContextStrings extends RepeaterContextVisibleStrings {
   srItemDropped?: RepeaterRenderedTextProp;
   srItemDroppedInvalid?: RepeaterRenderedTextProp;
   srCannotBeDropped?: RepeaterRenderedTextProp;
@@ -44,12 +47,7 @@ export interface RepeaterContextStrings {
   srReturnedToStart?: RepeaterRenderedTextWithPositionProp;
 }
 
-export interface RepeaterContextStringsFns {
-  moveDownText: () => ReactNode | undefined;
-  reorderText: () => ReactNode | undefined;
-  deleteText: () => ReactNode | undefined;
-  moveUpText: () => ReactNode | undefined;
-  addText: () => ReactNode | undefined;
+export interface RepeaterContextSrStringsFns {
   srItemDropped: () => string | undefined;
   srItemDroppedInvalid: () => string | undefined;
   srCannotBeDropped: () => string | undefined;
@@ -65,6 +63,14 @@ export interface RepeaterContextStringsFns {
   srReturnedToStart: (position: number | string) => string | undefined;
 }
 
+export interface RepeaterContextStringsFns extends RepeaterContextSrStringsFns {
+  moveDownText: () => ReactNode | undefined;
+  reorderText: () => ReactNode | undefined;
+  deleteText: () => ReactNode | undefined;
+  moveUpText: () => ReactNode | undefined;
+  addText: () => ReactNode | undefined;
+}
+
 export interface RepeaterContextPropsBase {
   dragAndDrop?: boolean;
   defaultValues?: any;
@@ -77,13 +83,14 @@ export interface RepeaterContextPropsBase {
 export interface RepeaterContextProps
   extends RepeaterContextStrings,
     RepeaterContextPropsBase {
+  subscription?: FieldSubscription;
   children: ReactNode;
   name: string;
 }
 
 export interface RepeaterContextValue
-  extends RepeaterContextStringsFns,
-    Required<RepeaterContextPropsBase> {
+  extends Required<RepeaterContextPropsBase> {
   srAnnounce: (content?: ReactNode) => void;
+  strings: RepeaterContextStringsFns;
   fields: any;
 }

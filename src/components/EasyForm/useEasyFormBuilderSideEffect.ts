@@ -2,7 +2,8 @@ import { useEffect, useRef } from 'react';
 import { useForm } from 'react-final-form';
 
 const useEasyFormBuilderSideEffect = () => {
-  const { pauseValidation, resumeValidation, isValidationPaused } = useForm();
+  const { pauseValidation, resumeValidation, isValidationPaused } =
+    useForm('EasyFormBuilder');
 
   // pause validation while the EasyFormRow registers fields on their first render;
   // using a ref to fire this on initial render, but without relying on useEffect,

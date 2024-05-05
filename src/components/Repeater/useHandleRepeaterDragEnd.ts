@@ -4,11 +4,13 @@ import { useRepeaterContext } from './RepeaterContext';
 const useHandleRepeaterDragEnd = () => {
   const {
     fields,
-    srItemMoved,
-    srItemDropped,
-    srReturnedToStart,
-    srMovementCancelled,
-    srItemDroppedInvalid,
+    strings: {
+      srItemMoved,
+      srItemDropped,
+      srReturnedToStart,
+      srMovementCancelled,
+      srItemDroppedInvalid,
+    },
   } = useRepeaterContext();
 
   const returnedToStartText = useCallback(

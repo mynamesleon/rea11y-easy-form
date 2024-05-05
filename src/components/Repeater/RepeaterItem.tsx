@@ -24,11 +24,8 @@ const RepeaterItem = forwardRef<HTMLDivElement, RepeaterItemProps>(
       fields,
       disabled,
       ordering,
-      deleteText,
-      moveUpText,
       dragAndDrop,
-      reorderText,
-      moveDownText,
+      strings: { deleteText, moveUpText, reorderText, moveDownText },
     } = useRepeaterContext();
     const repeaterItemId = useAutoId('repeater-item');
     const classPrefix = useFieldClassName('repeater');

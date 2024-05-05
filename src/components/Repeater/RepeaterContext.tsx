@@ -1,6 +1,15 @@
-import React, { createContext, useContext, useEffect, useMemo } from 'react';
-import { useFieldArray } from 'react-final-form-arrays';
-import { useDeepCompareMemo } from '@react-hookz/web';
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+} from 'react';
+import {
+  type FieldArrayRenderProps,
+  useFieldArray,
+} from 'react-final-form-arrays';
+import { useDeepCompareEffect } from '@react-hookz/web';
 import { useForm } from 'react-final-form';
 import { useEasyFormContext } from '../EasyForm';
 import {
@@ -26,7 +35,7 @@ const generateContextStringsFns = (props?: RepeaterContextStrings) =>
 
 const DEFAULT_VALUES = {};
 const REPEATER_CONTEXT = createContext<RepeaterContextValue>({
-  ...generateContextStringsFns(),
+  strings: generateContextStringsFns(),
   defaultValues: DEFAULT_VALUES,
   srAnnounce: () => {},
   dragAndDrop: true,
@@ -43,6 +52,7 @@ export const useRepeaterContext = (): RepeaterContextValue =>
 const RepeaterContext = ({
   defaultValues = DEFAULT_VALUES,
   dragAndDrop = true,
+  subscription = {},
   disabled = false,
   ordering = true,
   children,
@@ -51,13 +61,16 @@ const RepeaterContext = ({
   max,
   ...strings
 }: RepeaterContextProps) => {
-  const { batch } = useForm();
-  // @todo: allow repeater subscription to be controlled too?
-  // we aren't currently passing any of the data to the `children` function,
-  // but it might be useful if consuming apps need more re-renders (for some reason)
+  const { batch } = useForm('Repeater');
   const { fields } = useFieldArray(name, {
-    subscription: { value: true, error: true, touched: true },
+    subscription: { ...subscription, value: true, error: true, touched: true },
   });
+  // the `fields` object from `useFieldArray` is not memoised,
+  // and neither are the functions it returns, so we will use a ref
+  // to prevent unnecessary re-renders, and add `fields.value`
+  // to the context value's dependency array
+  const fieldsRef = useRef<FieldArrayRenderProps<any, HTMLElement>['fields']>();
+  fieldsRef.current = fields;
   const { announcer, announce } = useAnnounce();
 
   // populate to minimum number of repeater entries
@@ -77,13 +90,18 @@ const RepeaterContext = ({
   // so we will use it within this context provider instead
   const { disabled: formDisabled } = useEasyFormContext() || {};
 
-  // @todo: improve this for inline/anonymous functions being provided?
-  // this component relies on a lot of re-renders anyway, so could do
-  // with a general performance overhaul with less stored in context
-  const stringFns = useDeepCompareMemo(
-    () => generateContextStringsFns(strings),
-    [strings]
+  // using a ref to handle inline/anonymous functions being provided for strings
+  const stringsRef = useRef<RepeaterContextStringsFns>(
+    generateContextStringsFns(strings)
   );
+  useDeepCompareEffect(() => {
+    const newSrStringsFns = generateContextStringsFns(strings);
+    for (const key in newSrStringsFns) {
+      if (newSrStringsFns.hasOwnProperty(key)) {
+        stringsRef.current[key] = newSrStringsFns[key];
+      }
+    }
+  }, [strings]);
 
   const contextValue = useMemo(
     () => ({
@@ -91,23 +109,24 @@ const RepeaterContext = ({
       max: typeof max === 'number' ? max : Infinity,
       disabled: Boolean(disabled || formDisabled),
       dragAndDrop: Boolean(dragAndDrop),
+      strings: stringsRef.current,
       ordering: Boolean(ordering),
+      fields: fieldsRef.current,
       srAnnounce: announce,
       defaultValues,
-      fields,
-      ...stringFns,
     }),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [
       defaultValues,
       formDisabled,
       dragAndDrop,
-      stringFns,
       announce,
       disabled,
       ordering,
-      fields,
       min,
       max,
+      // need for updates due to using `fieldsRef`
+      fields.value,
     ]
   );
 

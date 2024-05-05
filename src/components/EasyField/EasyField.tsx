@@ -1,15 +1,13 @@
-import React, { Suspense, forwardRef, useEffect } from 'react';
-import { useForm } from 'react-final-form';
+import React, { Suspense, forwardRef } from 'react';
 import EasyFieldGroup from './EasyFieldGroup';
 import Skeleton, { SKELETON_TYPE } from '../Skeleton';
 import { useEasyFormContext } from '../EasyForm/EasyFormContext';
 import useEasyFieldValidator from './useEasyFieldValidator';
 import {
-  MUTATOR_SET_FIELD_DATA_KEY as SET_FIELD_DATA,
   FIELD_TYPE_OVERRIDE_KEY as OVERRIDE_KEY,
   FIELD_DATA_LABEL_KEY,
 } from '../../utils/constants';
-import { renderComponent } from '../../utils';
+import { renderComponent, useSetFieldData } from '../../utils';
 import type { EasyFieldProps } from './EasyField.types';
 
 const EasyField = forwardRef<HTMLDivElement, EasyFieldProps>(
@@ -38,12 +36,7 @@ const EasyField = forwardRef<HTMLDivElement, EasyFieldProps>(
 
     // we store the label against the mutable field data,
     // so that it is available to the `<EasyForm>` validation summary
-    const { mutators: { [SET_FIELD_DATA]: setFieldData } = {} } = useForm();
-    useEffect(() => {
-      if (typeof setFieldData === 'function') {
-        setFieldData(name, { [FIELD_DATA_LABEL_KEY]: label });
-      }
-    }, [label, name, setFieldData]);
+    useSetFieldData(name, { [FIELD_DATA_LABEL_KEY]: label }, [label]);
 
     // we allow overriding the `type` for the field
     // so that components can leverage internal final-form behaviour,

@@ -5,6 +5,7 @@ import EasyForm from '../EasyForm';
 import EasyField from '../EasyField';
 import type { RepeaterProps } from './Repeater.types';
 import type { EasyFormProps } from '../EasyForm/EasyForm.types';
+import { REPEATER_STRINGS_KEYS } from './RepeaterContext.types';
 import CONTROL_TYPE from '../../controlTypes';
 
 // temp work-around for doc-gen index type issue;
@@ -71,6 +72,12 @@ StandardUsage.args = {
 export default {
   title: 'Components/Repeater (in progress!!!)',
   component: StandardUsage,
+  argTypes: {
+    ...REPEATER_STRINGS_KEYS.reduce((acc, str) => {
+      acc[str] = { control: 'text' };
+      return acc;
+    }, {}),
+  },
 };
 
 export const EasyFormStructureExample = (props: EasyFormProps) => (
@@ -81,26 +88,32 @@ EasyFormStructureExample.args = {
   onSubmit: (values: any) => alert(JSON.stringify(values)),
   structure: [
     {
-      type: CONTROL_TYPE.REPEATER,
-      defaultValues: {
-        name: 'John Doe',
-        email: 'john@doe.example',
-      },
+      type: CONTROL_TYPE.FIELDSET,
+      label: 'Users',
       children: [
         {
-          type: 'text',
-          name: 'name',
-          label: 'Name',
-        },
-        {
-          type: 'email',
-          name: 'email',
-          label: 'Email',
+          type: CONTROL_TYPE.REPEATER,
+          defaultValues: {
+            name: 'John Doe',
+            email: 'john@doe.example',
+          },
+          children: [
+            {
+              type: 'text',
+              name: 'name',
+              label: 'Name',
+            },
+            {
+              type: 'email',
+              name: 'email',
+              label: 'Email',
+            },
+          ],
+          name: 'repeater',
+          min: 1,
+          max: 10,
         },
       ],
-      name: 'repeater',
-      min: 1,
-      max: 10,
     },
   ],
 };

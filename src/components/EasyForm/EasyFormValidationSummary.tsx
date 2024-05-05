@@ -49,7 +49,7 @@ const EasyFormValidationSummary = forwardRef<
   HTMLElement,
   EasyFormValidationSummaryProps
 >(({ staticErrors, validationSummary }, ref) => {
-  const formApi = useForm();
+  const formApi = useForm('EasyFormValidationSummary');
   const {
     content: contentType,
     renderLogic,

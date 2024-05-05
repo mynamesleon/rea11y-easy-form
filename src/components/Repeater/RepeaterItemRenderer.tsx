@@ -10,8 +10,7 @@ const RepeaterItemRenderer = ({ children }: RepeaterItemRendererProps) => {
     disabled,
     srAnnounce,
     dragAndDrop,
-    srItemMoved,
-    srItemDeleted,
+    strings: { srItemMoved, srItemDeleted },
   } = useRepeaterContext();
 
   // move button functions
@@ -54,12 +53,15 @@ const RepeaterItemRenderer = ({ children }: RepeaterItemRendererProps) => {
       }),
     };
 
+    // @note: we need a more consistent key somehow, rather than relying on index,
+    // especially as focus position is currently lost when moving items
+    const key = name || index;
     if (disabled || fields.length === 1 || !dragAndDrop) {
-      return <RepeaterItem {...itemProps} key={name || index} />;
+      return <RepeaterItem {...itemProps} key={key} />;
     }
 
     return (
-      <Draggable key={name || index} draggableId={name} index={index}>
+      <Draggable draggableId={name} index={index} key={key}>
         {(provided, snapshot) => (
           <RepeaterItem
             {...provided.draggableProps}

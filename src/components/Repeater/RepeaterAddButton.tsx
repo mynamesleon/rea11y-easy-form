@@ -13,11 +13,10 @@ const RepeaterAddButton = ({
   const {
     max,
     fields,
-    addText,
     disabled,
     srAnnounce,
-    srItemAdded,
     defaultValues,
+    strings: { addText, srItemAdded },
   } = useRepeaterContext();
 
   // focus newly added repeater section;

@@ -4,8 +4,14 @@ import { useRepeaterContext } from './RepeaterContext';
 import useHandleRepeaterDragEnd from './useHandleRepeaterDragEnd';
 
 const RepeaterDragDrop = ({ children }: { children: ReactNode }) => {
-  const { srItemLifted, srItemMoved, srCannotBeDropped, srUsageInstructions } =
-    useRepeaterContext();
+  const {
+    strings: {
+      srItemLifted,
+      srItemMoved,
+      srCannotBeDropped,
+      srUsageInstructions,
+    },
+  } = useRepeaterContext();
 
   // drag and drop handling functions
   // use the `announce()` provided by react-beautiful-dnd
