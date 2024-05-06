@@ -57,5 +57,26 @@ describe('<Fieldset />', () => {
         expect.any(Object)
       );
     });
+
+    it('can take a visuallyHiddenLegend prop as an alias for srOnlyLegend', () => {
+      props.legend = 'legend';
+      props.visuallyHiddenLegend = true;
+      renderComponent();
+      expect(VisuallyHidden).toHaveBeenCalledWith(
+        expect.objectContaining({
+          component: 'legend',
+          text: props.legend,
+        }),
+        expect.any(Object)
+      );
+    });
+
+    it('should take a legendClassName prop for the `legend` element', () => {
+      props.legend = 'legend';
+      props.legendClassName = 'test';
+      const { queryByText } = renderComponent();
+      const legend = queryByText(props.legend as string);
+      expect(legend).toHaveClass(props.legendClassName);
+    });
   });
 });

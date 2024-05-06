@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import React, { forwardRef } from 'react';
+import React, { forwardRef, memo } from 'react';
 import VisuallyHidden from '../VisuallyHidden';
 import { FieldsetProps } from './Fieldset.types';
 import { useFieldClassName } from '../../utils';
@@ -13,6 +13,7 @@ const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
       children,
       className,
       srOnlyLegend,
+      legendClassName,
       visuallyHiddenLegend,
       ...other
     },
@@ -20,7 +21,7 @@ const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
   ) => {
     const legendText = legend || label;
     const classPrefix = useFieldClassName('fieldset');
-    const legendClassName = `${classPrefix}__legend`;
+    const legendClass = clsx(legendClassName, `${classPrefix}__legend`);
     return (
       <fieldset
         data-testid="Fieldset"
@@ -31,12 +32,12 @@ const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
         {Boolean(legendText) &&
           (Boolean(srOnlyLegend || visuallyHiddenLegend) ? (
             <VisuallyHidden
+              className={legendClass}
               component="legend"
-              className={legendClassName}
               text={legendText}
             />
           ) : (
-            <legend className={legendClassName}>{legendText}</legend>
+            <legend className={legendClass}>{legendText}</legend>
           ))}
         {children}
       </fieldset>
@@ -44,5 +45,6 @@ const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
   }
 );
 
-Fieldset.displayName = 'Fieldset';
-export default Fieldset;
+const MemoisedFieldset = memo(Fieldset);
+MemoisedFieldset.displayName = 'Fieldset';
+export default MemoisedFieldset;

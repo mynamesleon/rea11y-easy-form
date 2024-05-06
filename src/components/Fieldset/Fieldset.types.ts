@@ -14,4 +14,8 @@ export interface FieldsetProps extends ComponentPropsWithRef<'fieldset'> {
    */
   srOnlyLegend?: boolean;
   visuallyHiddenLegend?: boolean;
+  /**
+   * Class name to add to the `<legend>` element
+   */
+  legendClassName?: string;
 }
