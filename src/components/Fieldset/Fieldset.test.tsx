@@ -51,8 +51,8 @@ describe('<Fieldset />', () => {
       renderComponent();
       expect(VisuallyHidden).toHaveBeenCalledWith(
         expect.objectContaining({
-          component: 'legend',
           text: props.legend,
+          as: 'legend',
         }),
         expect.any(Object)
       );
@@ -64,8 +64,8 @@ describe('<Fieldset />', () => {
       renderComponent();
       expect(VisuallyHidden).toHaveBeenCalledWith(
         expect.objectContaining({
-          component: 'legend',
           text: props.legend,
+          as: 'legend',
         }),
         expect.any(Object)
       );

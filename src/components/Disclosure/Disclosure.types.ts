@@ -5,7 +5,7 @@ export type DisclosureProps = {
    * The element to use for the outer element
    * @default 'div'
    */
-  component?: ElementType;
+  as?: ElementType;
   /**
    * If using in uncontrolled mode, sets the starting open state
    */

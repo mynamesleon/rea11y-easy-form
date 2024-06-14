@@ -2,16 +2,17 @@ import type { ReactNode } from 'react';
 import type { FieldSubscription } from 'final-form';
 
 type RepeaterRenderedTextProp = string | (() => string);
+type RepeaterRenderedTextNodeProp = ReactNode | ((index: number) => ReactNode);
 type RepeaterRenderedTextWithPositionProp =
   | string
   | ((position: number | string) => string);
 
 export const REPEATER_STRINGS_KEYS = [
-  'moveDownText',
-  'reorderText',
-  'deleteText',
-  'moveUpText',
-  'addText',
+  'moveDown',
+  'reorder',
+  'delete',
+  'moveUp',
+  'add',
   'srItemDropped',
   'srItemDroppedInvalid',
   'srCannotBeDropped',
@@ -25,11 +26,11 @@ export const REPEATER_STRINGS_KEYS = [
 ];
 
 interface RepeaterContextVisibleStrings {
-  moveDownText?: ReactNode;
-  reorderText?: ReactNode;
-  deleteText?: ReactNode;
-  moveUpText?: ReactNode;
-  addText?: ReactNode;
+  moveDown?: RepeaterRenderedTextNodeProp;
+  reorder?: RepeaterRenderedTextNodeProp;
+  delete?: RepeaterRenderedTextNodeProp;
+  moveUp?: RepeaterRenderedTextNodeProp;
+  add?: RepeaterRenderedTextNodeProp;
 }
 
 export interface RepeaterContextStrings extends RepeaterContextVisibleStrings {
@@ -64,11 +65,11 @@ export interface RepeaterContextSrStringsFns {
 }
 
 export interface RepeaterContextStringsFns extends RepeaterContextSrStringsFns {
-  moveDownText: () => ReactNode | undefined;
-  reorderText: () => ReactNode | undefined;
-  deleteText: () => ReactNode | undefined;
-  moveUpText: () => ReactNode | undefined;
-  addText: () => ReactNode | undefined;
+  moveDown: (index: number) => ReactNode | undefined;
+  reorder: (index: number) => ReactNode | undefined;
+  delete: (index: number) => ReactNode | undefined;
+  moveUp: (index: number) => ReactNode | undefined;
+  add: (length: number) => ReactNode | undefined;
 }
 
 export interface RepeaterContextPropsBase {
@@ -80,17 +81,14 @@ export interface RepeaterContextPropsBase {
   max?: number;
 }
 
-export interface RepeaterContextProps
-  extends RepeaterContextStrings,
-    RepeaterContextPropsBase {
+export interface RepeaterContextProps extends RepeaterContextPropsBase {
+  strings?: RepeaterContextStrings;
   subscription?: FieldSubscription;
   children: ReactNode;
-  name: string;
 }
 
 export interface RepeaterContextValue
   extends Required<RepeaterContextPropsBase> {
   srAnnounce: (content?: ReactNode) => void;
   strings: RepeaterContextStringsFns;
-  fields: any;
 }

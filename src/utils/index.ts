@@ -12,6 +12,7 @@ export { default as renderComponent } from './renderComponent';
 export { default as smoothlyScrollIntoView } from './smoothlyScrollIntoView';
 export { default as useAnnounce } from './useAnnounce';
 export { default as useAutoId } from './useAutoId';
+export { default as useFieldArray } from './useFieldArray';
 export { default as useFieldClassName } from './useFieldClassName';
 export { default as useFieldValue } from './useFieldValue';
 export { default as useMutatedField } from './useMutatedField';

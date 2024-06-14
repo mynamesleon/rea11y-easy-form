@@ -1,11 +1,7 @@
 import type { ComponentProps, ReactNode } from 'react';
-import type {
-  UseFieldConfig,
-  RenderableProps,
-  FieldMetaState,
-  FieldInputProps,
-} from 'react-final-form';
 import type { FieldSubscription, FieldValidator } from 'final-form';
+import type { FieldMetaState, FieldInputProps } from 'react-final-form';
+import type { EasyFieldGroupProps } from './EasyFieldGroup/EasyFieldGroup.types';
 import type { Dictionary } from '../../utils/constants';
 import Label from '../Label';
 
@@ -41,29 +37,11 @@ export type EasyFieldValidationRule =
   | FieldValidator<any>
   | any;
 
-export interface EasyFieldProps
-  extends UseFieldConfig<any, any>,
-    RenderableProps<EasyFieldRenderProps>,
-    Dictionary {
-  name?: string;
+export interface EasyFieldProps extends EasyFieldGroupProps {
   /**
    * whether to pass the `useField()` `meta` object to the rendered field component
    */
   meta?: boolean;
-  /**
-   * aria attribute to pass on to the rendered form field
-   */
-  'aria-describedby'?: string;
-  /**
-   * Advanced Usage:
-   * when `meta.error` has a value, this object is used to
-   * detail which parts of the `meta` object from `FieldRenderProps`
-   * should determine displaying the error message or not
-   * @example { touched: true, pristine: false }
-   * would cause the error to show only when meta.touched is truthy,
-   * and meta.pristine is falsy
-   */
-  errorLogic?: FieldSubscription;
   /**
    * Advanced Usage:
    * for completely custom field level validation, the `validate` prop
@@ -72,25 +50,8 @@ export interface EasyFieldProps
    */
   validation?: Dictionary<EasyFieldValidationRule>;
   /**
-   * Description to be associated with the rendered field element
-   */
-  description?: ReactNode;
-  /**
-   * Alias for `description`
-   */
-  helpText?: ReactNode;
-  /**
    * Indicate if the form element is a required field;
    * used for the label
    */
   required?: EasyFieldValidationRule;
-  /**
-   * All form elements should have a label...
-   */
-  label?: ReactNode;
-  /**
-   * Component to pass to the `<Label>`
-   * (e.g. to render a `<div>` instead of a `<label>` for a text-content field)
-   */
-  labelComponent?: ComponentProps<typeof Label>['component'];
 }

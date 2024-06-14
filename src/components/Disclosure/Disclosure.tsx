@@ -7,7 +7,7 @@ import './Disclosure.less';
 const Disclosure = forwardRef<any, DisclosureProps>(
   (
     {
-      component: Component = 'div',
+      as: Component = 'div',
       initialOpen,
       defaultOpen,
       className,

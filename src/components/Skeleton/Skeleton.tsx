@@ -8,7 +8,7 @@ const Skeleton = forwardRef<any, SkeletonProps>(
   (
     {
       type = SKELETON_TYPE.INPUT,
-      component: Component = 'span',
+      as: Component = 'span',
       text = 'Loading...',
       className,
       children,

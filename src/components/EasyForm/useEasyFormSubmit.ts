@@ -1,6 +1,25 @@
+import cloneDeep from 'clone-deep';
 import { useCallback } from 'react';
 import { FORM_ERROR } from 'final-form';
 import type { FormApi, SubmissionErrors } from 'final-form';
+import { REPEATER_ENTRY_KEY } from '../../utils';
+
+const deleteRepeaterKeys = (values: any) => {
+  if (typeof values === 'object') {
+    delete values[REPEATER_ENTRY_KEY];
+    for (const key in values) {
+      if (values.hasOwnProperty(key)) {
+        deleteRepeaterKeys(values[key]);
+      }
+    }
+  }
+  return values;
+};
+
+const processValues = (values: any) => {
+  const clone = cloneDeep(values);
+  return deleteRepeaterKeys(clone);
+};
 
 const useEasyFormSubmit = (onSubmit?: Function) =>
   useCallback(
@@ -13,9 +32,10 @@ const useEasyFormSubmit = (onSubmit?: Function) =>
       // so we can still render the form to make use of its state
       // even without the ability to submit
       try {
+        const submitValues = processValues(values);
         const submit =
           typeof onSubmit === 'function' ? onSubmit : () => Promise.resolve();
-        const result = await submit(values, form, callback);
+        const result = await submit(submitValues, form, callback);
         return result;
       } catch (err: any) {
         // some very basic default generic form error handling

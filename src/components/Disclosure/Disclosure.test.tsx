@@ -36,7 +36,7 @@ describe('<Disclosure />', () => {
   });
 
   it('renders the outer element with the chosen component', () => {
-    props.component = 'section';
+    props.as = 'section';
     const { getByTestId } = renderComponent();
     const component = getByTestId('Disclosure');
     expect(component.tagName).toBe('SECTION');

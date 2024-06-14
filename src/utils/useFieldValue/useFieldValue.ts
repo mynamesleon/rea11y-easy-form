@@ -34,8 +34,8 @@ const useFieldValue = (
     subscription: { values: true },
   });
   const namesArr = useDeepCompareMemo(
-    () => (Array.isArray(nameOrNames) ? nameOrNames : [nameOrNames]),
-    [nameOrNames]
+    () => (nameIsArray ? nameOrNames : [nameOrNames]),
+    [nameIsArray, nameOrNames]
   );
   const fieldValues: any[] = useMemo(
     () => namesArr.map((name) => getIn(values, name as string)),

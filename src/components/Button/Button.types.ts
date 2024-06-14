@@ -9,5 +9,5 @@ export interface ButtonProps extends ComponentPropsWithRef<'button'> {
    * Used for a modifier className
    */
   variant?: string;
-  component?: ElementType;
+  as?: ElementType;
 }

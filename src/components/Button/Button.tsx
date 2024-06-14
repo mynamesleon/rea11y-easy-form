@@ -7,7 +7,7 @@ import './Button.less';
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (
     {
-      component: Component = 'button',
+      as: Component = 'button',
       className,
       disabled,
       children,

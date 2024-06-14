@@ -6,8 +6,9 @@ import useEasyFieldValidator from './useEasyFieldValidator';
 import {
   FIELD_TYPE_OVERRIDE_KEY as OVERRIDE_KEY,
   FIELD_DATA_LABEL_KEY,
-} from '../../utils/constants';
-import { renderComponent, useSetFieldData } from '../../utils';
+  useSetFieldData,
+  renderComponent,
+} from '../../utils';
 import type { EasyFieldProps } from './EasyField.types';
 
 const EasyField = forwardRef<HTMLDivElement, EasyFieldProps>(

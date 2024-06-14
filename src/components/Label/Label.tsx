@@ -13,7 +13,7 @@ const Label = forwardRef<any, LabelProps>(
       children,
       className,
       srRequiredText,
-      component: Component = 'label',
+      as: Component = 'label',
       ...other
     },
     ref

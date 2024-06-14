@@ -33,8 +33,8 @@ const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
           (Boolean(srOnlyLegend || visuallyHiddenLegend) ? (
             <VisuallyHidden
               className={legendClass}
-              component="legend"
               text={legendText}
+              as="legend"
             />
           ) : (
             <legend className={legendClass}>{legendText}</legend>

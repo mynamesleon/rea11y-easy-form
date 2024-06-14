@@ -88,9 +88,9 @@ describe('<EasyFieldGroup />', () => {
     );
   });
 
-  it('takes a label prop and passes it to <Label /> with a default className, along with the labelComponent, id, and required', () => {
+  it('takes a label prop and passes it to <Label /> with a default className, along with the labelAs, id, and required', () => {
     props.label = 'label';
-    props.labelComponent = 'div';
+    props.labelAs = 'div';
     props.required = true;
     props.id = 'id';
     renderComponent();
@@ -98,8 +98,8 @@ describe('<EasyFieldGroup />', () => {
       expect.objectContaining({
         text: props.label,
         htmlFor: props.id,
+        as: props.labelAs,
         required: props.required,
-        component: props.labelComponent,
         className: `${classPrefix}__label`,
       }),
       expect.any(Object)

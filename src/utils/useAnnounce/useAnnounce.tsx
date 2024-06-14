@@ -23,15 +23,15 @@ const useAnnounce = (mode: 'off' | 'assertive' | 'polite' = 'assertive') => {
   // index is fine here though, as the array has a fixed length
   const announcer = useMemo(
     () => (
-      <VisuallyHidden className={classPrefix} component="span">
+      <VisuallyHidden className={classPrefix} as="span">
         {announcements.map((announcement, index) => (
           <VisuallyHidden
             className={`${classPrefix}__item`}
-            component="span"
             aria-live={mode}
             aria-atomic
             // eslint-disable-next-line react/no-array-index-key
             key={index}
+            as="span"
           >
             {announcement || ''}
           </VisuallyHidden>

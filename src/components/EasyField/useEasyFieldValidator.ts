@@ -51,9 +51,9 @@ const useEasyFieldValidator = (
         }
       }
       // if the field has no value, do not run any other validators;
-      // but we will allow empty reference value types (and even booleans)
-      // to trigger further rules, as these
-      // may indicate more complex field components
+      // but we will allow field values that are reference value types
+      // (and even booleans) to trigger further rules
+      // as these may indicate more complex field components
       const [value] = args;
       if (isNullOrUndefined(value) || value === '') {
         return;
@@ -66,10 +66,10 @@ const useEasyFieldValidator = (
             : defaultFieldValidationFunctions[key];
         const result = await validatorFunc(...args);
         if (result) {
-          return typeof val === 'string'
-            ? val
-            : typeof result === 'string'
+          return typeof result === 'string'
             ? result
+            : typeof val === 'string'
+            ? val
             : capitaliseFirstLetter(key);
         }
       }

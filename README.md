@@ -79,7 +79,7 @@ This will generate:
 Let's say you have another project (`test-app`) on your machine that you want to try installing the component library into without having to first publish the component library. In the `test-app` directory, you can run:
 
 ```
-npm i --save ../react-component-library
+npm i --save ../rea11y-easy-form
 ```
 
 which will install the local component library as a dependency in `test-app`. It'll then appear as a dependency in `package.json` like:
@@ -88,7 +88,7 @@ which will install the local component library as a dependency in `test-app`. It
   ...
   "dependencies": {
     ...
-    "react-component-library": "file:../react-component-library",
+    "rea11y-easy-form": "file:../rea11y-easy-form",
     ...
   },
   ...

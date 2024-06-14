@@ -10,7 +10,7 @@ export type SkeletonProps = {
    * The outer element to render for the component
    * @default 'span'
    */
-  component?: ElementType;
+  as?: ElementType;
   /**
    * Text visible to screen-reader users within the skeleton element;
    * can use this prop with a primitive value (such as a string)

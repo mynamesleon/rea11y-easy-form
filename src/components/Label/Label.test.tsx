@@ -36,7 +36,7 @@ describe('<Label />', () => {
 
   it('takes a component prop for the element', () => {
     props.text = 'text';
-    props.component = 'div';
+    props.as = 'div';
     const { getByTestId } = renderComponent();
     const component = getByTestId('Label');
     expect(component.tagName).toBe('DIV');
@@ -49,7 +49,7 @@ describe('<Label />', () => {
   });
 
   it('when the `component` prop is not `label`, still renders with no child data', () => {
-    props.component = 'div';
+    props.as = 'div';
     const { queryByTestId } = renderComponent();
     const component = queryByTestId('Label');
     expect(component).not.toBeNull();
@@ -64,7 +64,7 @@ describe('<Label />', () => {
   });
 
   it('should not set `htmlFor` when rendering an element that is not a `label`', () => {
-    props.component = 'div';
+    props.as = 'div';
     props.htmlFor = 'htmlFor';
     const { queryByTestId } = renderComponent();
     const component = queryByTestId('Label');

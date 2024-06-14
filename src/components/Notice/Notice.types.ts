@@ -18,7 +18,7 @@ export interface NoticeIconProps extends SVGAttributes<SVGElement> {
 }
 
 export type NoticeProps = {
-  component?: ElementType;
+  as?: ElementType;
   type?: NOTICE_TYPE;
   /**
    * Alias for `type`

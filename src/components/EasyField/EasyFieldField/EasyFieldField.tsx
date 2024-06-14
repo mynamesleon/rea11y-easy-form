@@ -20,6 +20,7 @@ import {
 } from './formFieldUtils';
 
 const EasyFieldField = ({
+  useFieldHook = useMutatedField,
   errorLogic: errorLogicProp,
   component,
   className,
@@ -38,10 +39,13 @@ const EasyFieldField = ({
     () => ({
       ...extractKeysForSubscription(other.subscription),
       ...extractKeysForSubscription(errorLogic, (key: string) => key),
-      // always subscribe to value, error, and validating
+      // there are some parts of the FieldState
+      // that we always want to subscribe to...
       validating: true,
+      length: true,
       value: true,
       error: true,
+      data: true,
     }),
     [other.subscription, errorLogic]
   );
@@ -62,7 +66,7 @@ const EasyFieldField = ({
 
   // react-final-form destructures the config object internally,
   // so we do not need to memoise it
-  const { input, meta } = useMutatedField(name, {
+  const { input, meta } = useFieldHook(name, {
     ...other,
     validateFields,
     subscription,

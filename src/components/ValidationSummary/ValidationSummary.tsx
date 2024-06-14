@@ -49,11 +49,11 @@ const ValidationSummary = forwardRef<HTMLElement, ValidationSummaryProps>(
       <Notice
         data-testid="ValidationSummary"
         {...other}
-        ref={ref}
+        className={clsx(className, classPrefix)}
         type={NOTICE_TYPE.ERROR}
         tabIndex={-1}
-        component="div"
-        className={clsx(className, classPrefix)}
+        ref={ref}
+        as="div"
       >
         {Boolean(header) && (isReactElement(header) ? header : <p>{header}</p>)}
         {Boolean(error) &&

@@ -15,18 +15,14 @@ const RepeaterItem = forwardRef<HTMLDivElement, RepeaterItemProps>(
       moveDown,
       moveUp,
       remove,
+      fields,
+      index,
       ...other
     },
     ref
   ) => {
-    const {
-      min,
-      fields,
-      disabled,
-      ordering,
-      dragAndDrop,
-      strings: { deleteText, moveUpText, reorderText, moveDownText },
-    } = useRepeaterContext();
+    const { min, strings, disabled, ordering, dragAndDrop } =
+      useRepeaterContext();
     const repeaterItemId = useAutoId('repeater-item');
     const classPrefix = useFieldClassName('repeater');
     const buttonClass = `${classPrefix}__button`;
@@ -55,8 +51,8 @@ const RepeaterItem = forwardRef<HTMLDivElement, RepeaterItemProps>(
               className={`${buttonClass} ${buttonClass}--delete`}
               {...sharedButtonProps}
               disabled={Boolean(disabled || (min && fields.length <= min))}
+              text={strings.delete(index)}
               variant="destructive"
-              text={deleteText()}
               onClick={remove}
             />
           )}
@@ -65,16 +61,16 @@ const RepeaterItem = forwardRef<HTMLDivElement, RepeaterItemProps>(
               {typeof moveDown === 'function' && (
                 <Button
                   className={`${buttonClass} ${buttonClass}--move-down`}
+                  text={strings.moveDown(index)}
                   {...sharedButtonProps}
-                  text={moveDownText()}
                   onClick={moveDown}
                 />
               )}
               {typeof moveUp === 'function' && (
                 <Button
                   className={`${buttonClass} ${buttonClass}--move-up`}
+                  text={strings.moveUp(index)}
                   {...sharedButtonProps}
-                  text={moveUpText()}
                   onClick={moveUp}
                 />
               )}
@@ -86,11 +82,11 @@ const RepeaterItem = forwardRef<HTMLDivElement, RepeaterItemProps>(
             (Boolean(dragHandleProps) || disabled) && (
               <Button
                 className={`${buttonClass} ${buttonClass}--drag`}
+                text={strings.reorder(index)}
                 {...sharedButtonProps}
                 {...dragHandleProps}
-                text={reorderText()}
-                component="span"
                 type={undefined}
+                as="span"
               />
             )}
         </div>

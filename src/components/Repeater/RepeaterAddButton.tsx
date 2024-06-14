@@ -6,17 +6,18 @@ import Button from '../Button';
 const RepeaterAddButton = ({
   droppableId,
   className,
+  fields,
 }: {
   droppableId: string;
   className: string;
+  fields: any;
 }) => {
   const {
     max,
-    fields,
     disabled,
     srAnnounce,
     defaultValues,
-    strings: { addText, srItemAdded },
+    strings: { add, srItemAdded },
   } = useRepeaterContext();
 
   // focus newly added repeater section;
@@ -40,11 +41,11 @@ const RepeaterAddButton = ({
   if (!max || fields.length < max) {
     return (
       <Button
+        text={add(fields.length)}
         aria-controls={droppableId}
         className={className}
         disabled={disabled}
         onClick={addItem}
-        text={addText()}
       />
     );
   }

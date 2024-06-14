@@ -1,37 +1,52 @@
-import React, {
-  createContext,
-  useContext,
-  useEffect,
-  useMemo,
-  useRef,
-} from 'react';
-import {
-  type FieldArrayRenderProps,
-  useFieldArray,
-} from 'react-final-form-arrays';
+import React, { createContext, useContext, useMemo, useRef } from 'react';
 import { useDeepCompareEffect } from '@react-hookz/web';
-import { useForm } from 'react-final-form';
 import { useEasyFormContext } from '../EasyForm';
 import {
   REPEATER_STRINGS_KEYS,
-  RepeaterContextProps,
-  RepeaterContextValue,
-  RepeaterContextStrings,
-  RepeaterContextStringsFns,
+  type RepeaterContextProps,
+  type RepeaterContextValue,
+  type RepeaterContextStrings,
+  type RepeaterContextStringsFns,
 } from './RepeaterContext.types';
 import { useAnnounce } from '../../utils';
+
+const DEFAULT_STRINGS = {
+  add: 'Add another entry',
+  delete: 'Remove this entry',
+  moveDown: 'Move down',
+  moveUp: 'Move up',
+  reorder: 'Re-order',
+  srItemDropped: 'You have dropped the item.',
+  srItemDroppedInvalid: 'The item has been dropped while not over a drop area.',
+  srCannotBeDropped: 'You are over an area that cannot be dropped on.',
+  srMovementCancelled: 'Movement cancelled.',
+  srUsageInstructions:
+    'Press space bar to start a drag. When dragging you can use the arrow keys to move the item around and escape to cancel. Some screen readers may require you to be in focus mode or to use your pass through key.',
+  srItemAdded: (position: string | number) =>
+    `Item added at position ${position}`,
+  srItemDeleted: (position: string | number) =>
+    `Item at position ${position} deleted`,
+  srItemLifted: (position: string | number) =>
+    `You have lifted an item in position ${position}.`,
+  srItemMoved: (start: string | number, end: string | number) =>
+    `You have moved the item from position ${start} to position ${end}.`,
+  srReturnedToStart: (position: string | number) =>
+    `The item has returned to its starting position of ${position}.`,
+};
 
 const repeaterContextStringHandler = (prop: any, args: any[] = []): string => {
   const possible = typeof prop === 'function' ? prop(...args) : prop;
   return typeof possible === 'string' ? possible : '';
 };
 
-const generateContextStringsFns = (props?: RepeaterContextStrings) =>
-  REPEATER_STRINGS_KEYS.reduce((result, key) => {
+const generateContextStringsFns = (stringsProp?: RepeaterContextStrings) => {
+  const strings = { ...DEFAULT_STRINGS, ...(stringsProp || {}) };
+  return REPEATER_STRINGS_KEYS.reduce((result, key) => {
     result[key] = (...args: any[]) =>
-      repeaterContextStringHandler(props?.[key], args);
+      repeaterContextStringHandler(strings?.[key], args);
     return result;
   }, {}) as RepeaterContextStringsFns;
+};
 
 const DEFAULT_VALUES = {};
 const REPEATER_CONTEXT = createContext<RepeaterContextValue>({
@@ -42,7 +57,6 @@ const REPEATER_CONTEXT = createContext<RepeaterContextValue>({
   disabled: false,
   ordering: true,
   max: Infinity,
-  fields: {},
   min: 0,
 });
 
@@ -52,38 +66,14 @@ export const useRepeaterContext = (): RepeaterContextValue =>
 const RepeaterContext = ({
   defaultValues = DEFAULT_VALUES,
   dragAndDrop = true,
-  subscription = {},
   disabled = false,
   ordering = true,
   children,
-  name,
+  strings,
   min,
   max,
-  ...strings
 }: RepeaterContextProps) => {
-  const { batch } = useForm('Repeater');
-  const { fields } = useFieldArray(name, {
-    subscription: { ...subscription, value: true, error: true, touched: true },
-  });
-  // the `fields` object from `useFieldArray` is not memoised,
-  // and neither are the functions it returns, so we will use a ref
-  // to prevent unnecessary re-renders, and add `fields.value`
-  // to the context value's dependency array
-  const fieldsRef = useRef<FieldArrayRenderProps<any, HTMLElement>['fields']>();
-  fieldsRef.current = fields;
   const { announcer, announce } = useAnnounce();
-
-  // populate to minimum number of repeater entries
-  useEffect(() => {
-    const fieldsLength = fields.length || 0;
-    if (typeof min === 'number' && fieldsLength < min) {
-      batch(() => {
-        [...Array(min - fieldsLength)].forEach(() => {
-          fields.push(defaultValues);
-        });
-      });
-    }
-  }, [fields, fields.length, min, defaultValues, batch]);
 
   // if useEasyFormContext is used within Repeater directly,
   // it causes an infinite rendering loop (sometimes...)
@@ -111,7 +101,6 @@ const RepeaterContext = ({
       dragAndDrop: Boolean(dragAndDrop),
       strings: stringsRef.current,
       ordering: Boolean(ordering),
-      fields: fieldsRef.current,
       srAnnounce: announce,
       defaultValues,
     }),
@@ -125,8 +114,6 @@ const RepeaterContext = ({
       ordering,
       min,
       max,
-      // need for updates due to using `fieldsRef`
-      fields.value,
     ]
   );
 

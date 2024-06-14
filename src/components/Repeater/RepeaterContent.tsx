@@ -7,14 +7,20 @@ import { useRepeaterContext } from './RepeaterContext';
 import RepeaterAddButton from './RepeaterAddButton';
 import { useAutoId, useFieldClassName } from '../../utils';
 import { RepeaterContentProps } from './RepeaterContent.types';
+import useRepeaterFieldsSetup from './useRepeaterFieldsSetup';
 
-const RepeaterContent = ({ children, className }: RepeaterContentProps) => {
+const RepeaterContent = ({
+  className,
+  children,
+  fields,
+}: RepeaterContentProps) => {
+  useRepeaterFieldsSetup(fields);
   const classPrefix = useFieldClassName('repeater');
   const droppableId = useAutoId('repeater-droppable');
   const { disabled, dragAndDrop } = useRepeaterContext();
 
   return (
-    <RepeaterDragAndDrop>
+    <RepeaterDragAndDrop fields={fields}>
       <div className={clsx(className, classPrefix)}>
         <Droppable
           isDropDisabled={disabled || !dragAndDrop}
@@ -30,7 +36,7 @@ const RepeaterContent = ({ children, className }: RepeaterContentProps) => {
               ref={provided.innerRef}
               {...provided.droppableProps}
             >
-              <RepeaterItemRenderer children={children} />
+              <RepeaterItemRenderer children={children} fields={fields} />
               {provided.placeholder}
             </div>
           )}
@@ -38,6 +44,7 @@ const RepeaterContent = ({ children, className }: RepeaterContentProps) => {
         <RepeaterAddButton
           className={`${classPrefix}__add`}
           droppableId={droppableId}
+          fields={fields}
         />
       </div>
     </RepeaterDragAndDrop>

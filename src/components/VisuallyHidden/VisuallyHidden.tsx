@@ -6,14 +6,7 @@ import './VisuallyHidden.less';
 
 const VisuallyHidden = forwardRef<any, VisuallyHiddenProps>(
   (
-    {
-      component: Component = 'span',
-      className,
-      focusable,
-      children,
-      text,
-      ...props
-    },
+    { as: Component = 'span', className, focusable, children, text, ...props },
     ref
   ) => {
     const classPrefix = useFieldClassName('visually-hidden');

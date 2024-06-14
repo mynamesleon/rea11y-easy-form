@@ -48,9 +48,11 @@ export interface EasyFieldFieldProps
   errorLogic?: FieldSubscription;
   /**
    * Advanced Usage:
-   * for completely custom field level validation, the `validate` prop
-   * (from react-final-form's FieldProps) is still the best solution.
-   * Alternatively, you can use this validation object
+   * The hook to use for registering the field with react-final-form.
+   * Defaults to `useMutatedField`
    */
-  validation?: Dictionary<any>;
+  useFieldHook?: (
+    name: string,
+    config?: UseFieldConfig<any> & Dictionary
+  ) => FieldRenderProps<any>;
 }

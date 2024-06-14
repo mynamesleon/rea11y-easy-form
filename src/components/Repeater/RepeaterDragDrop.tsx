@@ -2,12 +2,19 @@ import React, { ReactNode, useCallback } from 'react';
 import { DragDropContext } from 'react-beautiful-dnd';
 import { useRepeaterContext } from './RepeaterContext';
 import useHandleRepeaterDragEnd from './useHandleRepeaterDragEnd';
+import type { FieldArrayInput } from '../../utils/useFieldArray/useFieldArray.types';
 
-const RepeaterDragDrop = ({ children }: { children: ReactNode }) => {
+const RepeaterDragDrop = ({
+  children,
+  fields,
+}: {
+  children: ReactNode;
+  fields: FieldArrayInput<any>;
+}) => {
   const {
     strings: {
-      srItemLifted,
       srItemMoved,
+      srItemLifted,
       srCannotBeDropped,
       srUsageInstructions,
     },
@@ -29,7 +36,7 @@ const RepeaterDragDrop = ({ children }: { children: ReactNode }) => {
     },
     [srItemMoved, srCannotBeDropped]
   );
-  const handleDragEnd = useHandleRepeaterDragEnd();
+  const handleDragEnd = useHandleRepeaterDragEnd(fields);
 
   return (
     <DragDropContext

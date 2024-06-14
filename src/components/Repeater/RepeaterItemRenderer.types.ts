@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react';
+import type { FieldArrayInput } from '../../utils/useFieldArray/useFieldArray.types';
 
 type RepeaterItemRendererChildrenArg = {
   length: number;
@@ -8,4 +9,5 @@ type RepeaterItemRendererChildrenArg = {
 
 export interface RepeaterItemRendererProps {
   children: (arg: RepeaterItemRendererChildrenArg) => ReactNode;
+  fields: FieldArrayInput<any>;
 }

@@ -38,7 +38,7 @@ describe('<VisuallyHidden />', () => {
   it('takes a `component` prop to render as any HTML element', () => {
     const hiddenMessage = 'Hidden Message';
     props.children = hiddenMessage;
-    props.component = 'div';
+    props.as = 'div';
     const { getByText } = renderComponent();
     const visuallyHidden = getByText(hiddenMessage);
     expect(visuallyHidden.tagName).toBe('DIV');

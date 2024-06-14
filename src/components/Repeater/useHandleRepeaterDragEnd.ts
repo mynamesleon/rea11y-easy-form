@@ -1,9 +1,9 @@
 import { useCallback } from 'react';
 import { useRepeaterContext } from './RepeaterContext';
+import type { FieldArrayInput } from '../../utils/useFieldArray/useFieldArray.types';
 
-const useHandleRepeaterDragEnd = () => {
+const useHandleRepeaterDragEnd = (fields: FieldArrayInput<any>) => {
   const {
-    fields,
     strings: {
       srItemMoved,
       srItemDropped,
@@ -29,7 +29,7 @@ const useHandleRepeaterDragEnd = () => {
       const { index: start } = source;
       const { index: end } = destination;
       announce(`${srItemDropped()} ${srItemMoved(start + 1, end + 1)}`);
-      return fields.move(start, end);
+      return fields?.move?.(start, end);
     },
     [srItemDropped, srItemMoved, fields]
   );

@@ -17,5 +17,5 @@ export type LabelProps = {
    * to prevent orphaned labels
    * @default 'label'
    */
-  component?: ElementType;
+  as?: ElementType;
 } & ComponentPropsWithRef<'label'>;

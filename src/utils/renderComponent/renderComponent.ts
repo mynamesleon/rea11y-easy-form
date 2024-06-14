@@ -2,8 +2,12 @@ import React, { ReactNode } from 'react';
 import type { RenderableProps } from 'react-final-form';
 
 // functionality primarily copied from react-final-form
-const renderComponent = <T>(props: RenderableProps<T> & T): ReactNode => {
-  const { render, children, component, ...other } = props;
+const renderComponent = <T>({
+  component,
+  children,
+  render,
+  ...other
+}: RenderableProps<T> & T): ReactNode => {
   if (component) {
     return React.createElement(
       component as any,

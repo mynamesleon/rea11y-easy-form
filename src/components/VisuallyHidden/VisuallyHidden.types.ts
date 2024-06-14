@@ -11,7 +11,7 @@ export type VisuallyHiddenProps = {
    * The outer element to render for the component
    * @default 'span'
    */
-  component?: ElementType;
+  as?: ElementType;
   /**
    * Indicates that the VisuallyHidden `component` is a focusable element,
    * and should be made visible when it receives focus / is active

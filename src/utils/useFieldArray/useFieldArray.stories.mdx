@@ -1,0 +1,26 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Utils and Hooks/useFieldArray" />
+
+# `useFieldArray()` hook
+
+Functionally this `useFieldArray()` hook is almost identical to the `useFieldArray`
+hook available from `react-final-form-arrays`, but with a few advantages/differences:
+
+1. This hook passes all provided field config options along to `useField`
+   (e.g. you can use a `beforeSubmit` function if you want to, which you can't do with the hook
+   from `react-final-form-arrays` currently)
+2. The internals of this hook are memoised
+3. This hook returns both a `fields` and `input` property
+   (which both reference the same object internally)
+
+## Usage
+
+```jsx
+import { useFieldArray } from 'rea11y-easy-form';
+
+const YourComponent = () => {
+  const { input, meta } = useFieldArray('field-name', config);
+  // your component code here
+};
+```

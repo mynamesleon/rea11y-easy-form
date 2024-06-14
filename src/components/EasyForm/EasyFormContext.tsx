@@ -42,7 +42,7 @@ const EasyFormContextProvider = ({
       ...components,
     },
     // but keep default containers, because the way they interact
-    // will need specific handling (e.g. repeater and conditional)
+    // may need specific handling (e.g. repeater and conditional)
     containers: {
       ...containers,
       ...DEFAULT_CONTAINERS,

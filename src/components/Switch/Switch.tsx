@@ -4,8 +4,8 @@ import clsx from 'clsx';
 import Input from '../Input';
 import { SwitchProps, SWITCH_TYPE, SwitchStrings } from './Switch.types';
 import { isNullOrUndefined, useFieldClassName } from '../../utils';
-import './Switch.less';
 import { FIELD_TYPE_OVERRIDE_KEY } from '../../utils/constants';
+import './Switch.less';
 
 const DEFAULT_STRINGS: SwitchStrings = {};
 

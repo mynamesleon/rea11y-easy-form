@@ -11,12 +11,13 @@ const EasyFieldGroup = forwardRef<HTMLDivElement, EasyFieldGroupProps>(
   (
     {
       'aria-describedby': describedBy,
+      as: Component = 'div',
       description: desc,
-      labelComponent,
       id: idProp,
       className,
       helpText,
       required,
+      labelAs,
       label,
       type,
       name,
@@ -50,7 +51,7 @@ const EasyFieldGroup = forwardRef<HTMLDivElement, EasyFieldGroupProps>(
     }, [id, name, type, classPrefix, ariaDescribedBy]);
 
     return (
-      <div
+      <Component
         data-testid="EasyFieldGroup"
         className={clsx(
           className,
@@ -66,8 +67,8 @@ const EasyFieldGroup = forwardRef<HTMLDivElement, EasyFieldGroupProps>(
           ) : (
             <Label
               className={`${classPrefix}__label`}
-              component={labelComponent}
               required={required}
+              as={labelAs}
               htmlFor={id}
               text={label}
             />
@@ -84,7 +85,7 @@ const EasyFieldGroup = forwardRef<HTMLDivElement, EasyFieldGroupProps>(
           {...fieldProps}
           aria-required={Boolean(required)}
         />
-      </div>
+      </Component>
     );
   }
 );

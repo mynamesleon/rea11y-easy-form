@@ -12,7 +12,12 @@ import CONTROL_TYPE from '../../controlTypes';
 // see: https://github.com/storybookjs/storybook/issues/15334
 
 export const StandardUsage = (props: RepeaterProps) => (
-  <EasyForm onSubmit={(values) => alert(JSON.stringify(values))}>
+  <EasyForm
+    initialValues={{
+      repeater: [{ name: 'Some One', email: 'some.one@example.com' }],
+    }}
+    onSubmit={(values) => alert(JSON.stringify(values))}
+  >
     <Repeater {...props}>
       {(args) => (
         <>
@@ -86,34 +91,37 @@ export const EasyFormStructureExample = (props: EasyFormProps) => (
 
 EasyFormStructureExample.args = {
   onSubmit: (values: any) => alert(JSON.stringify(values)),
+  initialValues: {
+    repeater: [
+      {
+        name: 'Some One',
+        email: 'some.one@example.com',
+      },
+    ],
+  },
   structure: [
     {
-      type: CONTROL_TYPE.FIELDSET,
-      label: 'Users',
+      type: CONTROL_TYPE.REPEATER,
+      legend: 'Users',
+      defaultValues: {
+        name: 'John Doe',
+        email: 'john@doe.example',
+      },
       children: [
         {
-          type: CONTROL_TYPE.REPEATER,
-          defaultValues: {
-            name: 'John Doe',
-            email: 'john@doe.example',
-          },
-          children: [
-            {
-              type: 'text',
-              name: 'name',
-              label: 'Name',
-            },
-            {
-              type: 'email',
-              name: 'email',
-              label: 'Email',
-            },
-          ],
-          name: 'repeater',
-          min: 1,
-          max: 10,
+          type: 'text',
+          name: 'name',
+          label: 'Name',
+        },
+        {
+          type: 'email',
+          name: 'email',
+          label: 'Email',
         },
       ],
+      name: 'repeater',
+      min: 1,
+      max: 10,
     },
   ],
 };

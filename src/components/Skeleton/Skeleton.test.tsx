@@ -40,7 +40,7 @@ describe('<Skeleton />', () => {
   });
 
   it('renders as the chosen component', () => {
-    props.component = 'section';
+    props.as = 'section';
     const { getByTestId } = renderComponent();
     const component = getByTestId('Skeleton');
     expect(component.tagName).toBe('SECTION');

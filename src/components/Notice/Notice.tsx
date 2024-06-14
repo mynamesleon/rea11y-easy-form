@@ -11,7 +11,7 @@ const DEFAULT_NOTICE_TYPE = NOTICE_TYPE.INFO;
 const Notice = forwardRef<any, NoticeProps>(
   (
     {
-      component: Component = 'div',
+      as: Component = 'div',
       type: typeProp,
       className,
       children,
