@@ -81,10 +81,11 @@ export interface EasyFormContentProps
 
 export interface EasyFormFormProps
   extends EasyFormPropsBase,
-    FormProps,
+    Omit<FormProps, 'onSubmit'>,
     Dictionary {
   className?: string;
   disabled?: boolean;
+  onSubmit?: FormProps['onSubmit'];
 }
 
 export interface EasyFormBuilderProps {

@@ -1,33 +1,29 @@
 import cloneDeep from 'clone-deep';
 import { useCallback } from 'react';
 import { FORM_ERROR } from 'final-form';
-import type { FormApi, SubmissionErrors } from 'final-form';
-import { REPEATER_ENTRY_KEY } from '../../utils';
+import type { FormProps } from 'react-final-form';
+import { FIELD_REPEATER_ENTRY_KEY } from '../../utils';
 
-const deleteRepeaterKeys = (values: any) => {
+const deleteFieldRepeaterKeys = (values: Record<string, any>) => {
   if (typeof values === 'object') {
-    delete values[REPEATER_ENTRY_KEY];
+    delete values[FIELD_REPEATER_ENTRY_KEY];
     for (const key in values) {
       if (values.hasOwnProperty(key)) {
-        deleteRepeaterKeys(values[key]);
+        deleteFieldRepeaterKeys(values[key]);
       }
     }
   }
   return values;
 };
 
-const processValues = (values: any) => {
+const processValues = (values: Record<string, any>) => {
   const clone = cloneDeep(values);
-  return deleteRepeaterKeys(clone);
+  return deleteFieldRepeaterKeys(clone);
 };
 
-const useEasyFormSubmit = (onSubmit?: Function) =>
-  useCallback(
-    async (
-      values: any,
-      form: FormApi<any, Partial<any>>,
-      callback?: (errors?: SubmissionErrors) => void
-    ) => {
+const useEasyFormSubmit = (onSubmit?: FormProps['onSubmit']) =>
+  useCallback<FormProps['onSubmit']>(
+    async (values, form, callback) => {
       // handle an onSubmit not being provided
       // so we can still render the form to make use of its state
       // even without the ability to submit

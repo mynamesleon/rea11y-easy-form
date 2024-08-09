@@ -1,11 +1,11 @@
 import clsx from 'clsx';
 import React, { forwardRef } from 'react';
-import { useRepeaterContext } from './RepeaterContext';
+import { useFieldRepeaterContext } from './FieldRepeaterContext';
 import { useAutoId, useFieldClassName } from '../../utils';
-import type { RepeaterItemProps } from './RepeaterItem.types';
+import type { FieldRepeaterItemProps } from './FieldRepeaterItem.types';
 import Button from '../Button';
 
-const RepeaterItem = forwardRef<HTMLDivElement, RepeaterItemProps>(
+const FieldRepeaterItem = forwardRef<HTMLDivElement, FieldRepeaterItemProps>(
   (
     {
       dragHandleProps,
@@ -22,9 +22,9 @@ const RepeaterItem = forwardRef<HTMLDivElement, RepeaterItemProps>(
     ref
   ) => {
     const { min, strings, disabled, ordering, dragAndDrop } =
-      useRepeaterContext();
-    const repeaterItemId = useAutoId('repeater-item');
-    const classPrefix = useFieldClassName('repeater');
+      useFieldRepeaterContext();
+    const repeaterItemId = useAutoId('field-repeater-item');
+    const classPrefix = useFieldClassName('field-repeater');
     const buttonClass = `${classPrefix}__button`;
 
     const sharedButtonProps = {
@@ -95,4 +95,4 @@ const RepeaterItem = forwardRef<HTMLDivElement, RepeaterItemProps>(
   }
 );
 
-export default RepeaterItem;
+export default FieldRepeaterItem;

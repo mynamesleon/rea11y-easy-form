@@ -1,24 +1,24 @@
 import React from 'react';
 import Input from '../Input';
-import Repeater from './Repeater';
+import FieldRepeater from './FieldRepeater';
 import EasyForm from '../EasyForm';
 import EasyField from '../EasyField';
-import type { RepeaterProps } from './Repeater.types';
+import type { FieldRepeaterProps } from './FieldRepeater.types';
 import type { EasyFormProps } from '../EasyForm/EasyForm.types';
-import { REPEATER_STRINGS_KEYS } from './RepeaterContext.types';
+import { FIELD_REPEATER_STRINGS_KEYS } from './FieldRepeaterContext.types';
 import CONTROL_TYPE from '../../controlTypes';
 
 // temp work-around for doc-gen index type issue;
 // see: https://github.com/storybookjs/storybook/issues/15334
 
-export const StandardUsage = (props: RepeaterProps) => (
+export const StandardUsage = (props: FieldRepeaterProps) => (
   <EasyForm
     initialValues={{
       repeater: [{ name: 'Some One', email: 'some.one@example.com' }],
     }}
     onSubmit={(values) => alert(JSON.stringify(values))}
   >
-    <Repeater {...props}>
+    <FieldRepeater {...props}>
       {(args) => (
         <>
           <EasyField
@@ -33,12 +33,12 @@ export const StandardUsage = (props: RepeaterProps) => (
             type="email"
           />
           <p>
-            Repeater children function received arg:{' '}
+            FieldRepeater children function received arg:{' '}
             <code>{JSON.stringify(args)}</code>
           </p>
         </>
       )}
-    </Repeater>
+    </FieldRepeater>
   </EasyForm>
 );
 
@@ -53,17 +53,17 @@ StandardUsage.args = {
 };
 
 /**
- * The `Repeater` **must** be used within a `<Form>` or `<EasyForm>`,
+ * The `FieldRepeater` **must** be used within a `<Form>` or `<EasyForm>`,
  * and its `children` **must** be a function. The function will receive
  * an object argument containing `name`, `length`, and `index` properties.
  *
- * The `name` provided will be based on the `name` prop used for the `Repeater`.
+ * The `name` provided will be based on the `name` prop used for the `FieldRepeater`.
  *
- * e.g. the first entry in this example `Repeater` would have a `name` of
+ * e.g. the first entry in this example `FieldRepeater` would have a `name` of
  * `'users[0].name'`
  *
  * ```
- * <Repeater {...props} name='users'>
+ * <FieldRepeater {...props} name='users'>
  *   {({ name }) => (
  *     <EasyField
  *       label="Name"
@@ -71,14 +71,14 @@ StandardUsage.args = {
  *       name={`${name}.name`}
  *     />
  *   )}
- * </Repeater>
+ * </FieldRepeater>
  * ```
  */
 export default {
-  title: 'Components/Repeater (in progress!!!)',
+  title: 'Components/FieldRepeater',
   component: StandardUsage,
   argTypes: {
-    ...REPEATER_STRINGS_KEYS.reduce((acc, str) => {
+    ...FIELD_REPEATER_STRINGS_KEYS.reduce((acc, str) => {
       acc[str] = { control: 'text' };
       return acc;
     }, {}),

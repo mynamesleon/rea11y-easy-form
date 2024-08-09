@@ -1,13 +1,15 @@
 import type { ReactNode } from 'react';
 import type { FieldSubscription } from 'final-form';
 
-type RepeaterRenderedTextProp = string | (() => string);
-type RepeaterRenderedTextNodeProp = ReactNode | ((index: number) => ReactNode);
-type RepeaterRenderedTextWithPositionProp =
+type FieldRepeaterRenderedTextProp = string | (() => string);
+type FieldRepeaterRenderedTextNodeProp =
+  | ReactNode
+  | ((index: number) => ReactNode);
+type FieldRepeaterRenderedTextWithPositionProp =
   | string
   | ((position: number | string) => string);
 
-export const REPEATER_STRINGS_KEYS = [
+export const FIELD_REPEATER_STRINGS_KEYS = [
   'moveDown',
   'reorder',
   'delete',
@@ -25,30 +27,31 @@ export const REPEATER_STRINGS_KEYS = [
   'srReturnedToStart',
 ];
 
-interface RepeaterContextVisibleStrings {
-  moveDown?: RepeaterRenderedTextNodeProp;
-  reorder?: RepeaterRenderedTextNodeProp;
-  delete?: RepeaterRenderedTextNodeProp;
-  moveUp?: RepeaterRenderedTextNodeProp;
-  add?: RepeaterRenderedTextNodeProp;
+interface FieldRepeaterContextVisibleStrings {
+  moveDown?: FieldRepeaterRenderedTextNodeProp;
+  reorder?: FieldRepeaterRenderedTextNodeProp;
+  delete?: FieldRepeaterRenderedTextNodeProp;
+  moveUp?: FieldRepeaterRenderedTextNodeProp;
+  add?: FieldRepeaterRenderedTextNodeProp;
 }
 
-export interface RepeaterContextStrings extends RepeaterContextVisibleStrings {
-  srItemDropped?: RepeaterRenderedTextProp;
-  srItemDroppedInvalid?: RepeaterRenderedTextProp;
-  srCannotBeDropped?: RepeaterRenderedTextProp;
-  srMovementCancelled?: RepeaterRenderedTextProp;
-  srUsageInstructions?: RepeaterRenderedTextProp;
-  srItemAdded?: RepeaterRenderedTextWithPositionProp;
-  srItemDeleted?: RepeaterRenderedTextWithPositionProp;
-  srItemLifted?: RepeaterRenderedTextWithPositionProp;
+export interface FieldRepeaterContextStrings
+  extends FieldRepeaterContextVisibleStrings {
+  srItemDropped?: FieldRepeaterRenderedTextProp;
+  srItemDroppedInvalid?: FieldRepeaterRenderedTextProp;
+  srCannotBeDropped?: FieldRepeaterRenderedTextProp;
+  srMovementCancelled?: FieldRepeaterRenderedTextProp;
+  srUsageInstructions?: FieldRepeaterRenderedTextProp;
+  srItemAdded?: FieldRepeaterRenderedTextWithPositionProp;
+  srItemDeleted?: FieldRepeaterRenderedTextWithPositionProp;
+  srItemLifted?: FieldRepeaterRenderedTextWithPositionProp;
   srItemMoved?:
     | string
     | ((start: number | string, end: number | string) => string);
-  srReturnedToStart?: RepeaterRenderedTextWithPositionProp;
+  srReturnedToStart?: FieldRepeaterRenderedTextWithPositionProp;
 }
 
-export interface RepeaterContextSrStringsFns {
+export interface FieldRepeaterContextSrStringsFns {
   srItemDropped: () => string | undefined;
   srItemDroppedInvalid: () => string | undefined;
   srCannotBeDropped: () => string | undefined;
@@ -64,7 +67,8 @@ export interface RepeaterContextSrStringsFns {
   srReturnedToStart: (position: number | string) => string | undefined;
 }
 
-export interface RepeaterContextStringsFns extends RepeaterContextSrStringsFns {
+export interface FieldRepeaterContextStringsFns
+  extends FieldRepeaterContextSrStringsFns {
   moveDown: (index: number) => ReactNode | undefined;
   reorder: (index: number) => ReactNode | undefined;
   delete: (index: number) => ReactNode | undefined;
@@ -72,7 +76,7 @@ export interface RepeaterContextStringsFns extends RepeaterContextSrStringsFns {
   add: (length: number) => ReactNode | undefined;
 }
 
-export interface RepeaterContextPropsBase {
+export interface FieldRepeaterContextPropsBase {
   dragAndDrop?: boolean;
   defaultValues?: any;
   ordering?: boolean;
@@ -81,14 +85,15 @@ export interface RepeaterContextPropsBase {
   max?: number;
 }
 
-export interface RepeaterContextProps extends RepeaterContextPropsBase {
-  strings?: RepeaterContextStrings;
+export interface FieldRepeaterContextProps
+  extends FieldRepeaterContextPropsBase {
+  strings?: FieldRepeaterContextStrings;
   subscription?: FieldSubscription;
   children: ReactNode;
 }
 
-export interface RepeaterContextValue
-  extends Required<RepeaterContextPropsBase> {
+export interface FieldRepeaterContextValue
+  extends Required<FieldRepeaterContextPropsBase> {
   srAnnounce: (content?: ReactNode) => void;
-  strings: RepeaterContextStringsFns;
+  strings: FieldRepeaterContextStringsFns;
 }

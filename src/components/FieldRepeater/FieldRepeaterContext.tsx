@@ -2,12 +2,12 @@ import React, { createContext, useContext, useMemo, useRef } from 'react';
 import { useDeepCompareEffect } from '@react-hookz/web';
 import { useEasyFormContext } from '../EasyForm';
 import {
-  REPEATER_STRINGS_KEYS,
-  type RepeaterContextProps,
-  type RepeaterContextValue,
-  type RepeaterContextStrings,
-  type RepeaterContextStringsFns,
-} from './RepeaterContext.types';
+  FIELD_REPEATER_STRINGS_KEYS,
+  type FieldRepeaterContextProps,
+  type FieldRepeaterContextValue,
+  type FieldRepeaterContextStrings,
+  type FieldRepeaterContextStringsFns,
+} from './FieldRepeaterContext.types';
 import { useAnnounce } from '../../utils';
 
 const DEFAULT_STRINGS = {
@@ -39,17 +39,19 @@ const repeaterContextStringHandler = (prop: any, args: any[] = []): string => {
   return typeof possible === 'string' ? possible : '';
 };
 
-const generateContextStringsFns = (stringsProp?: RepeaterContextStrings) => {
+const generateContextStringsFns = (
+  stringsProp?: FieldRepeaterContextStrings
+) => {
   const strings = { ...DEFAULT_STRINGS, ...(stringsProp || {}) };
-  return REPEATER_STRINGS_KEYS.reduce((result, key) => {
+  return FIELD_REPEATER_STRINGS_KEYS.reduce((result, key) => {
     result[key] = (...args: any[]) =>
       repeaterContextStringHandler(strings?.[key], args);
     return result;
-  }, {}) as RepeaterContextStringsFns;
+  }, {}) as FieldRepeaterContextStringsFns;
 };
 
 const DEFAULT_VALUES = {};
-const REPEATER_CONTEXT = createContext<RepeaterContextValue>({
+const FIELD_REPEATER_CONTEXT = createContext<FieldRepeaterContextValue>({
   strings: generateContextStringsFns(),
   defaultValues: DEFAULT_VALUES,
   srAnnounce: () => {},
@@ -60,10 +62,10 @@ const REPEATER_CONTEXT = createContext<RepeaterContextValue>({
   min: 0,
 });
 
-export const useRepeaterContext = (): RepeaterContextValue =>
-  useContext(REPEATER_CONTEXT);
+export const useFieldRepeaterContext = (): FieldRepeaterContextValue =>
+  useContext(FIELD_REPEATER_CONTEXT);
 
-const RepeaterContext = ({
+const FieldRepeaterContext = ({
   defaultValues = DEFAULT_VALUES,
   dragAndDrop = true,
   disabled = false,
@@ -72,16 +74,16 @@ const RepeaterContext = ({
   strings,
   min,
   max,
-}: RepeaterContextProps) => {
+}: FieldRepeaterContextProps) => {
   const { announcer, announce } = useAnnounce();
 
-  // if useEasyFormContext is used within Repeater directly,
+  // if useEasyFormContext is used within FieldRepeater directly,
   // it causes an infinite rendering loop (sometimes...)
   // so we will use it within this context provider instead
   const { disabled: formDisabled } = useEasyFormContext() || {};
 
   // using a ref to handle inline/anonymous functions being provided for strings
-  const stringsRef = useRef<RepeaterContextStringsFns>(
+  const stringsRef = useRef<FieldRepeaterContextStringsFns>(
     generateContextStringsFns(strings)
   );
   useDeepCompareEffect(() => {
@@ -118,11 +120,11 @@ const RepeaterContext = ({
   );
 
   return (
-    <REPEATER_CONTEXT.Provider value={contextValue}>
+    <FIELD_REPEATER_CONTEXT.Provider value={contextValue}>
       {announcer}
       {children}
-    </REPEATER_CONTEXT.Provider>
+    </FIELD_REPEATER_CONTEXT.Provider>
   );
 };
 
-export default RepeaterContext;
+export default FieldRepeaterContext;

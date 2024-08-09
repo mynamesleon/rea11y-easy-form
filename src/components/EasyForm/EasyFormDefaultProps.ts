@@ -1,6 +1,7 @@
 import { lazy } from 'react';
 import type { FieldValidator } from 'final-form';
 import { EDITABLE_NATIVE_INPUT_TYPES } from '../../utils/constants';
+import FieldConditional from '../FieldConditional';
 import Disclosure from '../Disclosure';
 import Fieldset from '../Fieldset';
 import AsHtml from '../AsHtml';
@@ -27,7 +28,7 @@ import {
  * so that they (and their validation) are properly registered
  * before any other actions (such as submissions) are attempted.
  *
- * @note: treating the Repeater as an exception to this
+ * @note: treating the FieldRepeater as an exception to this
  * due to its complexity and depending on react-beautiful-dnd
  *
  * @note: we will not include aliases for built-in container types,
@@ -37,8 +38,9 @@ export const DEFAULT_CONTAINERS = {
   [CONTROL_TYPE.HTML]: AsHtml,
   [CONTROL_TYPE.DISCLOSURE]: Disclosure,
   [CONTROL_TYPE.FIELDSET]: Fieldset,
+  [CONTROL_TYPE.CONDITIONAL]: FieldConditional,
   [CONTROL_TYPE.CONTAINER]: ({ children }) => children,
-  [CONTROL_TYPE.REPEATER]: lazy(() => import('../Repeater')),
+  [CONTROL_TYPE.REPEATER]: lazy(() => import('../FieldRepeater')),
 };
 
 const Input = lazy(() => import('../Input'));

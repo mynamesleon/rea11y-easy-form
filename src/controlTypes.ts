@@ -46,6 +46,7 @@ enum CONTROL_TYPE {
   FIELDSET = 'fieldset',
   REPEATER = 'repeater',
   DISCLOSURE = 'disclosure',
+  CONDITIONAL = 'conditional',
 
   // generic wrapper, where the container has no semantic relevance;
   // only really useful for creating logical groups in the structure object
