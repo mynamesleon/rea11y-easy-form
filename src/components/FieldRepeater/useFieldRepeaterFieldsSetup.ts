@@ -21,7 +21,7 @@ const useFieldRepeaterFieldsSetup = ({
 }: FieldArrayInput<any>) => {
   const idIndex = useRef<number>(0);
   const { batch } = useForm('FieldRepeater');
-  const idPrefix = useAutoId('repeater');
+  const idPrefix = useAutoId('field-repeater');
 
   const customPush = useCallback(
     (value: any) => {

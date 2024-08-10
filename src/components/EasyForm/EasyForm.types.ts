@@ -102,12 +102,15 @@ interface EasyFormContextPropsBase {
   defaultFieldValidationFunctions?: Dictionary<FieldValidator<any>>;
   components?: Dictionary<any>;
   containers?: Dictionary<any>;
+  structure?: any[];
   disabled?: boolean;
 }
 
 export interface EasyFormContextValue
-  extends Required<EasyFormContextPropsBase>,
-    EasyFormContextFieldDefaults {}
+  extends Omit<Required<EasyFormContextPropsBase>, 'structure'>,
+    EasyFormContextFieldDefaults {
+  structure?: any[];
+}
 
 export interface EasyFormContextProps
   extends EasyFormContextPropsBase,

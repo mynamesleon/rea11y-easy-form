@@ -47,7 +47,7 @@ StandardUsage.args = {
     name: 'John Doe',
     email: 'john@doe.example',
   },
-  name: 'repeater',
+  name: 'field-repeater',
   max: 10,
   min: 1,
 };
@@ -119,7 +119,7 @@ EasyFormStructureExample.args = {
           label: 'Email',
         },
       ],
-      name: 'repeater',
+      name: 'field-repeater',
       min: 1,
       max: 10,
     },

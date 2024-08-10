@@ -1,33 +1,20 @@
 import React, { memo } from 'react';
 import { isEqual } from '@react-hookz/deep-equal';
-import {
-  FIELD_CONDITIONAL_LOGIC_TYPE,
-  type FieldConditionalProps,
-} from './FieldConditional.types';
-import useFieldConditionalEvaluator from './useFieldConditionalEvaluator';
+import { type FieldConditionalProps } from './FieldConditional.types';
+import { useCheckFieldValue } from '../../utils';
 
 const FieldConditionalContent = ({
-  ifNotLogic = FIELD_CONDITIONAL_LOGIC_TYPE.AND,
-  ifLogic = FIELD_CONDITIONAL_LOGIC_TYPE.AND,
-  logic = FIELD_CONDITIONAL_LOGIC_TYPE.AND,
   children,
-  ...other
+  ...config
 }: FieldConditionalProps) => {
-  const ifNotPasses = useFieldConditionalEvaluator(
-    other.ifNot || {},
-    ifNotLogic,
-    false
-  );
-  const ifPasses = useFieldConditionalEvaluator(other.if || {}, ifLogic, true);
-
-  if (
-    (logic === FIELD_CONDITIONAL_LOGIC_TYPE.AND && ifNotPasses && ifPasses) ||
-    (logic === FIELD_CONDITIONAL_LOGIC_TYPE.OR && (ifNotPasses || ifPasses))
-  ) {
-    return typeof children === 'function' ? children() : children;
+  const configPasses = useCheckFieldValue(config);
+  if (!configPasses) {
+    return null;
   }
-
-  return null;
+  if (typeof children === 'function') {
+    return children();
+  }
+  return children;
 };
 
 const FieldConditional = (props: FieldConditionalProps) => {
