@@ -81,10 +81,11 @@ export interface EasyFormContentProps
 
 export interface EasyFormFormProps
   extends EasyFormPropsBase,
-    FormProps,
+    Omit<FormProps, 'onSubmit'>,
     Dictionary {
   className?: string;
   disabled?: boolean;
+  onSubmit?: FormProps['onSubmit'];
 }
 
 export interface EasyFormBuilderProps {
@@ -101,12 +102,15 @@ interface EasyFormContextPropsBase {
   defaultFieldValidationFunctions?: Dictionary<FieldValidator<any>>;
   components?: Dictionary<any>;
   containers?: Dictionary<any>;
+  structure?: any[];
   disabled?: boolean;
 }
 
 export interface EasyFormContextValue
-  extends Required<EasyFormContextPropsBase>,
-    EasyFormContextFieldDefaults {}
+  extends Omit<Required<EasyFormContextPropsBase>, 'structure'>,
+    EasyFormContextFieldDefaults {
+  structure?: any[];
+}
 
 export interface EasyFormContextProps
   extends EasyFormContextPropsBase,

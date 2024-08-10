@@ -1,26 +1,26 @@
 import clsx from 'clsx';
 import React from 'react';
 import { Droppable } from 'react-beautiful-dnd';
-import RepeaterItemRenderer from './RepeaterItemRenderer';
-import RepeaterDragAndDrop from './RepeaterDragDrop';
-import { useRepeaterContext } from './RepeaterContext';
-import RepeaterAddButton from './RepeaterAddButton';
+import FieldRepeaterItemRenderer from './FieldRepeaterItemRenderer';
+import FieldRepeaterDragAndDrop from './FieldRepeaterDragDrop';
+import { useFieldRepeaterContext } from './FieldRepeaterContext';
+import FieldRepeaterAddButton from './FieldRepeaterAddButton';
 import { useAutoId, useFieldClassName } from '../../utils';
-import { RepeaterContentProps } from './RepeaterContent.types';
-import useRepeaterFieldsSetup from './useRepeaterFieldsSetup';
+import { FieldRepeaterContentProps } from './FieldRepeaterContent.types';
+import useFieldRepeaterFieldsSetup from './useFieldRepeaterFieldsSetup';
 
-const RepeaterContent = ({
+const FieldRepeaterContent = ({
   className,
   children,
   fields,
-}: RepeaterContentProps) => {
-  useRepeaterFieldsSetup(fields);
-  const classPrefix = useFieldClassName('repeater');
-  const droppableId = useAutoId('repeater-droppable');
-  const { disabled, dragAndDrop } = useRepeaterContext();
+}: FieldRepeaterContentProps) => {
+  useFieldRepeaterFieldsSetup(fields);
+  const classPrefix = useFieldClassName('field-repeater');
+  const droppableId = useAutoId('field-repeater-droppable');
+  const { disabled, dragAndDrop } = useFieldRepeaterContext();
 
   return (
-    <RepeaterDragAndDrop fields={fields}>
+    <FieldRepeaterDragAndDrop fields={fields}>
       <div className={clsx(className, classPrefix)}>
         <Droppable
           isDropDisabled={disabled || !dragAndDrop}
@@ -36,19 +36,19 @@ const RepeaterContent = ({
               ref={provided.innerRef}
               {...provided.droppableProps}
             >
-              <RepeaterItemRenderer children={children} fields={fields} />
+              <FieldRepeaterItemRenderer children={children} fields={fields} />
               {provided.placeholder}
             </div>
           )}
         </Droppable>
-        <RepeaterAddButton
+        <FieldRepeaterAddButton
           className={`${classPrefix}__add`}
           droppableId={droppableId}
           fields={fields}
         />
       </div>
-    </RepeaterDragAndDrop>
+    </FieldRepeaterDragAndDrop>
   );
 };
 
-export default RepeaterContent;
+export default FieldRepeaterContent;

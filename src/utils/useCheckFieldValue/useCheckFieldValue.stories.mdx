@@ -1,0 +1,40 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Utils and Hooks/useCheckFieldValue" />
+
+# `useCheckFieldValue()` hook
+
+A hook to get check if a field has a specific value. Uses `useFieldValue` internally.
+
+Can also take an object detailing multiple fields, as well as whether to use `&&` (the default)
+or `||` logic when checking the value of multiple fields.
+
+## Usage
+
+```js
+const passes = useCheckFieldValue('some.field.name', 'Desired value');
+const passesCaseInsensitive = useCheckFieldValue(
+  'some.field.name',
+  (currentValue) => currentValue?.toLowerCase() === 'desired value'
+);
+```
+
+## Advanced usage
+
+```js
+const config = {
+  if: {
+    'some.field': 'Has this value',
+    'some.other.field': (value) => value?.toLowerCase() === 'or has this value',
+  },
+  ifLogic: 'OR',
+  ifNot: {
+    'grand-parent.child': 'not this value',
+    'grand-parent.parent.grand-child': 'or not this value',
+  },
+  ifNotLogic: 'OR',
+  logic: 'OR',
+};
+
+const passes = useCheckFieldValue(config);
+```

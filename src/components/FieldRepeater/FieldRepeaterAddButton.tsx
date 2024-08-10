@@ -1,16 +1,17 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { useRepeaterContext } from './RepeaterContext';
+import { useFieldRepeaterContext } from './FieldRepeaterContext';
 import { focusAndSmoothlyScrollIntoView } from '../../utils';
+import type { FieldArrayInput } from '../../utils/useFieldArray/useFieldArray.types';
 import Button from '../Button';
 
-const RepeaterAddButton = ({
+const FieldRepeaterAddButton = ({
   droppableId,
   className,
   fields,
 }: {
   droppableId: string;
   className: string;
-  fields: any;
+  fields: FieldArrayInput<any>;
 }) => {
   const {
     max,
@@ -18,7 +19,7 @@ const RepeaterAddButton = ({
     srAnnounce,
     defaultValues,
     strings: { add, srItemAdded },
-  } = useRepeaterContext();
+  } = useFieldRepeaterContext();
 
   // focus newly added repeater section;
   // use `getElementById` to not interfere with droppable ref
@@ -52,4 +53,4 @@ const RepeaterAddButton = ({
   return null;
 };
 
-export default RepeaterAddButton;
+export default FieldRepeaterAddButton;

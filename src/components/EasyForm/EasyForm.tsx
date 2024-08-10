@@ -11,6 +11,7 @@ const EasyForm = ({
   validationSummary,
   components,
   containers,
+  structure,
   disabled,
   ...other
 }: EasyFormProps) => {
@@ -23,10 +24,12 @@ const EasyForm = ({
       defaultFieldConfig={defaultFieldConfig}
       components={components}
       containers={containers}
+      structure={structure}
       disabled={disabled}
     >
       <EasyFormForm
         {...other}
+        structure={structure}
         validationSummary={mappedValidationSummaryData}
       />
     </EasyFormContextProvider>

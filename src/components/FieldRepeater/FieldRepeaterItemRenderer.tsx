@@ -1,20 +1,20 @@
 import React, { useCallback } from 'react';
 import { Draggable } from 'react-beautiful-dnd';
-import RepeaterItem from './RepeaterItem';
-import { useRepeaterContext } from './RepeaterContext';
-import type { RepeaterItemRendererProps } from './RepeaterItemRenderer.types';
-import { REPEATER_ENTRY_KEY } from '../../utils';
+import FieldRepeaterItem from './FieldRepeaterItem';
+import { useFieldRepeaterContext } from './FieldRepeaterContext';
+import type { FieldRepeaterItemRendererProps } from './FieldRepeaterItemRenderer.types';
+import { FIELD_REPEATER_ENTRY_KEY } from '../../utils';
 
-const RepeaterItemRenderer = ({
+const FieldRepeaterItemRenderer = ({
   children,
   fields,
-}: RepeaterItemRendererProps) => {
+}: FieldRepeaterItemRendererProps) => {
   const {
     disabled,
     srAnnounce,
     dragAndDrop,
     strings: { srItemMoved, srItemDeleted },
-  } = useRepeaterContext();
+  } = useFieldRepeaterContext();
 
   // move button functions
   const handleMoveOffset = useCallback(
@@ -58,19 +58,22 @@ const RepeaterItemRenderer = ({
       index,
     };
 
-    // @note: REPEATER_ENTRY_KEY values will only be
+    // @note: FIELD_REPEATER_ENTRY_KEY values will only be
     // auto-removed when submitting using an <EasyForm>
     const currentValue = fields?.value?.[index];
     const key =
-      currentValue?.[REPEATER_ENTRY_KEY] || currentValue?.key || name || index;
+      currentValue?.[FIELD_REPEATER_ENTRY_KEY] ||
+      currentValue?.key ||
+      name ||
+      index;
     if (disabled || fields.length === 1 || !dragAndDrop) {
-      return <RepeaterItem {...itemProps} key={key} />;
+      return <FieldRepeaterItem {...itemProps} key={key} />;
     }
 
     return (
       <Draggable draggableId={key} index={index} key={key}>
         {(provided, snapshot) => (
-          <RepeaterItem
+          <FieldRepeaterItem
             {...provided.draggableProps}
             {...itemProps}
             dragHandleProps={provided.dragHandleProps}
@@ -83,4 +86,4 @@ const RepeaterItemRenderer = ({
   });
 };
 
-export default RepeaterItemRenderer;
+export default FieldRepeaterItemRenderer;

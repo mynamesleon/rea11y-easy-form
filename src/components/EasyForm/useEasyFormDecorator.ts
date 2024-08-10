@@ -55,7 +55,8 @@ const useEasyFormDecorator = ({
           validationSummary?.mode === EasyFormValidationSummaryModeTypes.STATIC
         ) {
           const { errors: errs = {}, submitErrors = {} } = state;
-          // prioritise submit errors for the validation summary
+          // prioritise submit errors for the static validation summary,
+          // unlike the dynamic summary where we prioritise the field errors
           const errors: ValidationErrors = { ...errs, ...submitErrors };
           // check that the component is still mounted for extra safety
           // as we are relying on a subscription

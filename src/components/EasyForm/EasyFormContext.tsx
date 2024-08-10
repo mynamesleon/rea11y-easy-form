@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useMemo } from 'react';
+import React, { createContext, useContext, useMemo, useRef } from 'react';
 import { useDeepCompareMemo } from '@react-hookz/web';
 import useConstant from 'use-constant';
 import {
@@ -15,6 +15,7 @@ const EasyFormContext = createContext<EasyFormContextValue>({
   defaultFieldValidationFunctions: DEFAULT_FIELD_VALIDATION_FUNCTIONS,
   containers: DEFAULT_CONTAINERS,
   components: DEFAULT_COMPONENTS,
+  structure: undefined,
   disabled: false,
 });
 
@@ -28,8 +29,11 @@ const EasyFormContextProvider = ({
   disabled = false,
   components,
   containers,
+  structure,
   children,
 }: EasyFormContextProps) => {
+  const structureRef = useRef<any[] | undefined>();
+  structureRef.current = structure;
   const firstMountOnlyObjects = useConstant(() => ({
     // allow default validation functions
     // and default components to be overridden
@@ -61,6 +65,7 @@ const EasyFormContextProvider = ({
     () => ({
       ...firstMountOnlyObjects,
       ...deepComareObjects,
+      structure: structureRef.current,
       disabled: disableForm,
     }),
     [firstMountOnlyObjects, deepComareObjects, disableForm]

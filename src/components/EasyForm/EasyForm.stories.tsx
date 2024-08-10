@@ -336,6 +336,18 @@ ListTypes.args = {
       },
     },
     {
+      type: 'conditional',
+      if: {
+        select: 'Apple',
+      },
+      children: [
+        {
+          type: 'html',
+          value: 'You selected Apple!',
+        },
+      ],
+    },
+    {
       type: 'repeater',
       name: 'repeater',
       label: 'repeater',

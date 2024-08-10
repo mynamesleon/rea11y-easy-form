@@ -1,10 +1,10 @@
 import React, { ReactNode, useCallback } from 'react';
 import { DragDropContext } from 'react-beautiful-dnd';
-import { useRepeaterContext } from './RepeaterContext';
-import useHandleRepeaterDragEnd from './useHandleRepeaterDragEnd';
+import { useFieldRepeaterContext } from './FieldRepeaterContext';
+import useHandleFieldRepeaterDragEnd from './useHandleFieldRepeaterDragEnd';
 import type { FieldArrayInput } from '../../utils/useFieldArray/useFieldArray.types';
 
-const RepeaterDragDrop = ({
+const FieldRepeaterDragDrop = ({
   children,
   fields,
 }: {
@@ -18,7 +18,7 @@ const RepeaterDragDrop = ({
       srCannotBeDropped,
       srUsageInstructions,
     },
-  } = useRepeaterContext();
+  } = useFieldRepeaterContext();
 
   // drag and drop handling functions
   // use the `announce()` provided by react-beautiful-dnd
@@ -36,7 +36,7 @@ const RepeaterDragDrop = ({
     },
     [srItemMoved, srCannotBeDropped]
   );
-  const handleDragEnd = useHandleRepeaterDragEnd(fields);
+  const handleDragEnd = useHandleFieldRepeaterDragEnd(fields);
 
   return (
     <DragDropContext
@@ -50,4 +50,4 @@ const RepeaterDragDrop = ({
   );
 };
 
-export default RepeaterDragDrop;
+export default FieldRepeaterDragDrop;

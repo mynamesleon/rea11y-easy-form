@@ -1,12 +1,15 @@
 export { default as CONTROL_TYPE } from './controlTypes';
 export * from './components';
 export {
+  flattenObject,
   focusAndSmoothlyScrollIntoView,
   focusElement,
   isElementInViewport,
   isNullOrUndefined,
+  mergeRefs,
   smoothlyScrollIntoView,
   useAnnounce,
+  useCheckFieldValue,
   useFieldArray,
   useFieldValue,
   useMutatedField,

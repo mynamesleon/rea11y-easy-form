@@ -40,13 +40,14 @@ import { Meta } from '@storybook/addon-docs/blocks';
 - `AsHtml` ✓
 - `Disclosure` ✓
 - `Fieldset` ✓ (also a util)
-- `Repeater` ✓ (unit tests and thorough manual testing ongoing)
-- `Conditional`
+- `FieldRepeater` ✓ (unit tests and thorough manual testing ongoing)
+- `FieldConditional` ✓
 
 ### Utility/Form functionality hooks
 
 - `useAnnounce` ✓ (for easy screen-reader announcements)
 - `useFieldValue` ✓ (for easy form field value fetching)
+- `useCheckFieldValue` ✓ (for confirming a field (or fields) has the desired value(s))
 - `useMutatedField` ✓ (for correcting common field issues)
 
 ### Built-in validation functions
@@ -64,6 +65,11 @@ Only the most basic built-in rules to be included. We do not want to bloat the p
 - `isNumber` ✓
 - `isUpperCase` ✓
 - `isUrl` ✓
+
+### Miscellaneous / Chore
+
+- Wide-spread CSS variables for easier theming? (not strictly necessary)
+- Proper Generics handling for components that take an `as` prop
 
 ## Beyond 1.0 ideas
 

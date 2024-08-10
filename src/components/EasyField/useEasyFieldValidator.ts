@@ -8,7 +8,7 @@ import type { Dictionary } from '../../utils/constants';
 import type { EasyFieldValidationRule } from './EasyField.types';
 
 const useEasyFieldValidator = (
-  requiredArg?: any,
+  requiredArg?: EasyFieldValidationRule,
   validation?: Dictionary<EasyFieldValidationRule>,
   validate?: FieldValidator<any>
 ) => {

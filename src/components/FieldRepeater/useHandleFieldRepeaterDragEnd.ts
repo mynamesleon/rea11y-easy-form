@@ -1,8 +1,8 @@
 import { useCallback } from 'react';
-import { useRepeaterContext } from './RepeaterContext';
+import { useFieldRepeaterContext } from './FieldRepeaterContext';
 import type { FieldArrayInput } from '../../utils/useFieldArray/useFieldArray.types';
 
-const useHandleRepeaterDragEnd = (fields: FieldArrayInput<any>) => {
+const useHandleFieldRepeaterDragEnd = (fields: FieldArrayInput<any>) => {
   const {
     strings: {
       srItemMoved,
@@ -11,7 +11,7 @@ const useHandleRepeaterDragEnd = (fields: FieldArrayInput<any>) => {
       srMovementCancelled,
       srItemDroppedInvalid,
     },
-  } = useRepeaterContext();
+  } = useFieldRepeaterContext();
 
   const returnedToStartText = useCallback(
     (source) => srReturnedToStart(source.index + 1),
@@ -54,4 +54,4 @@ const useHandleRepeaterDragEnd = (fields: FieldArrayInput<any>) => {
   return handleDragEnd;
 };
 
-export default useHandleRepeaterDragEnd;
+export default useHandleFieldRepeaterDragEnd;

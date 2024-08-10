@@ -2,14 +2,14 @@ import React from 'react';
 import { isValidElementType } from 'react-is';
 import Fieldset from '../Fieldset';
 import EasyField from '../EasyField';
-import RepeaterContent from './RepeaterContent';
-import RepeaterContext from './RepeaterContext';
-import type { RepeaterProps } from './Repeater.types';
+import FieldRepeaterContent from './FieldRepeaterContent';
+import FieldRepeaterContext from './FieldRepeaterContext';
+import type { FieldRepeaterProps } from './FieldRepeater.types';
 import type { FieldArrayInput } from '../../utils/useFieldArray/useFieldArray.types';
 import { useFieldArray } from '../../utils';
-import './Repeater.less';
+import './FieldRepeater.less';
 
-const Repeater = ({
+const FieldRepeater = ({
   defaultValues,
   dragAndDrop,
   className,
@@ -23,7 +23,7 @@ const Repeater = ({
   min,
   max,
   ...other
-}: RepeaterProps) => {
+}: FieldRepeaterProps) => {
   // silently handle children not being a function
   if (typeof children !== 'function' || typeof name !== 'string' || !name) {
     return null;
@@ -31,7 +31,7 @@ const Repeater = ({
 
   const legendToUse = legend || label;
   return (
-    <RepeaterContext
+    <FieldRepeaterContext
       defaultValues={defaultValues}
       dragAndDrop={dragAndDrop}
       disabled={disabled}
@@ -49,15 +49,15 @@ const Repeater = ({
         {...other}
       >
         {(fields: FieldArrayInput<any>) => (
-          <RepeaterContent
+          <FieldRepeaterContent
             className={className}
             children={children}
             fields={fields}
           />
         )}
       </EasyField>
-    </RepeaterContext>
+    </FieldRepeaterContext>
   );
 };
 
-export default Repeater;
+export default FieldRepeater;

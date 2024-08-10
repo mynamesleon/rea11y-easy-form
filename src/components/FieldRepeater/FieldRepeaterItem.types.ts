@@ -2,7 +2,7 @@ import type { HTMLAttributes, MouseEventHandler } from 'react';
 import type { DraggableProvidedDragHandleProps } from 'react-beautiful-dnd';
 import type { FieldArrayInput } from '../../utils/useFieldArray/useFieldArray.types';
 
-export interface RepeaterItemProps extends HTMLAttributes<HTMLDivElement> {
+export interface FieldRepeaterItemProps extends HTMLAttributes<HTMLDivElement> {
   dragHandleProps?: DraggableProvidedDragHandleProps | null | undefined;
   moveDown?: MouseEventHandler<HTMLButtonElement>;
   moveUp?: MouseEventHandler<HTMLButtonElement>;
