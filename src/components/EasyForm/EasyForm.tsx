@@ -29,6 +29,7 @@ const EasyForm = ({
     >
       <EasyFormForm
         {...other}
+        structure={structure}
         validationSummary={mappedValidationSummaryData}
       />
     </EasyFormContextProvider>

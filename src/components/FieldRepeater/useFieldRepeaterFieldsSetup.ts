@@ -37,7 +37,7 @@ const useFieldRepeaterFieldsSetup = ({
   // update initial repeater entries to have a custom key
   useEffect(() => {
     batch(() => {
-      fieldsValue.forEach((value, index) => {
+      fieldsValue?.forEach((value, index) => {
         if (isPlainObject(value) && !value[FIELD_REPEATER_ENTRY_KEY]) {
           const key = `${idPrefix}_${(idIndex.current += 1)}`;
           fieldsUpdate(index, {
