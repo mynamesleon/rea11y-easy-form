@@ -8,6 +8,8 @@ export { default as Disclosure } from './Disclosure';
 export { default as EasyField } from './EasyField';
 export { default as EasyForm, useEasyFormContext } from './EasyForm';
 export { default as ErrorMessage } from './ErrorMessage';
+export { default as FieldConditional } from './FieldConditional';
+export { default as FieldRepeater } from './FieldRepeater';
 export { default as Fieldset } from './Fieldset';
 export { default as Input } from './Input';
 export { default as Label } from './Label';
