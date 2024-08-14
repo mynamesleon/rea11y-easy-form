@@ -1,0 +1,25 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Components/MutatedFormSpy" />
+
+# MutatedFormSpy
+
+This component is much like the `react-final-form` `<FormSpy>` component,
+except that this one uses our `useMutatedFormState()` hook internally
+(see that story for details).
+
+## Usage
+
+```jsx
+import { MutatedFormSpy } from 'rea11y-easy-form';
+
+const YourComponent = () => {
+  return (
+    <MutatedFormSpy subscription={{ errors: true }}>
+      {({ errors }) => (
+        // do something with the errors
+      )}
+    </MutatedFormSpy>
+  );
+};
+```

@@ -13,6 +13,7 @@ export { default as FieldRepeater } from './FieldRepeater';
 export { default as Fieldset } from './Fieldset';
 export { default as Input } from './Input';
 export { default as Label } from './Label';
+export { default as MutatedFormSpy } from './MutatedFormSpy';
 export { default as Notice } from './Notice';
 export { default as Radio } from './Radio';
 export { default as RadioList } from './RadioList';

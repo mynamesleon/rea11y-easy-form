@@ -114,7 +114,7 @@ LoginFormWithUniqueFieldSetup.args = {
       ...examplePassword,
       validateFields: ['email'],
       description:
-        "Changes to this field will trigger the email field's validationas well",
+        "Changes to this field will trigger the email field's validation as well",
     },
   ],
 } as EasyFormProps;
@@ -244,12 +244,28 @@ LoginFormWithStaticLabelsValidationSummary.args = {
   },
 } as EasyFormProps;
 
+const delayedMinimumEightChars = async (value: string) => {
+  await new Promise((resolve) => setTimeout(resolve, 1000));
+  return value?.length < 8;
+};
 export const LoginFormWithSubmitError = Template.bind({});
 LoginFormWithSubmitError.args = {
   ...templateArgs,
+  defaultFieldValidationFunctions: {
+    delayedMinimumEightChars,
+  },
   header: <h2>Login</h2>,
   onSubmit: errorOnSubmit,
-  structure: [exampleEmail, examplePassword],
+  structure: [
+    exampleEmail,
+    {
+      ...examplePassword,
+      validation: {
+        delayedMinimumEightChars:
+          'The password must contain at least 8 characters',
+      },
+    },
+  ],
 } as EasyFormProps;
 
 export const FormWithAllNativeEditableInputs = Template.bind({});

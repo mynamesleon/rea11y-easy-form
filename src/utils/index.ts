@@ -17,6 +17,7 @@ export { default as useFieldArray } from './useFieldArray';
 export { default as useFieldClassName } from './useFieldClassName';
 export { default as useFieldValue } from './useFieldValue';
 export { default as useMutatedField } from './useMutatedField';
+export { default as useMutatedFormState } from './useMutatedFormState';
 export { default as useFieldData, useSetFieldData } from './useFieldData';
 export * from './validation';
 export * from './constants';

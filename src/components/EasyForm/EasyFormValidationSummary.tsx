@@ -1,6 +1,7 @@
 import React, { forwardRef } from 'react';
+import { useDeepCompareMemo } from '@react-hookz/web';
 import type { FormApi, ValidationErrors } from 'final-form';
-import { FormSpy, useForm, useFormState } from 'react-final-form';
+import { useForm, useFormState } from 'react-final-form';
 import {
   type EasyFormValidationSummaryProps,
   EasyFormValidationSummaryModeTypes,
@@ -12,7 +13,7 @@ import {
   flattenObject,
   extractKeysForSubscription,
 } from '../../utils';
-import { useDeepCompareMemo } from '@react-hookz/web';
+import MutatedFormSpy from '../MutatedFormSpy';
 
 const getErroredFieldsDataLabels = (
   errors: ValidationErrors,
@@ -122,7 +123,7 @@ const EasyFormValidationSummary = forwardRef<
   // as that would destroy performance, so we will instead spy on those states here
   if (mode === EasyFormValidationSummaryModeTypes.DYNAMIC) {
     return (
-      <FormSpy subscription={{ submitErrors: true, errors: true }}>
+      <MutatedFormSpy subscription={{ submitErrors: true, errors: true }}>
         {({ submitErrors, errors }) => {
           // prioritise standard errors over submit errors in this case,
           // as these are the ones more likely to change when the user
@@ -137,7 +138,7 @@ const EasyFormValidationSummary = forwardRef<
             />
           );
         }}
-      </FormSpy>
+      </MutatedFormSpy>
     );
   }
 
