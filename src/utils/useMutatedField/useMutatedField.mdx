@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/addon-docs/blocks';
+import { Meta } from '@storybook/blocks';
 
 <Meta title="Utils and Hooks/useMutatedField" />
 
@@ -36,8 +36,11 @@ This means that, if a field also triggers validation for another field,
 then the first field's mutated `validating` state will remain `true`
 until the other field finishes validating as well.
 
-**Please note**: you (unsurprisingly) need to subscribe to the `error` and `validating`
-properties on the `FieldState` for this hook to have any meaningful effect.
+**Please note**: you (unsurprisingly) need to subscribe to the `error`
+property on the `FieldState` for this hook to have any meaningful effect.
+Or, just like with the normal `useField()` hook,
+if you don't provide a `subscription` object,
+then all of the `FieldState` will be subscribed to.
 
 ## Usage
 

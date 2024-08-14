@@ -268,6 +268,8 @@ StandardUsage.args = {
 };
 
 /**
+ * ![Peer dependency: aria-autocomplete](https://img.shields.io/badge/Peer_dependency-aria--autocomplete-blue)
+ *
  * The `<AutoComplete>` component is a React wrapper around the
  * [`aria-autocomplete` library](https://mynamesleon.github.io/aria-autocomplete/).
  *

@@ -53,6 +53,8 @@ StandardUsage.args = {
 };
 
 /**
+ * ![Peer dependency: react-beautiful-dnd](https://img.shields.io/badge/Peer_dependency-react--beautiful--dnd-blue)
+ *
  * The `FieldRepeater` **must** be used within a `<Form>` or `<EasyForm>`,
  * and its `children` **must** be a function. The function will receive
  * an object argument containing `name`, `length`, and `index` properties.

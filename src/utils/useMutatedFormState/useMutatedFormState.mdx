@@ -1,0 +1,46 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Utils and Hooks/useMutatedFormState" />
+
+# `useMutatedFormState()`
+
+The `useMutatedFormState()` hook is a wrapper around
+`react-final-form`'s own `useFormState()` hook.
+Much like our `useMutatedField()` hook, this one attempts to normalise
+some of the `FormState` for asynchronous validation cases.
+
+## The problem this hook attempts to solve
+
+When using asynchronous validation in your form,
+either at the `<Field>` or `<Form>` level, the normal
+`react-final-form` `useFormState()` resets a lot of its state.
+In particular, if asynchronous validation is ongoing, you'll find that the
+`error`, `errors`, `valid`, and `invalid` properties all get reset.
+
+If you want to use any of those properties for something like a validation summary,
+having those properties reset in this way could be jarring.
+E.g. you have a validation summary visible, then some asynchronous validation is triggered
+which resets the errors in `FormState` causing the validation summary messaging to disappear,
+then the validation finishes and the summary is rendered again.
+
+## How it works
+
+The hook uses React refs to keep track of previous states for certain `FormState` properties,
+and mutates the result as needed based on the `validating` state.
+
+**Please note**: you (unsurprisingly) need to subscribe to the `error` and/or `errors`
+properties on the `FormState` for this hook to have any meaningful effect.
+Or, just like with the normal `useFormState()` hook,
+if you don't provide a `subscription` object,
+then all of the `FormState` will be subscribed to.
+
+## Usage
+
+```js
+import { useMutatedFormState } from 'rea11y-easy-form';
+
+const YourComponent = () => {
+  const { errors } = useMutatedFormState({ subscription: { errors: true } });
+  // your component code here
+};
+```

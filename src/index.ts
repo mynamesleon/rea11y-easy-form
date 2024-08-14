@@ -13,6 +13,7 @@ export {
   useFieldArray,
   useFieldValue,
   useMutatedField,
+  useMutatedFormState,
   FIELD_TYPE_OVERRIDE_KEY,
 } from './utils';
 export * from './utils/validation';
