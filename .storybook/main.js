@@ -1,14 +1,12 @@
 module.exports = {
-  stories: [
-    '../src/Introduction.stories.mdx',
-    '../src/**/*.stories.@(js|jsx|ts|tsx)',
-    '../src/**/*.stories.mdx',
-  ],
+  stories: ['../src/Introduction.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)', '../src/**/*.mdx'],
   addons: [
     '@storybook/addon-links',
     '@storybook/addon-essentials',
-    '@storybook/addon-interactions', 
+    '@storybook/addon-interactions',
     '@storybook/addon-mdx-gfm',
+    '@storybook/addon-webpack5-compiler-babel',
+    '@chromatic-com/storybook'
   ],
   framework: {
     name: '@storybook/react-webpack5',
@@ -40,7 +38,5 @@ module.exports = {
     // const includeLessConfig = useLessLoader(config);
     return config;
   },
-  docs: {
-    autodocs: true
-  }
+  docs: {}
 };
