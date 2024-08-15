@@ -128,6 +128,11 @@ const EasyFieldField = ({
     return result;
   }, [limitedOther, errorId, error, component, children, render, input, meta]);
 
+  // @todo: setting classes based on meta state could cause a lot of DOM updates
+  // e.g. from the `validating` state on each keypress;
+  // if `validateFields` is also used, then this could 
+  // cause a lot of extra DOM updates on the page.
+  // So we should test the impact of this, and maybe put this behind a prop
   const metaClassNames = useDeepCompareMemo(
     () =>
       fieldSubscriptionItems.reduce((acc, key) => {

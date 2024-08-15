@@ -1,5 +1,3 @@
-// @todo: write flattenObject tests
-
 import { isElement as isReactElement } from 'react-is';
 
 type FlattenObjectOptions = {
