@@ -3,8 +3,6 @@ import { render } from '@testing-library/react';
 import SwitchList from './SwitchList';
 import { SwitchListProps } from './SwitchList.types';
 
-// @todo: write SwitchList tests
-
 describe('<SwitchList />', () => {
   let props: SwitchListProps;
 

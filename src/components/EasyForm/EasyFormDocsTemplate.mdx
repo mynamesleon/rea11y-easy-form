@@ -14,14 +14,15 @@ import {
 
 <Title />
 
-Built on top of `react-final-form`, the `<EasyForm>` component aims to make setting up
-forms in React as easy as possible. It includes simple and extensible handling
-of common form aspects, such as defining shared validation rules, generating a validation summary
+Built on top of [react-final-form](https://final-form.org/react), 
+the `<EasyForm>` component aims to make setting up forms in React as easy as possible.
+It includes simple and highly extensible handling of common form aspects, 
+such as defining shared validation rules, generating a validation summary
 after submit attempts, global `disabled` handling throughout the form, etc.
 
 The fundamental feature of the `<EasyForm>` however is its `structure` prop -
 an array of objects that can be used to generate the entire form
-(using `<EasyField>` internally for each defined field).
+([using `<EasyField>` internally](?path=/docs/easyfield--docs#validation) for each defined field).
 This is particularly useful for any applications that include form building
 and store/return that structural data from API endpoints.
 
@@ -187,8 +188,8 @@ type EasyFormValidationSummaryInfo = {
 
 So let's explain these one at a time:
 
-1. **`position`**: when setting this, think of 'begin' as the `header` prop,
-   and 'end' as the `footer` prop. How the positioning works is intuitive from there.
+1. **`position`**: when setting this, think of 'begin' as the `<EasyForm>` `header` prop,
+   and 'end' as the `<EasyForm>` `footer` prop. How the positioning works is intuitive from there.
    The default is `'afterbegin'`.
 2. **`content`**:
    1. When set to `'errors'` (the default), the `errors` and `submitErrors`

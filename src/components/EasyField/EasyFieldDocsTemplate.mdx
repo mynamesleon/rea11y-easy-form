@@ -13,8 +13,9 @@ import {
 
 <Title />
 
-The `<EasyField>` component is intended to make field, label, and validation handling
-as easy as possible.
+Built on top of [react-final-form](https://final-form.org/react), 
+the `<EasyField>` component is intended to make field, label, and validation handling
+as easy (and as accessible) as possible.
 
 ## Table of Contents
 
@@ -46,7 +47,7 @@ while still allowing for custom validation as well.
 ### Accessibility
 
 Best of all, the `<EasyField>` component will also handle
-the label-description-field relationships for you,
+the label-description-error-field relationships for you,
 including all of the the needed ARIA attributes. For example:
 
 1. The rendered field is provided with a generated unique `id`,
@@ -54,14 +55,20 @@ including all of the the needed ARIA attributes. For example:
 2. If a `description` is provided, then the element this is rendered in
    will also have a generated unique `id`, and the rendered field
    will receive an `aria-describedby` prop linking to it. This will respect any
-   existing `aria-describedby` prop as well, and will even update for rendered error messages.
+   existing `aria-describedby` prop value that's provided as well.
 3. If you set the `required` prop
    (or a `required` rule in the `validation` object prop)
    then the rendered field will receive an `aria-required` attribute automatically.
 4. If the field is in an error state,
    then an `aria-invalid` attribute will be provided as well.
+5. Any error messaging (done via the `validate` or `validation` props),
+   will also get a generated `id`, and update the rendered field's `aria-describedby` prop
+   (again, respecting any existing `aria-describedby` prop).
 
-Feel free to inspect the rendered HTML in the examples to see this in action.
+So screen-reader users will get the label, description, error message, required state, 
+and valid/invalid state properly announced as they navigate between fields. 
+Feel free to test it for yourself (or inspect the rendered HTML in the examples)
+to see this in action.
 
 ### Ordinary `<Form>` usage
 

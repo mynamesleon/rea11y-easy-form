@@ -2,7 +2,9 @@ import { useMemo } from 'react';
 import type { FormApi } from 'final-form';
 import { useForm } from 'react-final-form';
 import { isEqual } from '@react-hookz/deep-equal';
-import { type Dictionary, useFieldValue, isNullOrUndefined } from '../../utils';
+import useFieldValue from '../useFieldValue';
+import isNullOrUndefined from '../isNullOrUndefined';
+import type { Dictionary } from '../constants';
 import {
   USE_CHECK_FIELD_VALUE_LOGIC_MATCHER,
   USE_CHECK_FIELD_VALUE_LOGIC_TYPE,
