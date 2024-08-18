@@ -7,7 +7,7 @@
     "build"
   ],
   "types": "build/index.d.ts",
-  "description": "Final form use",
+  "description": "Accessible form library using react-final-form",
   "scripts": {
     "build": "rollup -c",
     "test": "jest",
@@ -89,6 +89,7 @@
     "dompurify": "^3.1.6",
     "eslint": "^8.57.0",
     "eslint-config-react-app": "^7.0.1",
+    "eslint-plugin-jsx-a11y": "^6.9.0",
     "eslint-plugin-storybook": "^0.8.0",
     "final-form": "^4.20.10",
     "identity-obj-proxy": "^3.0.0",

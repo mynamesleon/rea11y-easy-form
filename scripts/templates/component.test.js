@@ -1,10 +1,10 @@
 module.exports = (componentName) => ({
-  content: `import React, { type ComponentProps } from 'react';
+  content: `import React, { type ComponentPropsWithoutRef } from 'react';
 import { render } from '@testing-library/react';
 import ${componentName} from './${componentName}';
 
 describe('<${componentName} />', () => {
-  let props: ComponentProps<typeof ${componentName}>;
+  let props: ComponentPropsWithoutRef<typeof ${componentName}>;
 
   beforeEach(() => {
     props = {};

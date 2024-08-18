@@ -1,4 +1,5 @@
 import React, {
+  type AriaAttributes,
   type ReactNode,
   useCallback,
   useState,
@@ -7,14 +8,19 @@ import React, {
 } from 'react';
 import VisuallyHidden from '../../components/VisuallyHidden';
 import useFieldClassName from '../useFieldClassName';
+import useConstant from 'use-constant';
 
-const MAX_ANNOUNCEMENTS = 5;
-const DEFAULT_ANNOUNCEMENTS = new Array(MAX_ANNOUNCEMENTS).fill(null);
-
-const useAnnounce = (mode: 'off' | 'assertive' | 'polite' = 'assertive') => {
+const useAnnounce = (
+  mode: AriaAttributes['aria-live'] = 'assertive',
+  maxAnnouncements: number = 5
+) => {
   const nextIndex = useRef(0);
+  const maxAnnouncementsConst = useConstant(() => {
+    const num = parseInt(maxAnnouncements?.toString());
+    return num < 1 ? 1 : num;
+  });
   const [announcements, setAnnouncements] = useState<(ReactNode | undefined)[]>(
-    () => [...DEFAULT_ANNOUNCEMENTS]
+    () => new Array(maxAnnouncementsConst).fill(null)
   );
   const classPrefix = useFieldClassName('announcer');
 
@@ -23,7 +29,7 @@ const useAnnounce = (mode: 'off' | 'assertive' | 'polite' = 'assertive') => {
   // index is fine here though, as the array has a fixed length
   const announcer = useMemo(
     () => (
-      <VisuallyHidden className={classPrefix} as="span">
+      <VisuallyHidden className={classPrefix} as="span" data-testid="Announcer">
         {announcements.map((announcement, index) => (
           <VisuallyHidden
             className={`${classPrefix}__item`}
@@ -41,21 +47,26 @@ const useAnnounce = (mode: 'off' | 'assertive' | 'polite' = 'assertive') => {
     [announcements, classPrefix, mode]
   );
 
-  const announce = useCallback((content?: ReactNode) => {
-    setAnnouncements((currentAnnouncements) => {
-      // update the array for the new announcement
-      const result = [...currentAnnouncements];
-      result[nextIndex.current] = content;
-      // empty the next announcement container so that
-      // even if it is updated with the same value as before
-      // it will still get announced
-      // (consider repeated "item deleted" announcements)
-      const updatedIndex = (nextIndex.current + 1) % MAX_ANNOUNCEMENTS;
-      result[updatedIndex] = undefined;
-      nextIndex.current = updatedIndex;
-      return result;
-    });
-  }, []);
+  const announce = useCallback(
+    (content?: ReactNode) => {
+      setAnnouncements((currentAnnouncements) => {
+        // update the array for the new announcement
+        const result = [...currentAnnouncements];
+        result[nextIndex.current] = content;
+        // empty the next announcement container so that
+        // even if it is updated with the same value as before
+        // it will still get announced
+        // (e.g. for repeated "item deleted" announcements)
+        const updatedIndex = (nextIndex.current + 1) % maxAnnouncementsConst;
+        if (updatedIndex !== nextIndex.current) {
+          result[updatedIndex] = undefined;
+        }
+        nextIndex.current = updatedIndex;
+        return result;
+      });
+    },
+    [maxAnnouncementsConst]
+  );
 
   return { announce, announcer };
 };

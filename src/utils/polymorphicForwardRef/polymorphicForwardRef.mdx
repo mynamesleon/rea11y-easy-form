@@ -1,0 +1,44 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Utils and Hooks/polymorphicForwardRef" />
+
+# `polymorphicForwardRef()`
+
+Works in the same way as React's normal `forwardRef()`,
+but also allows the component to take an `as` prop
+with a value that extends the `ElementType`.
+
+This util is mainly used internally, but is also exposed here for convenience.
+
+## Usage
+
+```ts
+// YourComponent.tsx
+import React, { type PropsWithChildren, memo } from 'react';
+import { polymorphicForwardRef } from 'rea11y-easy-form';
+
+const YourComponent = polymorphicForwardRef<'div', PropsWithChildren>(
+  ({ as: Component = 'div', children, ...other }, ref) => (
+    <Component {...other} ref={ref}>
+      {children}
+    </Component>
+  )
+);
+
+const MemoisedComponent = memo(YourComponent);
+MemoisedComponent.displayName = 'YourComponent';
+export default MemoisedComponent as typeof YourComponent;
+```
+
+And then in use:
+
+```ts
+<YourComponent
+  as="span"
+  // tsProperty 'href' does not exist on type 'IntrinsicAttributes &
+  // Omit<Omit<DetailedHTMLProps<HTMLAttributes<HTMLSpanElement>, HTMLSpanElement>, "ref">
+  href="/"
+>
+  Something something something, dark side
+</YourComponent>
+```

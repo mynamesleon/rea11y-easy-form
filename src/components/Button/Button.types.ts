@@ -1,4 +1,4 @@
-import type { ComponentProps, PropsWithChildren, ReactNode } from 'react';
+import type { ComponentPropsWithoutRef, ReactNode } from 'react';
 
 export type ButtonProps = {
   /**
@@ -10,4 +10,4 @@ export type ButtonProps = {
    * Used for a modifier className
    */
   variant?: string;
-} & PropsWithChildren<ComponentProps<'button'>>;
+} & ComponentPropsWithoutRef<'button'>;

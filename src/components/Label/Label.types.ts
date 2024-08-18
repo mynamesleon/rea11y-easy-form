@@ -1,4 +1,4 @@
-import type { ComponentProps, PropsWithChildren, ReactNode } from 'react';
+import type { ComponentPropsWithoutRef, ReactNode } from 'react';
 
 export type LabelProps = {
   text?: ReactNode;
@@ -11,4 +11,4 @@ export type LabelProps = {
    * Text used for `title` and `aria-label` attributes on the asterisk element
    */
   srRequiredText?: string;
-} & PropsWithChildren<ComponentProps<'label'>>;
+} & ComponentPropsWithoutRef<'label'>;

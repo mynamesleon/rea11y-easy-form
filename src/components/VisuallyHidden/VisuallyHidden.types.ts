@@ -1,4 +1,4 @@
-import type { ComponentProps, PropsWithChildren, ReactNode } from 'react';
+import type { ComponentPropsWithoutRef, ReactNode } from 'react';
 
 /**
  * A simple component to render content only visible to screen-reader users.
@@ -14,4 +14,4 @@ export type VisuallyHiddenProps = {
    */
   focusable?: boolean;
   text?: ReactNode;
-} & PropsWithChildren<ComponentProps<'span'>>;
+} & ComponentPropsWithoutRef<'span'>;
