@@ -1,10 +1,10 @@
-import React, { forwardRef, memo } from 'react';
 import clsx from 'clsx';
-import { SkeletonProps, SKELETON_TYPE } from './Skeleton.types';
-import { useFieldClassName } from '../../utils';
+import React, { memo } from 'react';
+import { type SkeletonProps, SKELETON_TYPE } from './Skeleton.types';
+import { polymorphicForwardRef, useFieldClassName } from '../../utils';
 import './Skeleton.less';
 
-const Skeleton = forwardRef<any, SkeletonProps>(
+const Skeleton = polymorphicForwardRef<any, SkeletonProps>(
   (
     {
       type = SKELETON_TYPE.INPUT,
@@ -32,4 +32,4 @@ const Skeleton = forwardRef<any, SkeletonProps>(
 
 const MemoisedSkeleton = memo(Skeleton);
 MemoisedSkeleton.displayName = 'Skeleton';
-export default MemoisedSkeleton;
+export default MemoisedSkeleton as typeof Skeleton;

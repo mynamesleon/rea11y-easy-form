@@ -1,14 +1,14 @@
-import React, { forwardRef, memo, useMemo } from 'react';
 import clsx from 'clsx';
-import { NoticeProps, NOTICE_TYPE } from './Notice.types';
-import { useFieldClassName } from '../../utils';
+import React, { memo, useMemo } from 'react';
+import { type NoticeProps, NOTICE_TYPE } from './Notice.types';
+import { polymorphicForwardRef, useFieldClassName } from '../../utils';
 import NoticeIcon from './NoticeIcon';
 import './Notice.less';
 
 const POSSIBLE_NOTICE_TYPE = Object.values(NOTICE_TYPE);
 const DEFAULT_NOTICE_TYPE = NOTICE_TYPE.INFO;
 
-const Notice = forwardRef<any, NoticeProps>(
+const Notice = polymorphicForwardRef<'div', NoticeProps>(
   (
     {
       as: Component = 'div',
@@ -65,4 +65,4 @@ const Notice = forwardRef<any, NoticeProps>(
 
 const MemoisedNotice = memo(Notice);
 MemoisedNotice.displayName = 'Notice';
-export default MemoisedNotice;
+export default MemoisedNotice as typeof Notice;

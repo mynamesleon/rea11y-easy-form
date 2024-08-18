@@ -30,13 +30,13 @@ describe('<FieldConditional />', () => {
     );
 
   it('should render the children if no `if` or `ifNot` prop exists', () => {
-    props.children = <div data-testid="children"></div>;
+    props.children = <div data-testid="children" />;
     const { queryByTestId } = renderComponent();
     expect(queryByTestId('children')).toBeInTheDocument();
   });
 
   it('accepts a children function', () => {
-    props.children = () => <div data-testid="children"></div>;
+    props.children = () => <div data-testid="children" />;
     const { queryByTestId } = renderComponent();
     expect(queryByTestId('children')).toBeInTheDocument();
   });
@@ -84,7 +84,7 @@ describe('<FieldConditional />', () => {
     },
   ])('should render the children in case %#', (args: FieldConditionalProps) => {
     props = {
-      children: <div data-testid="children"></div>,
+      children: <div data-testid="children" />,
       ...args,
     };
     const { queryByTestId } = renderComponent();
@@ -123,7 +123,7 @@ describe('<FieldConditional />', () => {
     'should not render the children in case %#',
     (args: FieldConditionalProps) => {
       props = {
-        children: <div data-testid="children"></div>,
+        children: <div data-testid="children" />,
         ...args,
       };
       const { queryByTestId } = renderComponent();

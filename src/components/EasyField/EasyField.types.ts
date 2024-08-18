@@ -1,11 +1,15 @@
 import type { FieldValidator } from 'final-form';
-import type { FieldMetaState, FieldInputProps } from 'react-final-form';
+import type {
+  FieldMetaState,
+  FieldInputProps,
+  RenderableProps,
+} from 'react-final-form';
 import type { EasyFieldGroupProps } from './EasyFieldGroup/EasyFieldGroup.types';
-import type { Dictionary } from '../../utils/constants';
+import type { Dictionary, Merge } from '../../utils';
 
 export interface EasyFieldRenderProps
   extends FieldInputProps<any, any>,
-    Dictionary {
+    Dictionary<any> {
   /**
    * the `meta` object returned by `useField()`
    * - only included if `meta` is set to `true` on `EasyFieldProps`
@@ -35,7 +39,7 @@ export type EasyFieldValidationRule =
   | FieldValidator<any>
   | any;
 
-export interface EasyFieldProps extends EasyFieldGroupProps {
+export type EasyFieldProps = {
   /**
    * whether to pass the `useField()` `meta` object to the rendered field component
    */
@@ -52,4 +56,4 @@ export interface EasyFieldProps extends EasyFieldGroupProps {
    * used for the label
    */
   required?: EasyFieldValidationRule;
-}
+} & Merge<EasyFieldGroupProps, RenderableProps<EasyFieldRenderProps>>;

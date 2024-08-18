@@ -1,11 +1,10 @@
-import React from 'react';
+import React, { type ComponentProps } from 'react';
 import { render, fireEvent } from '@testing-library/react';
 import Disclosure from './Disclosure';
-import { DisclosureProps } from './Disclosure.types';
 import { fieldClassName } from '../../utils';
 
 describe('<Disclosure />', () => {
-  let props: DisclosureProps;
+  let props: ComponentProps<typeof Disclosure>;
 
   beforeEach(() => {
     props = {};

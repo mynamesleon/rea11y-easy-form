@@ -4,7 +4,7 @@ import { useEasyFormContext } from '../EasyForm/EasyFormContext';
 import { capitaliseFirstLetter, isNullOrUndefined } from '../../utils';
 
 import type { FieldValidator } from 'final-form';
-import type { Dictionary } from '../../utils/constants';
+import type { Dictionary } from '../../utils';
 import type { EasyFieldValidationRule } from './EasyField.types';
 
 const useEasyFieldValidator = (
@@ -29,17 +29,17 @@ const useEasyFieldValidator = (
     typeof requiredArg === 'function'
       ? requiredArg
       : typeof required === 'function'
-      ? required
-      : required || requiredArg
-      ? defaultFieldValidationFunctions.required
-      : null;
+        ? required
+        : required || requiredArg
+          ? defaultFieldValidationFunctions.required
+          : null;
 
   const requiredString =
     typeof requiredArg === 'string'
       ? requiredArg
       : typeof required === 'string'
-      ? required
-      : 'Required';
+        ? required
+        : 'Required';
 
   const finalValidator: FieldValidator<any> = useCallback(
     async (...args) => {
@@ -69,8 +69,8 @@ const useEasyFieldValidator = (
           return typeof result === 'string'
             ? result
             : typeof val === 'string'
-            ? val
-            : capitaliseFirstLetter(key);
+              ? val
+              : capitaliseFirstLetter(key);
         }
       }
       // call provided validate method last
@@ -92,7 +92,7 @@ const useEasyFieldValidator = (
   );
   return {
     isRequired: Boolean(requiredFunc),
-    handleValidate: validatorNeeded ? finalValidator : null,
+    handleValidate: validatorNeeded ? finalValidator : undefined,
   };
 };
 

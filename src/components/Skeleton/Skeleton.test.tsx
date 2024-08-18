@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { type ComponentProps } from 'react';
 import { render } from '@testing-library/react';
 import Skeleton from './Skeleton';
-import { SkeletonProps, SKELETON_TYPE } from './Skeleton.types';
+import { SKELETON_TYPE } from './Skeleton.types';
 
 describe('<Skeleton />', () => {
-  let props: SkeletonProps;
+  let props: ComponentProps<typeof Skeleton>;
 
   beforeEach(() => {
     props = {

@@ -1,11 +1,6 @@
-import type { ComponentPropsWithRef, ElementType, ReactNode } from 'react';
+import type { ComponentProps, ReactNode } from 'react';
 
 export type DisclosureProps = {
-  /**
-   * The element to use for the outer element
-   * @default 'div'
-   */
-  as?: ElementType;
   /**
    * If using in uncontrolled mode, sets the starting open state
    */
@@ -45,6 +40,6 @@ export type DisclosureProps = {
    */
   open?: boolean;
 } & Omit<
-  ComponentPropsWithRef<'div'>,
+  ComponentProps<'div'>,
   'onChange' | 'label' | 'title' | 'children' | 'summary'
 >;

@@ -1,4 +1,4 @@
-import type { ComponentPropsWithRef, ElementType, ReactNode } from 'react';
+import type { ComponentProps, PropsWithChildren, ReactNode } from 'react';
 
 export type LabelProps = {
   text?: ReactNode;
@@ -11,11 +11,4 @@ export type LabelProps = {
    * Text used for `title` and `aria-label` attributes on the asterisk element
    */
   srRequiredText?: string;
-  /**
-   * The element to use,
-   * e.g. can be passed a `'div'` if `htmlFor` will be empty
-   * to prevent orphaned labels
-   * @default 'label'
-   */
-  as?: ElementType;
-} & ComponentPropsWithRef<'label'>;
+} & PropsWithChildren<ComponentProps<'label'>>;

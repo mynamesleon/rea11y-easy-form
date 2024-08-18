@@ -1,10 +1,15 @@
 import clsx from 'clsx';
-import React, { forwardRef, useState, useCallback } from 'react';
-import { isNullOrUndefined, useAutoId, useFieldClassName } from '../../utils';
+import React, { useState, useCallback } from 'react';
+import {
+  polymorphicForwardRef,
+  useFieldClassName,
+  isNullOrUndefined,
+  useAutoId,
+} from '../../utils';
 import type { DisclosureProps } from './Disclosure.types';
 import './Disclosure.less';
 
-const Disclosure = forwardRef<any, DisclosureProps>(
+const Disclosure = polymorphicForwardRef<'div', DisclosureProps>(
   (
     {
       as: Component = 'div',

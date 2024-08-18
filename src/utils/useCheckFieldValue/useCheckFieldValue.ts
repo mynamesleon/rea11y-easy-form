@@ -4,7 +4,7 @@ import { useForm } from 'react-final-form';
 import { isEqual } from '@react-hookz/deep-equal';
 import useFieldValue from '../useFieldValue';
 import isNullOrUndefined from '../isNullOrUndefined';
-import type { Dictionary } from '../constants';
+import type { Dictionary } from '../types';
 import {
   USE_CHECK_FIELD_VALUE_LOGIC_MATCHER,
   USE_CHECK_FIELD_VALUE_LOGIC_TYPE,
@@ -28,8 +28,8 @@ const doesMatchSucceed = (
       typeof expectedValue === 'object' && !isNullOrUndefined(expectedValue)
         ? isEqual(expectedValue, actualValue)
         : typeof expectedValue === 'function'
-        ? Boolean(expectedValue(actualValue, formApi))
-        : expectedValue === actualValue;
+          ? Boolean(expectedValue(actualValue, formApi))
+          : expectedValue === actualValue;
 
     const matches = seeking === true ? initialMatches : !initialMatches;
 

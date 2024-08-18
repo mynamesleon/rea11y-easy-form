@@ -12,7 +12,7 @@ import type {
   RenderableProps,
   UseFieldConfig,
 } from 'react-final-form';
-import type { Dictionary } from '../../utils/constants';
+import type { Dictionary } from '../../utils';
 
 export enum EasyFormValidationSummaryModeTypes {
   DYNAMIC = 'dynamic',
@@ -26,7 +26,7 @@ export enum EasyFormValidationSummaryContentTypes {
 }
 
 type EasyFormValidationSummaryRenderFunction = (
-  ref: ForwardedRef<HTMLElement>
+  ref: ForwardedRef<HTMLDivElement>
 ) => ReactNode;
 
 export type EasyFormValidationSummaryInfo = {
@@ -59,7 +59,7 @@ interface FormRenderPropsWithoutHandleSubmit extends FormState<any> {
   form: FormApi<any>;
 }
 
-interface EasyFormPropsBase {
+interface EasyFormPropsBase extends RenderableProps<FormState<any>> {
   header?:
     | ((props: FormRenderPropsWithoutHandleSubmit) => ReactNode)
     | ReactNode;
@@ -72,7 +72,6 @@ interface EasyFormPropsBase {
 
 export interface EasyFormContentProps
   extends EasyFormPropsBase,
-    RenderableProps<any>,
     FormRenderPropsWithoutHandleSubmit {
   validationSummary?: EasyFormValidationSummaryInfo;
   staticErrors?: ValidationErrors;

@@ -1,5 +1,6 @@
-import type { ComponentPropsWithRef, ElementType, ReactNode } from 'react';
-export interface ButtonProps extends ComponentPropsWithRef<'button'> {
+import type { ComponentProps, PropsWithChildren, ReactNode } from 'react';
+
+export type ButtonProps = {
   /**
    * Can be used in place of `children`;
    * this will better leverage memoisation when a string is used
@@ -9,5 +10,4 @@ export interface ButtonProps extends ComponentPropsWithRef<'button'> {
    * Used for a modifier className
    */
   variant?: string;
-  as?: ElementType;
-}
+} & PropsWithChildren<ComponentProps<'button'>>;

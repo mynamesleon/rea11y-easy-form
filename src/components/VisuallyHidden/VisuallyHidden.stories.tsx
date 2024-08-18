@@ -20,7 +20,7 @@ const Template = (args: VisuallyHiddenPropsType) => (
 export const Focusabled = Template.bind({});
 Focusabled.args = {
   focusable: true,
-  component: 'button',
+  as: 'button',
   type: 'button',
   onClick: () => {},
   children: 'Skip to content',

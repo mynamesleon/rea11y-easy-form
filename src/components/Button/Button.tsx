@@ -1,10 +1,10 @@
 import clsx from 'clsx';
-import React, { forwardRef, memo } from 'react';
+import React, { memo } from 'react';
 import type { ButtonProps } from './Button.types';
-import { useFieldClassName } from '../../utils';
+import { polymorphicForwardRef, useFieldClassName } from '../../utils';
 import './Button.less';
 
-const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+const Button = polymorphicForwardRef<'button', ButtonProps>(
   (
     {
       as: Component = 'button',
@@ -49,4 +49,4 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 
 const MemoisedButton = memo(Button);
 MemoisedButton.displayName = 'Button';
-export default MemoisedButton;
+export default MemoisedButton as typeof Button;

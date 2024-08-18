@@ -1,6 +1,11 @@
 module.exports = (componentName) => ({
-  content: `import type { Dictionary } from '../../utils/constants';
-export interface ${componentName}Props extends Dictionary {}
+  content: `import type { ComponentProps, PropsWithChildren } from 'react';
+export type ${componentName}Props = {
+  /**
+   * Class name to add to the container element
+   */
+  className?: string;
+} & PropsWithChildren<ComponentProps<'div'>>;
 `,
   extension: `.types.ts`,
 });

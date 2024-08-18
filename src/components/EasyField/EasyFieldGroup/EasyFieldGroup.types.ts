@@ -1,8 +1,8 @@
-import type { ComponentProps, ElementType, ReactNode } from 'react';
+import type { ComponentProps, ReactNode } from 'react';
 import type { EasyFieldFieldProps } from '../EasyFieldField';
 import Label from '../../Label';
 
-export interface EasyFieldGroupProps extends EasyFieldFieldProps {
+export type EasyFieldGroupProps = {
   /**
    * Description to be associated with the rendered field element
    */
@@ -25,13 +25,8 @@ export interface EasyFieldGroupProps extends EasyFieldFieldProps {
    */
   type?: string;
   /**
-   * The wrapping element to use,
-   * @default 'div'
-   */
-  as?: ElementType;
-  /**
    * Component to pass to the `<Label>` (if a non-react element is used for the `label` prop)
    */
   labelAs?: ComponentProps<typeof Label>['as'];
   id?: string;
-}
+} & EasyFieldFieldProps;

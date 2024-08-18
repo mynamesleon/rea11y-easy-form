@@ -12,7 +12,7 @@ const hasAnyError = (
     return typeof value !== 'undefined';
   });
 
-const storeStatePropBasedOnValidating = (
+const useStoreStatePropBasedOnValidating = (
   formState: FormState<any>,
   stateProp: string,
   acc: FormState<any>
@@ -43,8 +43,8 @@ const useMutatedFormState = (
   const mutatedFormState = useMemo(() => ({ ...formState }), [formState]);
 
   // handle async validation cases by storing error and errors
-  storeStatePropBasedOnValidating(formState, 'error', mutatedFormState);
-  storeStatePropBasedOnValidating(formState, 'errors', mutatedFormState);
+  useStoreStatePropBasedOnValidating(formState, 'error', mutatedFormState);
+  useStoreStatePropBasedOnValidating(formState, 'errors', mutatedFormState);
 
   // only set `invalid` and `valid` if they were defined in `FormState`,
   // (indicating that they were subscribed to)

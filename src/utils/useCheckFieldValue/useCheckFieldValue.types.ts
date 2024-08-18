@@ -1,4 +1,4 @@
-import type { Dictionary } from '../../utils';
+import type { Dictionary } from '../types';
 
 export type UseCheckFieldValueLogicProp =
   | 'AND'

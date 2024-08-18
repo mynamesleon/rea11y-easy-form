@@ -47,7 +47,7 @@ const determineErrors = (
     : errors;
 
 const EasyFormValidationSummary = forwardRef<
-  HTMLElement,
+  HTMLDivElement,
   EasyFormValidationSummaryProps
 >(({ staticErrors, validationSummary }, ref) => {
   const formApi = useForm('EasyFormValidationSummary');

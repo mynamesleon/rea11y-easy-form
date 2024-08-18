@@ -1,8 +1,3 @@
-import React from 'react';
-import { render } from '@testing-library/react';
-import AutoCompleteInput from './AutoCompleteInput';
-import type { AutoCompleteInputProps } from './AutoComplete.types';
-import { ARIA_ATTRIBUTES } from '../../utils';
 import {
   destroyAutoComplete,
   enableAutoComplete,
@@ -10,7 +5,6 @@ import {
   setAutoCompleteOption,
   setAutoCompleteOptions,
 } from './autoCompleteUtils';
-import type { IAriaAutocompleteApi } from 'aria-autocomplete';
 
 const mockRef = {
   current: {
