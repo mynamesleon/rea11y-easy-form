@@ -1,9 +1,4 @@
-import type {
-  PropsWithChildren,
-  ComponentProps,
-  SVGAttributes,
-  ReactNode,
-} from 'react';
+import type { ComponentPropsWithoutRef, SVGAttributes, ReactNode } from 'react';
 
 export enum NOTICE_TYPE {
   LOADING = 'loading',
@@ -24,4 +19,4 @@ export type NoticeProps = {
    */
   variant?: NOTICE_TYPE;
   text?: ReactNode;
-} & PropsWithChildren<ComponentProps<'div'>>;
+} & ComponentPropsWithoutRef<'div'>;

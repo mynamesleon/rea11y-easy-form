@@ -1,15 +1,17 @@
-import React, { ReactNode, useEffect } from 'react';
+import React, { type AriaAttributes, type ReactNode, useEffect } from 'react';
 import { render, screen } from '@testing-library/react';
 import useAnnounce from './useAnnounce';
 
 const TestComponent = ({
+  maxAnnouncements,
   announcement,
   mode,
 }: {
+  mode?: AriaAttributes['aria-live'];
+  maxAnnouncements?: number;
   announcement?: ReactNode;
-  mode?: 'off' | 'assertive' | 'polite';
 }) => {
-  const { announcer, announce } = useAnnounce(mode);
+  const { announcer, announce } = useAnnounce(mode, maxAnnouncements);
   useEffect(() => announce(announcement), [announcement, announce]);
   return announcer;
 };
@@ -46,8 +48,11 @@ describe('useAnnounce', () => {
     expect(screen.getByText('test3')).toBeInTheDocument();
   });
 
-  it('renders 5 elements, keeping one empty', () => {
-    const { rerender } = render(<TestComponent announcement="test1" />);
+  it('renders 5 elements by default, keeping one empty', () => {
+    const { rerender, getByTestId } = render(
+      <TestComponent announcement="test1" />
+    );
+    expect(getByTestId('Announcer').children).toHaveLength(5);
     rerender(<TestComponent announcement="test2" />);
     rerender(<TestComponent announcement="test3" />);
     rerender(<TestComponent announcement="test4" />);
@@ -55,6 +60,13 @@ describe('useAnnounce', () => {
     rerender(<TestComponent announcement="test5" />);
 
     expect(screen.queryByText('test1')).not.toBeInTheDocument();
+  });
+
+  it('takes a second argument for the number of announcement elements to render', () => {
+    const { getByTestId } = render(
+      <TestComponent announcement="test1" maxAnnouncements={2} />
+    );
+    expect(getByTestId('Announcer').children).toHaveLength(2);
   });
 
   it('clears the VisuallyHidden element that is after the current announcement text', () => {

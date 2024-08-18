@@ -1,6 +1,6 @@
 module.exports = (componentName) => ({
   content: `import clsx from 'clsx';
-import React, { forwardRef, memo } from 'react';
+import React, { memo } from 'react';
 import type { ${componentName}Props } from './${componentName}.types';
 import { polymorphicForwardRef, useFieldClassName } from '../../utils';
 

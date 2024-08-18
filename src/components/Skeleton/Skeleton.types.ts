@@ -1,4 +1,4 @@
-import type { ComponentProps, PropsWithChildren, ReactNode } from 'react';
+import type { ComponentPropsWithoutRef, ReactNode } from 'react';
 
 export enum SKELETON_TYPE {
   INPUT = 'input',
@@ -17,4 +17,4 @@ export type SkeletonProps = {
    * @default 'input'
    */
   type?: SKELETON_TYPE | String;
-} & PropsWithChildren<ComponentProps<'span'>>;
+} & ComponentPropsWithoutRef<'span'>;
