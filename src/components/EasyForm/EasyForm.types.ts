@@ -12,7 +12,7 @@ import type {
   RenderableProps,
   UseFieldConfig,
 } from 'react-final-form';
-import type { Dictionary } from '../../utils/constants';
+import type { Dictionary } from '../../utils';
 
 export enum EasyFormValidationSummaryModeTypes {
   DYNAMIC = 'dynamic',

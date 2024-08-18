@@ -1,10 +1,10 @@
-import React, { forwardRef, memo } from 'react';
 import clsx from 'clsx';
-import { useFieldClassName } from '../../utils';
-import { LabelProps } from './Label.types';
+import React, { memo } from 'react';
+import { polymorphicForwardRef, useFieldClassName } from '../../utils';
+import type { LabelProps } from './Label.types';
 import './Label.less';
 
-const Label = forwardRef<any, LabelProps>(
+const Label = polymorphicForwardRef<'label', LabelProps>(
   (
     {
       text,
@@ -51,4 +51,4 @@ const Label = forwardRef<any, LabelProps>(
 
 const Memoised = memo(Label);
 Memoised.displayName = 'Label';
-export default Memoised;
+export default Memoised as typeof Label;

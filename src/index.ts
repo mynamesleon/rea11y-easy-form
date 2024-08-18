@@ -7,6 +7,7 @@ export {
   isElementInViewport,
   isNullOrUndefined,
   mergeRefs,
+  polymorphicForwardRef,
   smoothlyScrollIntoView,
   useAnnounce,
   useCheckFieldValue,

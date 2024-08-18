@@ -27,7 +27,7 @@ const EasyField = forwardRef<HTMLDivElement, EasyFieldProps>(
       children,
       render,
       ...props
-    } = { ...defaultFieldConfig, ...localProps };
+    }: EasyFieldProps = { ...defaultFieldConfig, ...localProps };
 
     const { isRequired, handleValidate } = useEasyFieldValidator(
       required,

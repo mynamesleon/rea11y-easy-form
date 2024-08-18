@@ -4,11 +4,9 @@ import type {
   RenderableProps,
 } from 'react-final-form';
 import type { FieldSubscription } from 'final-form';
-import type { Dictionary } from '../../../utils/constants';
+import type { Dictionary } from '../../../utils';
 
-export interface EasyFieldFieldRenderProps
-  extends FieldRenderProps<any, any, any>,
-    Dictionary {
+export type EasyFieldFieldRenderProps = {
   /**
    * className to pass on to the rendered form field
    */
@@ -21,13 +19,10 @@ export interface EasyFieldFieldRenderProps
    * aria attribute to pass on to the rendered form field
    */
   'aria-invalid'?: boolean;
-}
+} & FieldRenderProps<any, any, any> &
+  Dictionary;
 
-export interface EasyFieldFieldProps
-  extends UseFieldConfig<any, any>,
-    RenderableProps<EasyFieldFieldRenderProps>,
-    Dictionary {
-  name: string;
+export type EasyFieldFieldProps = {
   /**
    * className to be added to the containing div
    */
@@ -55,4 +50,6 @@ export interface EasyFieldFieldProps
     name: string,
     config?: UseFieldConfig<any> & Dictionary
   ) => FieldRenderProps<any>;
-}
+} & UseFieldConfig<any, any> &
+  RenderableProps<EasyFieldFieldRenderProps> &
+  Dictionary;

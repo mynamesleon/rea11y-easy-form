@@ -1,5 +1,5 @@
 import { ComponentPropsWithRef, ReactNode } from 'react';
-import { Dictionary } from '../../utils/constants';
+import { Dictionary } from '../../utils';
 
 export type ValidationSummaryError =
   | ReactNode

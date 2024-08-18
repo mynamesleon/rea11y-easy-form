@@ -81,7 +81,3 @@ export const ARIA_ATTRIBUTES = [
   'aria-valuenow',
   'aria-valuetext',
 ];
-
-export interface Dictionary<T = any> {
-  [x: string]: T;
-}

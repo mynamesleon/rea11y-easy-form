@@ -1,13 +1,17 @@
 import clsx from 'clsx';
-import React, { forwardRef, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { isElement as isReactElement } from 'react-is';
-import { useFieldClassName, useAutoId } from '../../../utils';
+import {
+  useAutoId,
+  useFieldClassName,
+  polymorphicForwardRef,
+} from '../../../utils';
 import type { EasyFieldGroupProps } from './EasyFieldGroup.types';
 import EasyFieldField from '../EasyFieldField';
 import Label from '../../Label';
 import './EasyFieldGroup.less';
 
-const EasyFieldGroup = forwardRef<HTMLDivElement, EasyFieldGroupProps>(
+const EasyFieldGroup = polymorphicForwardRef<'div', EasyFieldGroupProps>(
   (
     {
       'aria-describedby': describedBy,

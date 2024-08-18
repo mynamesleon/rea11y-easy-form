@@ -1,4 +1,4 @@
-import type { ComponentPropsWithRef, ElementType, ReactNode } from 'react';
+import type { ComponentProps, PropsWithChildren, ReactNode } from 'react';
 
 export enum SKELETON_TYPE {
   INPUT = 'input',
@@ -6,11 +6,6 @@ export enum SKELETON_TYPE {
 }
 
 export type SkeletonProps = {
-  /**
-   * The outer element to render for the component
-   * @default 'span'
-   */
-  as?: ElementType;
   /**
    * Text visible to screen-reader users within the skeleton element;
    * can use this prop with a primitive value (such as a string)
@@ -22,4 +17,4 @@ export type SkeletonProps = {
    * @default 'input'
    */
   type?: SKELETON_TYPE | String;
-} & ComponentPropsWithRef<'span'>;
+} & PropsWithChildren<ComponentProps<'span'>>;

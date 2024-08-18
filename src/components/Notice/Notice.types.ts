@@ -1,7 +1,7 @@
 import type {
-  ComponentPropsWithRef,
+  PropsWithChildren,
+  ComponentProps,
   SVGAttributes,
-  ElementType,
   ReactNode,
 } from 'react';
 
@@ -18,11 +18,10 @@ export interface NoticeIconProps extends SVGAttributes<SVGElement> {
 }
 
 export type NoticeProps = {
-  as?: ElementType;
   type?: NOTICE_TYPE;
   /**
    * Alias for `type`
    */
   variant?: NOTICE_TYPE;
   text?: ReactNode;
-} & ComponentPropsWithRef<'div'>;
+} & PropsWithChildren<ComponentProps<'div'>>;

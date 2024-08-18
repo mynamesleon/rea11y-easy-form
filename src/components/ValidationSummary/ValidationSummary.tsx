@@ -36,7 +36,7 @@ const processErrorsArray = (errors?: ValidationSummaryErrors): any[] => {
   });
 };
 
-const ValidationSummary = forwardRef<HTMLElement, ValidationSummaryProps>(
+const ValidationSummary = forwardRef<HTMLDivElement, ValidationSummaryProps>(
   ({ className, error, errors, header, footer, ...other }, ref) => {
     const classPrefix = useFieldClassName('validation-summary');
     const errorsArr = useMemo(() => processErrorsArray(errors), [errors]);

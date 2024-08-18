@@ -1,7 +1,5 @@
 import type { FocusEvent, ChangeEvent, ComponentPropsWithRef } from 'react';
 
-// extending Dictionary, instead of InputHTMLAttributes,
-// due to incompatible `onChange` approach
 export type ColorInputProps = {
   colorPickerLabel?: string;
   /**
