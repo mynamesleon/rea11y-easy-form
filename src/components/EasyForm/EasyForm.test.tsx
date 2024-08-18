@@ -1,13 +1,12 @@
-import React from 'react';
+import React, { type ComponentProps } from 'react';
 import { render } from '@testing-library/react';
 import EasyForm from './EasyForm';
-import { EasyFormProps } from './EasyForm.types';
 
 describe('<EasyForm />', () => {
-  let props: EasyFormProps;
+  let props: ComponentProps<typeof EasyForm>;
 
   beforeEach(() => {
-    //props = {};
+    props = {};
   });
 
   const renderComponent = () => render(<EasyForm {...props} />);

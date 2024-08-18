@@ -1,10 +1,9 @@
-import * as React from 'react';
+import React, { type ComponentProps } from 'react';
 import { render } from '@testing-library/react';
 import VisuallyHidden from './VisuallyHidden';
-import { VisuallyHiddenProps } from './VisuallyHidden.types';
 
 describe('<VisuallyHidden />', () => {
-  let props: VisuallyHiddenProps;
+  let props: ComponentProps<typeof VisuallyHidden>;
 
   beforeEach(() => {
     props = {

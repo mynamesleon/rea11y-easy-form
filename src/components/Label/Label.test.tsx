@@ -1,11 +1,10 @@
-import React from 'react';
+import React, { type ComponentProps } from 'react';
 import { render } from '@testing-library/react';
 import Label from './Label';
-import { LabelProps } from './Label.types';
 import { fieldClassName } from '../../utils';
 
 describe('<Label />', () => {
-  let props: LabelProps;
+  let props: ComponentProps<typeof Label>;
 
   beforeEach(() => {
     props = {};
