@@ -30,8 +30,8 @@ module.exports = {
     }),
     commonjs(),
     typescript({ useTsconfigDeclarationDir: true }),
-    dynamicImportVars(),
     postcss({ minimize: true }),
+    dynamicImportVars(),
     terser(),
     copy({
       targets: [
