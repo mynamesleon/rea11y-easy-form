@@ -1,3 +1,4 @@
+const dynamicImportVars = require('@rollup/plugin-dynamic-import-vars');
 const peerDepsExternal = require('rollup-plugin-peer-deps-external');
 const resolve = require('@rollup/plugin-node-resolve');
 const commonjs = require('@rollup/plugin-commonjs');
@@ -29,6 +30,7 @@ module.exports = {
     }),
     commonjs(),
     typescript({ useTsconfigDeclarationDir: true }),
+    dynamicImportVars(),
     postcss({ minimize: true }),
     terser(),
     copy({
