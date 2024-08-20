@@ -1,6 +1,6 @@
 {
   "name": "rea11y-easy-form",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "main": "build/cjs/index.js",
   "module": "build/esm/index.js",
   "files": [
@@ -60,7 +60,7 @@
     "@babel/preset-env": "^7.25.3",
     "@babel/preset-typescript": "^7.24.7",
     "@chromatic-com/storybook": "^1.6.1",
-    "@rollup/plugin-commonjs": "^25.0.7",
+    "@rollup/plugin-commonjs": "^26.0.1",
     "@rollup/plugin-dynamic-import-vars": "^2.1.2",
     "@rollup/plugin-node-resolve": "^15.2.3",
     "@rollup/plugin-terser": "^0.4.4",
@@ -69,7 +69,6 @@
     "@storybook/addon-essentials": "^8.2.9",
     "@storybook/addon-interactions": "^8.2.9",
     "@storybook/addon-links": "^8.2.9",
-    "@storybook/addon-mdx-gfm": "^8.2.9",
     "@storybook/addon-webpack5-compiler-babel": "^3.0.3",
     "@storybook/blocks": "^8.2.9",
     "@storybook/react": "^8.2.9",
@@ -102,7 +101,7 @@
     "react-beautiful-dnd": "^13.1.1",
     "react-dom": "^18.3.1",
     "react-final-form": "^6.5.9",
-    "rollup": "^3.29.2",
+    "rollup": "^4.21.0",
     "rollup-plugin-copy": "^3.5.0",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-postcss": "^4.0.2",

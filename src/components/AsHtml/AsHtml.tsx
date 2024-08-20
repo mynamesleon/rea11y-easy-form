@@ -1,9 +1,9 @@
 import clsx from 'clsx';
 import { isElement as isReactElement } from 'react-is';
-import DOMPurify from 'dompurify';
 import React, { useMemo, memo } from 'react';
-import { AsHtmlProps } from './AsHtml.types';
-import { useFieldClassName } from '../../utils';
+import type { AsHtmlProps } from './AsHtml.types';
+import Skeleton, { SKELETON_TYPE } from '../Skeleton';
+import { useAsyncOnMount, useFieldClassName } from '../../utils';
 
 const DEFAULT_SANITIZE_OPTIONS = {
   FORBID_TAGS: ['style'],
@@ -26,6 +26,9 @@ const AsHtml = ({
     [options]
   );
 
+  const { result } = useAsyncOnMount(() => import('dompurify'));
+  const DOMPurify = result?.default;
+
   if (!content) {
     return null;
   }
@@ -42,11 +45,16 @@ const AsHtml = ({
   if (!sanitize) {
     return (
       <div
+        data-testid="AsHtml"
         className={classes}
         // eslint-disable-next-line react/no-danger
         dangerouslySetInnerHTML={{ __html: htmlString }}
       />
     );
+  }
+
+  if (!DOMPurify) {
+    return <Skeleton type={SKELETON_TYPE.TEXT} />;
   }
 
   const cleaned = DOMPurify.sanitize(
@@ -59,8 +67,12 @@ const AsHtml = ({
     return null;
   }
   return (
-    // eslint-disable-next-line react/no-danger
-    <div className={classes} dangerouslySetInnerHTML={{ __html: cleaned }} />
+    <div
+      data-testid="AsHtml"
+      className={classes}
+      // eslint-disable-next-line react/no-danger
+      dangerouslySetInnerHTML={{ __html: cleaned }}
+    />
   );
 };
 

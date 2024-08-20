@@ -12,6 +12,7 @@ export { default as reactKeyFrom } from './reactKeyFrom';
 export { default as renderComponent } from './renderComponent';
 export { default as smoothlyScrollIntoView } from './smoothlyScrollIntoView';
 export { default as useAnnounce } from './useAnnounce';
+export { default as useAsyncOnMount } from './useAsyncOnMount';
 export { default as useAutoId } from './useAutoId';
 export { default as useCheckFieldValue } from './useCheckFieldValue';
 export { default as useFieldArray } from './useFieldArray';
