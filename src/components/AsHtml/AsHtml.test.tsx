@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, waitFor } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import AsHtml from './AsHtml';
 import { AsHtmlProps } from './AsHtml.types';
 import { fieldClassName } from '../../utils';
@@ -13,26 +13,22 @@ describe('<AsHtml />', () => {
 
   const renderComponent = () => render(<AsHtml {...props} />);
 
-  it('renders nothing if value, or children, or html have not been provided', async () => {
+  it('renders nothing if value, or children, or html have not been provided', () => {
     const { container } = renderComponent();
-    await waitFor(() => {
-      expect(container).toBeEmptyDOMElement();
-    });
+    expect(container).toBeEmptyDOMElement();
   });
 
-  it('renders valid react elements unaltered', async () => {
+  it('renders valid react elements unaltered', () => {
     props.children = (
       <div className="element" data-testid="element">
         element
       </div>
     );
-    const { queryByTestId } = renderComponent();
-    await waitFor(() => {
-      const element = queryByTestId('element');
-      expect(element).toHaveTextContent('element');
-    });
+    const { getByTestId, container } = renderComponent();
+    const element = getByTestId('element');
+    expect(element).toHaveTextContent('element');
     // also check that an element with the html class is not rendered
-    const htmlElem = queryByTestId('AsHtml');
+    const htmlElem = container.querySelector(`.${fieldClassName('html')}`);
     expect(htmlElem).toBeNull();
   });
 
@@ -43,17 +39,12 @@ describe('<AsHtml />', () => {
     props.value = dangerous;
     props.sanitize = false;
     const { container } = renderComponent();
-    await waitFor(() => {
-      expect(container.querySelector('script')).not.toBeNull();
-    });
+    expect(container.querySelector('script')).not.toBeNull();
   });
 
   it('renders sanitized html by default', async () => {
     props.value = dangerous;
-    const { container, queryByTestId } = renderComponent();
-    await waitFor(() => {
-      expect(queryByTestId('AsHtml')).not.toBeNull();
-    });
+    const { container } = renderComponent();
     expect(container.querySelector('script')).toBeNull();
     expect(container.querySelector('style')).toBeNull();
     expect(container.querySelector('p')?.getAttribute('style')).toBeNull();
@@ -63,8 +54,6 @@ describe('<AsHtml />', () => {
     props.value = "<script>alert('test')</script>";
     const { container } = renderComponent();
     const element = container.querySelector(`.${fieldClassName('html')}`);
-    await waitFor(() => {
-      expect(element).toBeNull();
-    });
+    return expect(element).toBeNull();
   });
 });

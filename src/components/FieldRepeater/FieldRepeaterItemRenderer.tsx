@@ -1,4 +1,5 @@
 import React, { useCallback } from 'react';
+import { Draggable } from 'react-beautiful-dnd';
 import FieldRepeaterItem from './FieldRepeaterItem';
 import { useFieldRepeaterContext } from './FieldRepeaterContext';
 import type { FieldRepeaterItemRendererProps } from './FieldRepeaterItemRenderer.types';
@@ -9,7 +10,6 @@ const FieldRepeaterItemRenderer = ({
   fields,
 }: FieldRepeaterItemRendererProps) => {
   const {
-    Draggable,
     disabled,
     srAnnounce,
     dragAndDrop,

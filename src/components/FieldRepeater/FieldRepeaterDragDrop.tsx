@@ -1,4 +1,5 @@
 import React, { ReactNode, useCallback } from 'react';
+import { DragDropContext } from 'react-beautiful-dnd';
 import { useFieldRepeaterContext } from './FieldRepeaterContext';
 import useHandleFieldRepeaterDragEnd from './useHandleFieldRepeaterDragEnd';
 import type { FieldArrayInput } from '../../utils/useFieldArray/useFieldArray.types';
@@ -11,7 +12,6 @@ const FieldRepeaterDragDrop = ({
   fields: FieldArrayInput<any>;
 }) => {
   const {
-    DragDropContext,
     strings: {
       srItemMoved,
       srItemLifted,

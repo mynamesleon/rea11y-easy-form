@@ -1,9 +1,4 @@
 import React, { createContext, useContext, useMemo, useRef } from 'react';
-import type {
-  Draggable,
-  Droppable,
-  DragDropContext,
-} from 'react-beautiful-dnd';
 import { useDeepCompareEffect } from '@react-hookz/web';
 import { useEasyFormContext } from '../EasyForm';
 import {
@@ -13,7 +8,7 @@ import {
   type FieldRepeaterContextStrings,
   type FieldRepeaterContextStringsFns,
 } from './FieldRepeaterContext.types';
-import { useAnnounce, useAsyncOnMount } from '../../utils';
+import { useAnnounce } from '../../utils';
 
 const DEFAULT_STRINGS = {
   add: 'Add another entry',
@@ -55,13 +50,20 @@ const generateContextStringsFns = (
   }, {}) as FieldRepeaterContextStringsFns;
 };
 
-// @ts-ignore
-const FIELD_REPEATER_CONTEXT = createContext<FieldRepeaterContextValue>({});
+const DEFAULT_VALUES = {};
+const FIELD_REPEATER_CONTEXT = createContext<FieldRepeaterContextValue>({
+  strings: generateContextStringsFns(),
+  defaultValues: DEFAULT_VALUES,
+  srAnnounce: () => {},
+  dragAndDrop: true,
+  disabled: false,
+  ordering: true,
+  max: Infinity,
+  min: 0,
+});
 
 export const useFieldRepeaterContext = (): FieldRepeaterContextValue =>
   useContext(FIELD_REPEATER_CONTEXT);
-
-const DEFAULT_VALUES = {};
 
 const FieldRepeaterContext = ({
   defaultValues = DEFAULT_VALUES,
@@ -93,15 +95,8 @@ const FieldRepeaterContext = ({
     }
   }, [strings]);
 
-  const { result } = useAsyncOnMount(() => import('react-beautiful-dnd'));
-
   const contextValue = useMemo(
     () => ({
-      // components
-      DragDropContext: result?.DragDropContext as typeof DragDropContext,
-      Draggable: result?.Draggable as typeof Draggable,
-      Droppable: result?.Droppable as typeof Droppable,
-      // values
       min: typeof min === 'number' && min > -1 ? min : 0,
       max: typeof max === 'number' ? max : Infinity,
       disabled: Boolean(disabled || formDisabled),
@@ -119,15 +114,10 @@ const FieldRepeaterContext = ({
       announce,
       disabled,
       ordering,
-      result,
       min,
       max,
     ]
   );
-
-  if (!contextValue.DragDropContext) {
-    return null;
-  }
 
   return (
     <FIELD_REPEATER_CONTEXT.Provider value={contextValue}>

@@ -1,5 +1,6 @@
 import clsx from 'clsx';
 import React from 'react';
+import { Droppable } from 'react-beautiful-dnd';
 import FieldRepeaterItemRenderer from './FieldRepeaterItemRenderer';
 import FieldRepeaterDragAndDrop from './FieldRepeaterDragDrop';
 import { useFieldRepeaterContext } from './FieldRepeaterContext';
@@ -16,7 +17,7 @@ const FieldRepeaterContent = ({
   useFieldRepeaterFieldsSetup(fields);
   const classPrefix = useFieldClassName('field-repeater');
   const droppableId = useAutoId('field-repeater-droppable');
-  const { disabled, dragAndDrop, Droppable } = useFieldRepeaterContext();
+  const { disabled, dragAndDrop } = useFieldRepeaterContext();
 
   return (
     <FieldRepeaterDragAndDrop fields={fields}>
