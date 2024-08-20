@@ -1,5 +1,10 @@
 import type { ReactNode } from 'react';
 import type { FieldSubscription } from 'final-form';
+import type {
+  Draggable,
+  Droppable,
+  DragDropContext,
+} from 'react-beautiful-dnd';
 
 type FieldRepeaterRenderedTextProp = string | (() => string);
 type FieldRepeaterRenderedTextNodeProp =
@@ -94,6 +99,9 @@ export interface FieldRepeaterContextProps
 
 export interface FieldRepeaterContextValue
   extends Required<FieldRepeaterContextPropsBase> {
+  DragDropContext: typeof DragDropContext;
+  Draggable: typeof Draggable;
+  Droppable: typeof Droppable;
   srAnnounce: (content?: ReactNode) => void;
   strings: FieldRepeaterContextStringsFns;
 }

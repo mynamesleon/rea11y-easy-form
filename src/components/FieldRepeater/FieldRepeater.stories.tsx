@@ -53,7 +53,8 @@ StandardUsage.args = {
 };
 
 /**
- * ![Peer dependency: react-beautiful-dnd](https://img.shields.io/badge/Peer_dependency-react--beautiful--dnd-blue)
+ * Built on top of `react-beautiful-dnd`, the `FieldRepeater`
+ * allows you to manage a repeatable and re-rderable template of form fields.
  *
  * The `FieldRepeater` **must** be used within a `<Form>` or `<EasyForm>`,
  * and its `children` **must** be a function. The function will receive
