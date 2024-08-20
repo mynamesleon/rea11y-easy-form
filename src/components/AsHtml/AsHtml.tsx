@@ -45,6 +45,7 @@ const AsHtml = ({
   if (!sanitize) {
     return (
       <div
+        data-testid="AsHtml"
         className={classes}
         // eslint-disable-next-line react/no-danger
         dangerouslySetInnerHTML={{ __html: htmlString }}
@@ -66,8 +67,12 @@ const AsHtml = ({
     return null;
   }
   return (
-    // eslint-disable-next-line react/no-danger
-    <div className={classes} dangerouslySetInnerHTML={{ __html: cleaned }} />
+    <div
+      data-testid="AsHtml"
+      className={classes}
+      // eslint-disable-next-line react/no-danger
+      dangerouslySetInnerHTML={{ __html: cleaned }}
+    />
   );
 };
 

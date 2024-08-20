@@ -1,5 +1,5 @@
 import React from 'react';
-import { fireEvent, render } from '@testing-library/react';
+import { fireEvent, render, waitFor } from '@testing-library/react';
 import AutoCompleteInput from './AutoCompleteInput';
 import type { AutoCompleteInputProps } from './AutoComplete.types';
 import { ARIA_ATTRIBUTES } from '../../utils';
@@ -11,27 +11,27 @@ describe('<AutoCompleteInput />', () => {
     props = {};
   });
 
-  const renderComponent = () => {
-    const { container, getByTestId, ...other } = render(
+  const renderComponent = async () => {
+    const { container, findByTestId, ...other } = render(
       <AutoCompleteInput {...props} />
     );
-    const input = getByTestId('AutoCompleteInput');
+    const input = await findByTestId('AutoCompleteInput');
     return { input, container, ...other };
   };
 
-  it('calls AriaAutocomplete with the rendered input', () => {
+  it('calls AriaAutocomplete with the rendered input', async () => {
     props.onReady = jest.fn();
-    const { input } = renderComponent();
+    const { input } = await renderComponent();
     expect(props.onReady).toHaveBeenCalled();
     expect(input).not.toBeVisible();
   });
 
   it.each(ARIA_ATTRIBUTES)(
     'passes (and removes) aria attribute %s from the generated input',
-    (attr) => {
+    async (attr) => {
       const testValue = 'aria-autocomplete-test-value';
       props.ariaAttributes = { [attr]: testValue };
-      const { rerender, container } = renderComponent();
+      const { rerender, container } = await renderComponent();
       expect(
         container.querySelector('.aria-autocomplete__input')
       ).toHaveAttribute(attr, expect.stringContaining(testValue));
@@ -44,12 +44,12 @@ describe('<AutoCompleteInput />', () => {
     }
   );
 
-  it('disables the autocomplete based on the `disabled` prop', () => {
+  it('disables the autocomplete based on the `disabled` prop', async () => {
     props.disabled = true;
     props.multiple = true;
     props.defaultValue = 'apple';
     props.source = ['apple', 'orange'];
-    const { container } = renderComponent();
+    const { container } = await renderComponent();
     expect(container.querySelector('.aria-autocomplete__input')).toBeDisabled();
     // confirm the selected item is disabled too
     const selected = container.querySelector('.aria-autocomplete__selected');
@@ -60,12 +60,12 @@ describe('<AutoCompleteInput />', () => {
     expect(selected).toBeInTheDocument();
   });
 
-  it('soft disables the autocomplete on load based on selected item count and `maxItems` option', () => {
+  it('soft disables the autocomplete on load based on selected item count and `maxItems` option', async () => {
     props.maxItems = 1;
     props.multiple = true;
     props.defaultValue = 'apple';
     props.source = ['apple', 'orange'];
-    const { container } = renderComponent();
+    const { container } = await renderComponent();
     const generatedInput = container.querySelector('.aria-autocomplete__input');
     expect(generatedInput).toBeDisabled();
     // confirm the selected item is NOT disabled

@@ -45,7 +45,7 @@ const AutoCompleteInput = ({
       disabled,
       ...ariaAttributes,
     });
-  }, [disabled, ariaAttributes]);
+  }, [disabled, ariaAttributes, AriaAutocomplete]);
 
   // remember to destroy on unmount
   useUnmountEffect(() => destroyAutoComplete(autoCompleteRef));
