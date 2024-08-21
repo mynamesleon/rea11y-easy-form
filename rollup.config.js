@@ -32,7 +32,6 @@ module.exports = {
       sourcemap: true,
     },
   ],
-  treeshake: 'smallest',
   plugins: [
     peerDepsExternal(),
     resolve({
