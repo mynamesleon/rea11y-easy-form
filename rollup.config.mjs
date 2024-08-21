@@ -1,10 +1,10 @@
-const peerDepsExternal = require('rollup-plugin-peer-deps-external');
-const resolve = require('@rollup/plugin-node-resolve');
-const commonjs = require('@rollup/plugin-commonjs');
-const typescript = require('rollup-plugin-typescript2');
-const postcss = require('rollup-plugin-postcss');
-const terser = require('@rollup/plugin-terser');
-const copy = require('rollup-plugin-copy');
+import peerDepsExternal from 'rollup-plugin-peer-deps-external';
+import resolve from '@rollup/plugin-node-resolve';
+import commonjs from '@rollup/plugin-commonjs';
+import typescript from 'rollup-plugin-typescript2';
+import postcss from 'rollup-plugin-postcss';
+import terser from '@rollup/plugin-terser';
+import copy from 'rollup-plugin-copy';
 
 /**
  * @todo: investigate handling to allow for 
@@ -18,22 +18,14 @@ const copy = require('rollup-plugin-copy');
  * dependingo on how it is handled.
  */ 
 
-module.exports = {
+const config = {
   input: 'src/index.ts',
-  output: [
-    {
-      dir: 'build/cjs',
-      format: 'cjs',
-      sourcemap: true,
-      minifyInternalExports: true,
-    },
-    {
-      dir: 'build/esm',
-      format: 'esm',
-      sourcemap: true,
-      minifyInternalExports: true,
-    },
-  ],
+  output: {
+    dir: 'build',
+    format: 'es',
+    sourcemap: true,
+  },
+  treeshake: 'smallest',
   plugins: [
     peerDepsExternal(),
     resolve({
@@ -54,3 +46,5 @@ module.exports = {
     }),
   ],
 };
+
+export default config;
