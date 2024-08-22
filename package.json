@@ -1,6 +1,6 @@
 {
   "name": "rea11y-easy-form",
-  "version": "0.3.6",
+  "version": "0.3.7",
   "main": "build/cjs/index.js",
   "module": "build/esm/index.js",
   "files": [
@@ -46,7 +46,7 @@
     "@babel/core": "^7.25.2",
     "@babel/preset-env": "^7.25.3",
     "@babel/preset-typescript": "^7.24.7",
-    "@chromatic-com/storybook": "^1.6.1",
+    "@chromatic-com/storybook": "^1.7.0",
     "@rollup/plugin-commonjs": "^26.0.1",
     "@rollup/plugin-node-resolve": "^15.2.3",
     "@rollup/plugin-terser": "^0.4.4",
@@ -66,7 +66,7 @@
     "@testing-library/react": "^16.0.0",
     "@types/dompurify": "^3.0.5",
     "@types/jest": "^29.5.12",
-    "@types/react": "^18.3.3",
+    "@types/react": "^18.3.4",
     "@types/react-beautiful-dnd": "^13.1.8",
     "@types/react-dom": "^18.3.0",
     "@types/react-is": "^18.3.0",
@@ -90,7 +90,6 @@
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-postcss": "^4.0.2",
     "rollup-plugin-typescript2": "^0.36.0",
-    "sass-loader": "^13.3.3",
     "storybook": "^8.2.9",
     "ts-jest": "^29.2.4",
     "typescript": "^5.5.4"

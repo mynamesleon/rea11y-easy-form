@@ -25,11 +25,15 @@ module.exports = {
       dir: 'build/cjs',
       format: 'cjs',
       sourcemap: true,
+      preserveModules: true,
+      preserveModulesRoot: 'src',
     },
     {
       dir: 'build/esm',
       format: 'esm',
       sourcemap: true,
+      preserveModules: true,
+      preserveModulesRoot: 'src',
     },
   ],
   plugins: [
