@@ -1,16 +1,23 @@
 {
   "name": "rea11y-easy-form",
-  "version": "0.3.7",
+  "version": "0.3.8",
   "main": "build/cjs/index.js",
   "module": "build/esm/index.js",
   "files": [
     "build"
   ],
+  "sideEffects": [
+    "*.less.js",
+    "*.css.js",
+    "*.less",
+    "*.css"
+  ],
   "types": "build/index.d.ts",
-  "sideEffects": false,
   "description": "Accessible form library using react-final-form",
   "scripts": {
-    "build": "rollup -c",
+    "build:rollup": "rollup -c",
+    "build:clean": "rimraf build",
+    "build": "npm run build:clean && npm run build:rollup",
     "test": "jest",
     "test:coverage": "jest --coverage",
     "lint": "eslint src --ext .ts,.js",
@@ -85,6 +92,7 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-final-form": "^6.5.9",
+    "rimraf": "^6.0.1",
     "rollup": "^4.21.0",
     "rollup-plugin-copy": "^3.5.0",
     "rollup-plugin-peer-deps-external": "^2.2.4",
