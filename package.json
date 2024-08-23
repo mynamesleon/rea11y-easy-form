@@ -44,10 +44,24 @@
   "author": "Leon Slater",
   "license": "MIT",
   "peerDependencies": {
+    "aria-autocomplete": ">=1.5.1",
+    "dompurify": ">=3.0.0",
     "final-form": ">=4.0.0",
     "react": ">=17.0.0",
+    "react-beautiful-dnd": ">=13.0.0",
     "react-dom": ">=17.0.0",
     "react-final-form": ">=6.0.0"
+  },
+  "peerDependenciesMeta": {
+    "aria-autocomplete": {
+      "optional": true
+    },
+    "dompurify": {
+      "optional": true
+    },
+    "react-beautiful-dnd": {
+      "optional": true
+    }
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
@@ -77,8 +91,10 @@
     "@types/react-beautiful-dnd": "^13.1.8",
     "@types/react-dom": "^18.3.0",
     "@types/react-is": "^18.3.0",
+    "aria-autocomplete": "^1.5.1",
     "babel-loader": "^9.1.3",
     "babel-preset-react-app": "^10.0.1",
+    "dompurify": "^3.1.6",
     "eslint": "^8.57.0",
     "eslint-config-react-app": "^7.0.1",
     "eslint-plugin-jsx-a11y": "^6.9.0",
@@ -90,6 +106,7 @@
     "less": "^4.2.0",
     "less-loader": "^12.2.0",
     "react": "^18.3.1",
+    "react-beautiful-dnd": "^13.1.1",
     "react-dom": "^18.3.1",
     "react-final-form": "^6.5.9",
     "rimraf": "^6.0.1",
@@ -105,13 +122,10 @@
   "dependencies": {
     "@react-hookz/deep-equal": "^2.0.2",
     "@react-hookz/web": "^24.0.4",
-    "aria-autocomplete": "^1.5.1",
     "clone-deep": "^4.0.1",
     "clsx": "^2.1.1",
-    "dompurify": "^3.1.6",
     "final-form-arrays": "^3.1.0",
     "final-form-set-field-data": "^1.0.2",
-    "react-beautiful-dnd": "^13.1.1",
     "react-is": "^18.3.1",
     "tabbable": "^6.2.0",
     "use-constant": "^1.1.1"
