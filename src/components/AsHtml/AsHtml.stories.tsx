@@ -9,7 +9,7 @@ StandardUsage.args = {
 };
 
 /**
- * ![Dependency: dompurify](https://img.shields.io/badge/Dependency-dompurify-blue)
+ * ![Peer dependency: dompurify](https://img.shields.io/badge/Peer_dependency-dompurify-blue)
  *
  * Render provided string as HTML.
  * Sanitizes with `dompurify` by default.
