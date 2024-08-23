@@ -5,7 +5,6 @@ import EasyForm from '../EasyForm';
 import EasyField from '../EasyField';
 import type { FieldRepeaterProps } from './FieldRepeater.types';
 import type { EasyFormProps } from '../EasyForm/EasyForm.types';
-import { FIELD_REPEATER_STRINGS_KEYS } from './FieldRepeaterContext.types';
 import CONTROL_TYPE from '../../controlTypes';
 
 // temp work-around for doc-gen index type issue;
@@ -47,7 +46,7 @@ StandardUsage.args = {
     name: 'John Doe',
     email: 'john@doe.example',
   },
-  name: 'field-repeater',
+  name: 'repeater',
   max: 10,
   min: 1,
 };
@@ -79,12 +78,6 @@ StandardUsage.args = {
 export default {
   title: 'Components/FieldRepeater',
   component: StandardUsage,
-  argTypes: {
-    ...FIELD_REPEATER_STRINGS_KEYS.reduce((acc, str) => {
-      acc[str] = { control: 'text' };
-      return acc;
-    }, {}),
-  },
 };
 
 export const EasyFormStructureExample = (props: EasyFormProps) => (
@@ -121,7 +114,7 @@ EasyFormStructureExample.args = {
           label: 'Email',
         },
       ],
-      name: 'field-repeater',
+      name: 'repeater',
       min: 1,
       max: 10,
     },
