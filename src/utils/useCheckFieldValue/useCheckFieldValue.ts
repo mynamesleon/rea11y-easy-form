@@ -93,7 +93,7 @@ const useCheckFieldValue = (
     logic = USE_CHECK_FIELD_VALUE_LOGIC_TYPE.AND,
   } = config;
 
-  const formApi = useForm();
+  const formApi = useForm('useCheckFieldValue');
   const ifNotPasses = useCheckFieldValueEvaluator(
     config.ifNot || {},
     ifNotLogic,
