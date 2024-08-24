@@ -16,15 +16,12 @@ export type DetailedSwitchListOption = {
 
 export type SwitchListOptions = (string | DetailedSwitchListOption)[];
 
-export interface BaseSwitchListProps extends FieldsetProps {
+export interface SwitchListProps extends FieldsetProps {
   options?: SwitchListOptions;
   className?: string;
   disabled?: boolean;
-  name: string;
-}
-
-export interface SwitchListProps extends BaseSwitchListProps {
   type?: SWITCH_LIST_TYPE;
+  name: string;
 }
 
 export type useSwitchListOptionsArg = {

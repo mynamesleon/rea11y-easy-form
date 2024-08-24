@@ -3,21 +3,22 @@ import clsx from 'clsx';
 import { isEqual } from '@react-hookz/deep-equal';
 import { useFieldClassName } from '../../utils';
 import SwitchList, { SWITCH_LIST_TYPE } from '../SwitchList';
-import { RadioListProps } from './RadioList.types';
+import type { SwitchListProps } from '../SwitchList/SwitchList.types';
 
-const RadioList = forwardRef<HTMLFieldSetElement, RadioListProps>(
-  ({ className, ...other }, ref) => {
-    const classPrefix = useFieldClassName('radio-list');
-    return (
-      <SwitchList
-        {...other}
-        ref={ref}
-        type={SWITCH_LIST_TYPE.RADIO}
-        className={clsx(className, classPrefix)}
-      />
-    );
-  }
-);
+const RadioList = forwardRef<
+  HTMLFieldSetElement,
+  Omit<SwitchListProps, 'type'>
+>(({ className, ...other }, ref) => {
+  const classPrefix = useFieldClassName('radio-list');
+  return (
+    <SwitchList
+      {...other}
+      ref={ref}
+      type={SWITCH_LIST_TYPE.RADIO}
+      className={clsx(className, classPrefix)}
+    />
+  );
+});
 
 // do a deep equal comparison in this case,
 // to account for lazy use of the `options` prop
