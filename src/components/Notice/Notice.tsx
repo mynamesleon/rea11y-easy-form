@@ -15,6 +15,7 @@ const Notice = polymorphicForwardRef<'div', NoticeProps>(
       type: typeProp,
       className,
       children,
+      loading,
       variant,
       text,
       ...other
@@ -43,6 +44,9 @@ const Notice = polymorphicForwardRef<'div', NoticeProps>(
         {...other}
         ref={ref}
         className={clsx(className, classPrefix, `${classPrefix}--${type}`)}
+        // aria-busy is only really relevant if this is a live region,
+        // but we will set it anyway just in case
+        aria-busy={loading}
       >
         <span
           className={`${classPrefix}__icon ${classPrefix}__icon--${type}`}
@@ -51,6 +55,7 @@ const Notice = polymorphicForwardRef<'div', NoticeProps>(
           <NoticeIcon
             className={`${classPrefix}__svg`}
             focusable={false}
+            loading={loading}
             type={type}
           />
         </span>

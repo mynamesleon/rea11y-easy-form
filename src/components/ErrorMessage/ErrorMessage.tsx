@@ -17,11 +17,12 @@ const ErrorMessage = forwardRef<HTMLDivElement, ErrorMessageProps>(
         {...other}
         ref={ref}
         className={clsx(className, classPrefix)}
+        // aria-busy is only really relevant if this is a live region,
+        // but we will set it anyway just in case
+        aria-busy={loading}
       >
         <span className={`${classPrefix}__icon`} aria-hidden="true">
-          <NoticeIcon
-            type={loading ? NOTICE_TYPE.LOADING : NOTICE_TYPE.ERROR}
-          />
+          <NoticeIcon loading={loading} type={NOTICE_TYPE.ERROR} />
         </span>
         {children || text}
       </div>

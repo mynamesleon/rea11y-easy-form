@@ -55,7 +55,7 @@ describe('<ErrorMessage />', () => {
     props.loading = true;
     renderComponent();
     expect(NoticeIcon).toHaveBeenCalledWith(
-      expect.objectContaining({ type: NOTICE_TYPE.LOADING }),
+      expect.objectContaining({ type: NOTICE_TYPE.ERROR, loading: true }),
       expect.any(Object) // context
     );
   });

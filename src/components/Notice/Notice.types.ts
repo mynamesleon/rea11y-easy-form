@@ -1,7 +1,6 @@
 import type { ComponentPropsWithoutRef, SVGAttributes, ReactNode } from 'react';
 
 export enum NOTICE_TYPE {
-  LOADING = 'loading',
   SUCCESS = 'success',
   WARNING = 'warning',
   ERROR = 'error',
@@ -9,6 +8,7 @@ export enum NOTICE_TYPE {
 }
 
 export interface NoticeIconProps extends SVGAttributes<SVGElement> {
+  loading?: boolean;
   type?: NOTICE_TYPE;
 }
 
@@ -18,5 +18,6 @@ export type NoticeProps = {
    * Alias for `type`
    */
   variant?: NOTICE_TYPE;
+  loading?: boolean;
   text?: ReactNode;
 } & ComponentPropsWithoutRef<'div'>;
