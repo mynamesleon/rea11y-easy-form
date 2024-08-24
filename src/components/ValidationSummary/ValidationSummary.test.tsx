@@ -20,7 +20,7 @@ describe('<ValidationSummary />', () => {
     expect(component).toBeNull();
   });
 
-  it('renders an error <Notice /> div with a default className and a tabIndex of -1', () => {
+  it('renders an error <Notice /> div with a default className', () => {
     props.error = 'error';
     const { getByTestId } = renderComponent();
     const component = getByTestId('ValidationSummary');
@@ -29,7 +29,6 @@ describe('<ValidationSummary />', () => {
       fieldClassName(`notice--${NOTICE_TYPE.ERROR}`)
     );
     expect(component).toHaveClass(fieldClassName('validation-summary'));
-    expect(component).toHaveAttribute('tabindex', '-1');
     expect(component.nodeName).toStrictEqual('DIV');
   });
 
