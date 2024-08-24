@@ -52,6 +52,9 @@ const EasyFormValidationSummary = forwardRef<
 >(({ staticErrors, validationSummary }, ref) => {
   const formApi = useForm('EasyFormValidationSummary');
   const {
+    // destructure `position` out so that it does not
+    // end up as an attribute on the rendered div
+    position,
     content: contentType,
     renderLogic,
     render,
@@ -62,8 +65,9 @@ const EasyFormValidationSummary = forwardRef<
   const subscription = useDeepCompareMemo(
     () => ({
       ...extractKeysForSubscription(renderLogic, (key: string) => key),
-      // always subscribe to the submitError
+      // always subscribe to the submitError, and validating states
       submitError: true,
+      validating: true,
     }),
     [renderLogic]
   );
@@ -92,11 +96,18 @@ const EasyFormValidationSummary = forwardRef<
     return render(ref) || null;
   }
 
+  const { validating } = formState;
+
   // ignore other validationSummary behaviour when a whole form submit error exists,
   // as we always want to prioritise this, just in case
   if (formState.submitError) {
     return (
-      <ValidationSummary error={formState.submitError} role="alert" ref={ref} />
+      <ValidationSummary
+        error={formState.submitError}
+        loading={validating}
+        role="alert"
+        ref={ref}
+      />
     );
   }
 
@@ -110,6 +121,7 @@ const EasyFormValidationSummary = forwardRef<
     const finalErrors = determineErrors(contentType, staticErrors, formApi);
     return (
       <ValidationSummary
+        loading={validating}
         errors={finalErrors}
         role="alert"
         ref={ref}
@@ -132,6 +144,7 @@ const EasyFormValidationSummary = forwardRef<
           const finalErrors = determineErrors(contentType, errs, formApi);
           return (
             <ValidationSummary
+              loading={validating}
               errors={finalErrors}
               ref={ref}
               {...headerFooter}
