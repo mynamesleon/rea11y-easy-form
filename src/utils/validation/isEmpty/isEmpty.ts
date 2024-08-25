@@ -1,5 +1,7 @@
+import isNullOrUndefined from '../../isNullOrUndefined';
+
 const isEmpty = (value?: any): boolean => {
-  if (typeof value === 'undefined' || value === null) {
+  if (isNullOrUndefined(value)) {
     return true;
   }
   // consider empty white-space as still empty

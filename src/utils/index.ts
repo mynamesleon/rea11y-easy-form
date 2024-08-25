@@ -6,6 +6,7 @@ export { default as focusAndSmoothlyScrollIntoView } from './focusAndSmoothlyScr
 export { default as focusElement } from './focusElement';
 export { default as isElementInViewport } from './isElementInViewport';
 export { default as isNullOrUndefined } from './isNullOrUndefined';
+export { default as isThenable } from './isThenable';
 export { default as mergeRefs } from './mergeRefs';
 export { default as polymorphicForwardRef } from './polymorphicForwardRef';
 export { default as reactKeyFrom } from './reactKeyFrom';
