@@ -1,5 +1,8 @@
 # Accessibility When Developing and Testing
 
+![Author: Leon Slater](https://img.shields.io/badge/Author-Leon_Slater-blue)
+![Last update: 2024/08/05](https://img.shields.io/badge/Last_updated-2024/08/25-blue)
+
 Accessibility is a core part of this library and the components it contains. So, at a minimum, all components should be tested with the following document in mind.
 
 ## Automated testing
@@ -27,7 +30,7 @@ These considerations will cover most scenarios, particularly at a component leve
    - does any essential complex functionality have keyboard-only alternatives? (e.g. drag and drop)
 3. **Is it clear and functional for users without vision?**
    - points (1) and (2) above will do most of this for you
-   - **test using at least NVDA** as it is one of the most widely used screen-readers (bonus points for also testing with other screen-readers, such as TalkBack, Windows Narrator, and VoiceOver)
+   - **test using at least NVDA** as it is one of the most widely used screen-readers (bonus points for also testing with other screen-readers, such as TalkBack, Windows Narrator, and VoiceOver). In particular, **test with a screen-reader using only your keyboard**: does everything you can tab to have an announcement that clearly indicates what it's for?
    - Consider if there are elements that need additional text (e.g. icon buttons), or if there are elements that a screen-reader can ignore (e.g. purely presentation iconography that you could set `aria-hidden="true"` for)
 4. **Does it work at a viewport width of 320px?**
    - This is to account for the "reflow" criterion: no loss of content or functionality occurs, and horizontal scrolling is avoided

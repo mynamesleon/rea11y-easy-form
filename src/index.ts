@@ -6,6 +6,7 @@ export {
   focusElement,
   isElementInViewport,
   isNullOrUndefined,
+  isThenable,
   mergeRefs,
   polymorphicForwardRef,
   smoothlyScrollIntoView,
