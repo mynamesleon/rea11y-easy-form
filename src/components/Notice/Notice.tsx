@@ -1,7 +1,11 @@
 import clsx from 'clsx';
 import React, { memo, useMemo } from 'react';
 import { type NoticeProps, NOTICE_TYPE } from './Notice.types';
-import { polymorphicForwardRef, useFieldClassName } from '../../utils';
+import {
+  polymorphicForwardRef,
+  useDebouncedValue,
+  useFieldClassName,
+} from '../../utils';
 import NoticeIcon from './NoticeIcon';
 import './Notice.less';
 
@@ -12,10 +16,10 @@ const Notice = polymorphicForwardRef<'div', NoticeProps>(
   (
     {
       as: Component = 'div',
+      loading: loadingProp,
       type: typeProp,
       className,
       children,
-      loading,
       variant,
       text,
       ...other
@@ -33,6 +37,11 @@ const Notice = polymorphicForwardRef<'div', NoticeProps>(
       }
       return DEFAULT_NOTICE_TYPE;
     }, [typeProp, variant]);
+
+    // we will debounce the loading state to
+    // minimise DOM updates between rapid successive changes
+    // e.g. if the `loading` prop is set based on an instantly fulfilled Promise
+    const loading = useDebouncedValue(loadingProp);
 
     if (!text && !children) {
       return null;
