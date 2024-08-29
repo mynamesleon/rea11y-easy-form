@@ -1,5 +1,5 @@
 import { useDeepCompareMemo } from '@react-hookz/web';
-import { useEasyFormContext } from '../../EasyForm';
+import { useEasyFormContext } from '../../EasyForm/EasyFormContext';
 import type { EasyFieldValidationRule } from '../EasyField.types';
 import type { Dictionary } from '../../../utils';
 
