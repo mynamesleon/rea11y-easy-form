@@ -1,7 +1,7 @@
 import React from 'react';
 import { isValidElementType } from 'react-is';
 import Fieldset from '../Fieldset';
-import EasyField from '../EasyField';
+import EasyField from '../EasyField/EasyField';
 import FieldRepeaterContent from './FieldRepeaterContent';
 import FieldRepeaterContext from './FieldRepeaterContext';
 import type { FieldRepeaterProps } from './FieldRepeater.types';
