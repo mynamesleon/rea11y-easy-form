@@ -2,8 +2,8 @@
 
 ![License: MIT](https://img.shields.io/npm/l/rea11y-easy-form)
 ![NPM version](https://img.shields.io/npm/v/rea11y-easy-form.svg)
-![Types](https://img.shields.io/npm/types/rea11y-easy-form)
-![Tree Shaking](https://flat.badgen.net/bundlephobia/tree-shaking/rea11y-easy-form)
+![Types: TypeScript](https://img.shields.io/npm/types/rea11y-easy-form)
+![Tree Shaking: Supported](https://badgen.net/bundlephobia/tree-shaking/rea11y-easy-form)
 
 ![React](https://img.shields.io/badge/React-%2320232a.svg?logo=React&logoColor=%2361DAFB)
 ![React Final Form](https://img.shields.io/badge/React%20Final%20Form-%23333639.svg?logo=react&logoColor=white)

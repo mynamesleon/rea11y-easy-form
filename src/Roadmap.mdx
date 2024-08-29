@@ -4,80 +4,83 @@ import { Meta } from '@storybook/blocks';
 
 # Roadmap
 
+![Author: Leon Slater](https://img.shields.io/badge/Author-Leon_Slater-blue)
+
 ## For 1.0
 
 ### Core component exports
 
-* `EasyForm` ✓
-* `EasyField` ✓
+- `EasyForm` ✓
+- `EasyField` ✓
 
 ### Form field components
 
-* `Input` ✓
-* `Textarea` ✓
-* `Checkbox` ✓
-* `CheckboxList` ✓
-* `ColorInput` ✓
-* `Radio` ✓
-* `RadioList` ✓
-* `Select` ✓
-* `Switch` ✓
-* `SwitchList` ✓
-* `AutoComplete` ✓ (supports multi-select)
+- `Input` ✓
+- `Textarea` ✓
+- `Checkbox` ✓
+- `CheckboxList` ✓
+- `ColorInput` ✓
+- `Radio` ✓
+- `RadioList` ✓
+- `Select` ✓
+- `Switch` ✓
+- `SwitchList` ✓
+- `AutoComplete` ✓ (supports multi-select)
 
 ### Util components (used by form components, and exported)
 
-* `Fieldset` ✓ (also a container)
-* `ErrorMessage` ✓
-* `Label` ✓
-* `Notice` ✓ (looks like an alert, but not a `role='alert'` element by default)
-* `Skeleton` ✓ (for loading states)
-* `ValidationSummary` ✓
-* `VisuallyHidden` ✓
+- `Fieldset` ✓ (also a container)
+- `ErrorMessage` ✓
+- `Label` ✓
+- `MutatedFormSpy` ✓
+- `Notice` ✓ (looks like an alert, but not a `role='alert'` element by default)
+- `Skeleton` ✓ (for loading states)
+- `ValidationSummary` ✓
+- `VisuallyHidden` ✓
 
 ### Container/unique components
 
-* `AsHtml` ✓
-* `Disclosure` ✓
-* `Fieldset` ✓ (also a util)
-* `FieldRepeater` ✓ (unit tests and thorough manual testing ongoing)
-* `FieldConditional` ✓
+- `AsHtml` ✓
+- `Disclosure` ✓
+- `Fieldset` ✓ (also a util)
+- `FieldRepeater` ✓ (unit tests and thorough manual testing ongoing)
+- `FieldConditional` ✓
 
 ### Utility/Form functionality hooks
 
-* `useAnnounce` ✓ (for easy screen-reader announcements)
-* `useFieldValue` ✓ (for easy form field value fetching)
-* `useCheckFieldValue` ✓ (for confirming a field (or fields) has the desired value(s))
-* `useMutatedField` ✓ (for correcting async validation state issues)
-* `useMutatedFormState` ✓ (for correcting async validation state issues)
+- `useAnnounce` ✓ (for easy screen-reader announcements)
+- `useFieldValue` ✓ (for easy form field value fetching)
+- `useCheckFieldValue` ✓ (for confirming a field (or fields) has the desired value(s))
+- `useMutatedField` ✓ (for correcting async validation state issues)
+- `useMutatedFormState` ✓ (for correcting async validation state issues)
 
 ### Built-in validation functions
 
 Only the most basic built-in rules to be included. We do not want to bloat the package.
 
-* `isAlpha` ✓
-* `isAlphaNumeric` ✓
-* `isDate` ✓
-* `isEmail` ✓
-* `isEmpty` ✓ (reversed for `required` rule)
-* `isHexColor` ✓
-* `isInteger` ✓
-* `isLowerCase` ✓
-* `isNumber` ✓
-* `isUpperCase` ✓
-* `isUrl` ✓
+- `isAlpha` ✓
+- `isAlphaNumeric` ✓
+- `isDate` ✓
+- `isEmail` ✓
+- `isEmpty` ✓ (reversed for `required` rule)
+- `isHexColor` ✓
+- `isInteger` ✓
+- `isLowerCase` ✓
+- `isNumber` ✓
+- `isUpperCase` ✓
+- `isUrl` ✓
 
 ### Miscellaneous / Chore
 
-* Wide-spread CSS variables for easier theming? (not strictly necessary)
-* Proper Generics handling for components that take an `as` prop
+- Wide-spread CSS variables for easier theming? (not strictly necessary)
+- Proper Generics handling for components that take an `as` prop ✓
 
 ## Beyond 1.0 ideas
 
 ### Form field components
 
-* `StarRating` (how granular? E.g. can it display 3.5 out of 5, but only allow selecting full values?)
-* `RichTextEditor` (do we want this as part of the core code? Will be big!)
-* `Datepicker` (do we want this? Can use native, and custom can be added)
-* `Timepicker` (do we want this? Can use native, and custom can be added)
-* `Telephone` (do we want this? Is complex. Can use native, and custom can be added)
+- `StarRating` (how granular? E.g. can it display 3.5 out of 5, but only allow selecting full values?)
+- `RichTextEditor` (do we want this as part of the core code? Will be big!)
+- `Datepicker` (do we want this? Can use native, and custom can be added)
+- `Timepicker` (do we want this? Can use native, and custom can be added)
+- `Telephone` (do we want this? Is complex. Can use native, and custom can be added)

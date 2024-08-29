@@ -65,7 +65,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
-    "@babel/preset-env": "^7.25.3",
+    "@babel/preset-env": "^7.25.4",
     "@babel/preset-typescript": "^7.24.7",
     "@chromatic-com/storybook": "^1.7.0",
     "@rollup/plugin-commonjs": "^26.0.1",
@@ -83,7 +83,7 @@
     "@storybook/react-webpack5": "^8.2.9",
     "@storybook/test": "^8.2.9",
     "@testing-library/dom": "^10.4.0",
-    "@testing-library/jest-dom": "^6.4.8",
+    "@testing-library/jest-dom": "^6.5.0",
     "@testing-library/react": "^16.0.0",
     "@types/dompurify": "^3.0.5",
     "@types/jest": "^29.5.12",
@@ -116,7 +116,7 @@
     "rollup-plugin-postcss": "^4.0.2",
     "rollup-plugin-typescript2": "^0.36.0",
     "storybook": "^8.2.9",
-    "ts-jest": "^29.2.4",
+    "ts-jest": "^29.2.5",
     "typescript": "^5.5.4"
   },
   "dependencies": {

@@ -2,8 +2,8 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import CheckboxList from './CheckboxList';
 import SwitchList, { SWITCH_LIST_TYPE } from '../SwitchList';
-import { CheckboxListProps } from './CheckboxList.types';
 import { fieldClassName } from '../../utils';
+import type { SwitchListProps } from '../SwitchList/SwitchList.types';
 
 jest.mock('../SwitchList', () => ({
   __esModule: true,
@@ -12,7 +12,7 @@ jest.mock('../SwitchList', () => ({
 }));
 
 describe('<CheckboxList />', () => {
-  let props: CheckboxListProps;
+  let props: Omit<SwitchListProps, 'type'>;
 
   beforeEach(() => {
     props = {

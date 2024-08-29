@@ -10,7 +10,7 @@ import {
   type UseEasyFormDecoratorProps,
   EasyFormValidationSummaryModeTypes,
 } from './EasyForm.types';
-import { focusAndSmoothlyScrollIntoView } from '../../utils';
+import { focusAndSmoothlyScrollIntoView, isThenable } from '../../utils';
 
 /**
  * final form decorator to handle the static validation summary mode
@@ -21,7 +21,7 @@ const useEasyFormDecorator = ({
   ref,
 }: UseEasyFormDecoratorProps): [
   ValidationErrors | undefined,
-  Decorator<any, any>
+  Decorator<any, any>,
 ] => {
   const isMounted = useIsMounted();
 
@@ -75,8 +75,8 @@ const useEasyFormDecorator = ({
         setErrors(undefined);
         // handle async or sync submit variant
         const result = originalSubmit.call(form);
-        if (result && typeof result.then === 'function') {
-          result.then(afterSubmit, () => {});
+        if (isThenable(result)) {
+          (result as Promise<any>).then(afterSubmit, () => {});
         } else {
           afterSubmit();
         }

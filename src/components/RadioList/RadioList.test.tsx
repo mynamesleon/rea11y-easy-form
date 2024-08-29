@@ -2,8 +2,8 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import RadioList from './RadioList';
 import SwitchList, { SWITCH_LIST_TYPE } from '../SwitchList';
-import { RadioListProps } from './RadioList.types';
 import { fieldClassName } from '../../utils';
+import type { SwitchListProps } from '../SwitchList/SwitchList.types';
 
 jest.mock('../SwitchList', () => ({
   __esModule: true,
@@ -12,7 +12,7 @@ jest.mock('../SwitchList', () => ({
 }));
 
 describe('<RadioList />', () => {
-  let props: RadioListProps;
+  let props: Omit<SwitchListProps, 'type'>;
 
   beforeEach(() => {
     props = {

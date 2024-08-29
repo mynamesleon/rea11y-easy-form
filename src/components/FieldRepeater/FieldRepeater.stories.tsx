@@ -24,12 +24,14 @@ export const StandardUsage = (props: FieldRepeaterProps) => (
             label="Name"
             name={`${args.name}.name`}
             component={Input}
+            disabled={args.disabled}
           />
           <EasyField
             label="Email"
             name={`${args.name}.email`}
             component={Input}
             type="email"
+            disabled={args.disabled}
           />
           <p>
             FieldRepeater children function received arg:{' '}
@@ -54,9 +56,14 @@ StandardUsage.args = {
 /**
  * ![Peer dependency: react-beautiful-dnd](https://img.shields.io/badge/Peer_dependency-react--beautiful--dnd-blue)
  *
- * The `FieldRepeater` **must** be used within a `<Form>` or `<EasyForm>`,
+ * The `FieldRepeater` is a complex field container for repeatable groupings
+ * of fields. A good example usage would be a list of contacts.
+ *
+ * Please note: the `FieldRepeater` **must** be used within a `<Form>` or `<EasyForm>`,
  * and its `children` **must** be a function. The function will receive
- * an object argument containing `name`, `length`, and `index` properties.
+ * an object argument containing `name`, `length`, `index`, and `disabled` properties.
+ * The `disabled` property reflects the `disabled` prop on the `FieldRepeater` itself.
+ * And if used within an `EasyForm` that is disabled, it will reflect that too.
  *
  * The `name` provided will be based on the `name` prop used for the `FieldRepeater`.
  *
@@ -65,10 +72,11 @@ StandardUsage.args = {
  *
  * ```
  * <FieldRepeater {...props} name='users'>
- *   {({ name }) => (
+ *   {({ name, disabled }) => (
  *     <EasyField
  *       label="Name"
  *       component={Input}
+ *       disabled={disabled}
  *       name={`${name}.name`}
  *     />
  *   )}
@@ -78,6 +86,12 @@ StandardUsage.args = {
 export default {
   title: 'Components/FieldRepeater',
   component: StandardUsage,
+  argTypes: {
+    disabled: {
+      description:
+        'Disables the add, delete, and re-ordering controls. Fields rendered within the control will need to be disabled separately',
+    },
+  },
 };
 
 export const EasyFormStructureExample = (props: EasyFormProps) => (

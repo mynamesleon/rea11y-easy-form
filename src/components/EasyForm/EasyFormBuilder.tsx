@@ -7,7 +7,7 @@ import Skeleton, { SKELETON_TYPE } from '../Skeleton';
 import { useEasyFormContext } from './EasyFormContext';
 import Notice, { NOTICE_TYPE } from '../Notice';
 import CONTROL_TYPE from '../../controlTypes';
-import EasyField from '../EasyField';
+import EasyField from '../EasyField/EasyField';
 
 /**
  * @note `<EasyFormBuilder>` and `<EasyFormRow>`

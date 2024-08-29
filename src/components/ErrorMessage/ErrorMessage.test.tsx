@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { render, waitFor } from '@testing-library/react';
 import ErrorMessage from './ErrorMessage';
 import type { ErrorMessageProps } from './ErrorMessage.types';
 import { NoticeIcon, NOTICE_TYPE } from '../Notice';
@@ -50,14 +50,26 @@ describe('<ErrorMessage />', () => {
     );
   });
 
-  it('renders a loading type NoticeIcon if `loading` is true', () => {
+  it('does not immediately render a loading type NoticeIcon if `loading` is true', () => {
     props.text = 'text';
     props.loading = true;
     renderComponent();
     expect(NoticeIcon).toHaveBeenCalledWith(
-      expect.objectContaining({ type: NOTICE_TYPE.LOADING }),
+      expect.objectContaining({ type: NOTICE_TYPE.ERROR }),
       expect.any(Object) // context
     );
+  });
+
+  it('renders a loading type NoticeIcon if `loading` is true after a tiny delay', async () => {
+    props.text = 'text';
+    props.loading = true;
+    renderComponent();
+    await waitFor(() => {
+      expect(NoticeIcon).toHaveBeenCalledWith(
+        expect.objectContaining({ type: NOTICE_TYPE.ERROR, loading: true }),
+        expect.any(Object) // context
+      );
+    });
   });
 
   it('passes other props onto the element', () => {

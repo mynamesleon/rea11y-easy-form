@@ -51,6 +51,7 @@ const FieldRepeaterItemRenderer = ({
       tabIndex: isLastItem ? -1 : undefined,
       children: children({
         length: fields.length || 0,
+        disabled,
         index,
         name,
       }),

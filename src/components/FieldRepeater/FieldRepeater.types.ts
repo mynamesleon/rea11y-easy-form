@@ -8,7 +8,7 @@ import type { FieldRepeaterContentProps } from './FieldRepeaterContent.types';
 
 export interface FieldRepeaterProps
   extends FieldRepeaterContextPropsBase,
-    FieldRepeaterContentProps,
+    Omit<FieldRepeaterContentProps, 'fields'>,
     UseFieldConfig<any> {
   strings?: FieldRepeaterContextStrings;
   name: string;

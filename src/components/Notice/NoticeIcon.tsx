@@ -2,14 +2,14 @@ import React, { memo } from 'react';
 import { NoticeIconProps, NOTICE_TYPE } from './Notice.types';
 import { ExclamationIcon, TickIcon, InfoIcon, LoadingIcon } from '../../icons';
 
-const NoticeIcon = ({ type, ...other }: NoticeIconProps) => {
+const NoticeIcon = ({ type, loading, ...other }: NoticeIconProps) => {
+  if (loading) {
+    return <LoadingIcon data-testid="NoticeIcon" {...other} />;
+  }
   switch (type) {
     case NOTICE_TYPE.ERROR:
     case NOTICE_TYPE.WARNING:
       return <ExclamationIcon data-testid="NoticeIcon" {...other} />;
-
-    case NOTICE_TYPE.LOADING:
-      return <LoadingIcon data-testid="NoticeIcon" {...other} />;
 
     case NOTICE_TYPE.SUCCESS:
       return <TickIcon data-testid="NoticeIcon" {...other} />;
