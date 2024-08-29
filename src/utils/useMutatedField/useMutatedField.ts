@@ -21,10 +21,10 @@ const useMutatedField = (name: string, config?: UseFieldConfig<any>) => {
   const mutatedMeta = useMemo(() => ({ ...meta }), [meta]);
 
   // the Field validating state resets even when async validation is happening,
-  // so we will store validating state based on the whole form still validating
+  // so we will store validating state when it is initially set to true,
   // and reset the ref when the whole form has finished validating
   const validatingRef = useRef(false);
-  if (validating || formValidating) {
+  if (validating) {
     validatingRef.current = true;
   }
   if (!validating && !formValidating) {
