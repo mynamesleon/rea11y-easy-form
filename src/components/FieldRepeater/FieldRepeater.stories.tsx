@@ -54,7 +54,7 @@ StandardUsage.args = {
 };
 
 /**
- * ![Peer dependency: react-beautiful-dnd](https://img.shields.io/badge/Peer_dependency-react--beautiful--dnd-blue)
+ * ![Dependency: react-beautiful-dnd](https://img.shields.io/badge/Dependency-react--beautiful--dnd-blue)
  *
  * The `FieldRepeater` is a complex field container for repeatable groupings
  * of fields. A good example usage would be a list of contacts.
